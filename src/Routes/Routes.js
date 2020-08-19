@@ -1,4 +1,4 @@
-import LoginPage from "../Components/ActionPages/LoginPage";
+import LoginPage from "../Containers/LoginPage";
 
 const routes = [
   {

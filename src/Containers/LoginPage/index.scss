@@ -1,21 +1,36 @@
-.loginPage{
+.loginPage {
     margin-top: 100px;
-    .paper{
+
+    .paper {
         display: flex;
         flex-direction: column;
         align-items: center;
-        .avatar{
+
+        .avatar {
             background-color: #F50057;
             height: 48px;
             width: 48px;
         }
-        .signInForm{
+
+        .signInForm {
             width: 100%;
             margin-top: 8px;
         }
-        .signInBtn{
+
+        .signInBtn {
             margin-top: 8px;
             height: 48px;
+        }
+
+        .forgot_link {
+            color: #303F9F;
+            font-weight: 600;
+            margin-top: 8px;
+            transition: .2s all linear;
+
+            &:hover {
+                color: #6074f3;
+            }
         }
     }
 }
