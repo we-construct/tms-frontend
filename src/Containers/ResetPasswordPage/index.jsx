@@ -6,12 +6,12 @@ import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import { connect } from 'react-redux';
-import { resetPassword } from '../../Redux/Login/actions';
+import './index.scss';
 
 const ResetPasswordPage = ({ resetPassword }) => {
   const [email, setEmail] = useState('');
   const handleSubmit = () => {
-    resetPassword(email);
+    // resetPassword(email);
   };
 
   return (
@@ -53,10 +53,10 @@ const ResetPasswordPage = ({ resetPassword }) => {
 };
 
 const mapStateToProps = (state) => ({
-  isPasswordReset: state.loginData.isPasswordReset,
+  // isPasswordReset: state.loginData.isPasswordReset,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  resetPassword: (email) => dispatch(resetPassword(email)),
+  // resetPassword: (email) => dispatch(resetPassword(email)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(ResetPasswordPage);

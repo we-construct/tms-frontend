@@ -1,12 +1,12 @@
-import LoginPage from '../Containers/LoginPage/index';
+// import LoginPage from '../Containers/LoginPage/index';
 import ResetPasswordPage from '../Containers/ResetPasswordPage/index';
 
 const routes = [
-  {
-    path: '/',
-    exact: true,
-    component: LoginPage,
-  },
+  // {
+  //   path: '/',
+  //   exact: true,
+  //   component: LoginPage,
+  // },
   {
     path: '/reset-password',
     exact: true,
