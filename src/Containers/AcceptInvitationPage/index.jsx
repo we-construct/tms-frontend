@@ -11,8 +11,7 @@ import {
 import InputMask from "react-input-mask";
 import "./index.scss";
 
-const RegistrationPage = () => {
-    
+const AcceptInvitationPage = () => {
   const [data, setData] = useState({
     first_name: "",
     last_name: "",
@@ -25,22 +24,22 @@ const RegistrationPage = () => {
   };
 
   return (
-    <div className="registrationPage">
+    <div className="acceptionPage">
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <div className="paper">
           <Avatar className="avatar" />
           <Typography component="h1" variant="h5">
-            Registration
+            Accept Invitation
           </Typography>
-          <div className="registerForm">
+          <div className="acceptForm">
             <Grid container spacing={1}>
               <Grid item xs>
                 <TextField
                   variant="outlined"
                   margin="normal"
                   required
-                  label="Name"
+                  label="First Name"
                   name="first_name"
                   inputProps={{ maxLength: 16 }}
                   value={data.first_name}
@@ -101,9 +100,9 @@ const RegistrationPage = () => {
               fullWidth
               variant="contained"
               color="primary"
-              className="registerBtn"
+              className="acceptBtn"
             >
-              Sign Up
+              Accept
             </Button>
           </div>
         </div>
@@ -112,4 +111,4 @@ const RegistrationPage = () => {
   );
 };
 
-export default RegistrationPage;
+export default AcceptInvitationPage;

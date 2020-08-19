@@ -1,5 +1,5 @@
 import LoginPage from "../Containers/LoginPage";
-import RegistrationPage from "../Containers/RegistrationPage";
+import AcceptInvitationPage from "../Containers/AcceptInvitationPage";
 
 const routes = [
   {
@@ -8,8 +8,8 @@ const routes = [
     component: LoginPage,
   },
   {
-    path: "/registration",
-    component: RegistrationPage,
+    path: "/invitation",
+    component: AcceptInvitationPage,
   },
 ];
 
