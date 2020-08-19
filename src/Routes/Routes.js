@@ -1,10 +1,16 @@
-import LoginPage from "../Components/ActionPages/LoginPage";
+import LoginPage from '../Containers/LoginPage/index';
+import ResetPasswordPage from '../Containers/ResetPasswordPage/index';
 
 const routes = [
   {
-    path: "/",
+    path: '/',
     exact: true,
     component: LoginPage,
+  },
+  {
+    path: '/reset-password',
+    exact: true,
+    component: ResetPasswordPage,
   },
 ];
 
