@@ -1,10 +1,10 @@
-import LoginPage from "../Containers/LoginPage";
+import Login from "../Containers/Login";
 
 const routes = [
   {
     path: "/",
     exact: true,
-    component: LoginPage,
+    component: Login,
   },
 ];
 
