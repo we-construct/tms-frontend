@@ -1,8 +1,18 @@
 import { SET_LOGGED_USER, SET_ERROR } from "./actions";
 
 const initialState = {
-    user: [],
-    error: null,
+  user: {
+    id: null,
+    firstName: null,
+    lastName: null,
+    phoneNumber: null,
+    email: null,
+    roleId: null,
+    statusId: null,
+    positionId: null,
+    createdAt: null,
+  },
+  error: null,
 };
 
 const usersReducer = (state = initialState, action) => {
