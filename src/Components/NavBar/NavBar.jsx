@@ -12,14 +12,20 @@ import {
   Divider,
   IconButton,
   Badge,
+  Table,
+  Container,
+  Grid,
+  Paper,
 } from "@material-ui/core";
 
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import NotificationsIcon from "@material-ui/icons/Notifications";
-import { mainListItems, secondaryListItems } from "./listItem";
-import { Avatar } from "@material-ui/core";
-import BadgeAvatars from "./Avatar";
+import { mainListItems, secondaryListItems } from "./ListItem/listItem";
+import BadgeAvatars from "./Avatar/Avatar";
+
+import style from "./NavBar.module.scss";
+import MatTable from "./Table/Table";
 
 const drawerWidth = 240;
 
@@ -101,6 +107,15 @@ const useStyles = makeStyles((theme) => ({
   fixedHeight: {
     height: 240,
   },
+  paper: {
+    padding: theme.spacing(2),
+    display: "flex",
+    overflow: "auto",
+    flexDirection: "column",
+  },
+  fixedHeight: {
+    height: 240,
+  },
 }));
 
 export default function NavBar() {
@@ -135,7 +150,7 @@ export default function NavBar() {
           </IconButton>
           <Typography
             component="h1"
-            variant="h6"
+            variant="h5"
             color="inherit"
             noWrap
             className={classes.title}
@@ -159,7 +174,7 @@ export default function NavBar() {
         <div className={classes.toolbarIcon}>
           <BadgeAvatars />
           <IconButton onClick={handleDrawerClose}>
-            <ChevronLeftIcon />
+            <ChevronLeftIcon className={style.arrow} />
           </IconButton>
         </div>
         <Divider />
@@ -167,6 +182,19 @@ export default function NavBar() {
         <Divider />
         <List>{secondaryListItems}</List>
       </Drawer>
+
+      <main className={classes.content}>
+        <div className={classes.appBarSpacer} />
+        <Container maxWidth="lg" className={classes.container}>
+          <Grid container spacing={3}>
+            <Grid item xs={12}>
+
+                <MatTable />
+              
+            </Grid>
+          </Grid>
+        </Container>
+      </main>
     </div>
   );
 }

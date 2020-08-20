@@ -56,7 +56,7 @@ export default function BadgeAvatars() {
       >
         <Avatar
           alt="Remy Sharp"
-          src="https://koolinus.files.wordpress.com/2019/03/avataaars-e28093-koolinus-1-12mar2019.png"
+          src="./avatar.png"
         />
       </StyledBadge>
     </div>
