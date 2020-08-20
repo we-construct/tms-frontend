@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
+import { connect } from "react-redux";
+import { loginUser } from '../../Redux/Users/actions';
 import {
   Container,
   Typography,
@@ -13,7 +15,26 @@ import {
 import { NavLink } from "react-router-dom";
 import "./index.scss";
 
-const LoginPage = () => {
+const Login = ({ error, loginUser }) => {
+
+  const [check, setCheck] = useState(false);
+  const [data, setData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const changeHandler = (e) => {
+    const {name, value} = e.target;
+    setData({ ...data, [name]: value });
+  };
+  const loginHandler = () => {
+    loginUser({
+      email: data.email,
+      password: data.password,
+      isCheckedRememberMe: check,
+    });
+  };
+
   return (
     <div className="loginPage">
       <Container component="main" maxWidth="xs">
@@ -32,6 +53,11 @@ const LoginPage = () => {
               label="Email Address"
               autoComplete="email"
               autoFocus
+              name="email"
+              value={data.email}
+              onChange={changeHandler}
+              error={error !== null}
+              helperText={error !== null ? error : null}
             />
             <TextField
               variant="outlined"
@@ -41,9 +67,15 @@ const LoginPage = () => {
               label="Password"
               type="password"
               autoComplete="current-password"
+              name="password"
+              value={data.password}
+              onChange={changeHandler}
+              error={error !== null}
+              helperText={error !== null ? error : null}
             />
             <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
+              onChange={() => setCheck(!check)}
+              control={<Checkbox value="remember" color="primary" name="remember" checked={check} />}
               label="Remember me"
             />
             <Button
@@ -52,6 +84,7 @@ const LoginPage = () => {
               variant="contained"
               color="primary"
               className="signInBtn"
+              onClick={loginHandler}
             >
               Sign In
             </Button>
@@ -69,4 +102,14 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+const mapStateToProps = (state) => ({
+  error: state.userData.error,
+});
+
+function mapDispatchToProps(dispatch) {
+  return {
+    loginUser: (data) => dispatch(loginUser(data)),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
