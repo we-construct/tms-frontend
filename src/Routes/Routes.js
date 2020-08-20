@@ -1,10 +1,8 @@
-import Navbar from "../Components/NavBar/NavBar";
-
 const routes = [
     {
-        path: "/",
-        exact: true,
-        component: Navbar,
+        // path: "/",
+        // exact: true,
+        // component: ...,
     },
 ];
 
