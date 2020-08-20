@@ -11,7 +11,7 @@ import {
 import InputMask from "react-input-mask";
 import "./index.scss";
 
-const AcceptInvitationPage = () => {
+const AcceptInvitation = () => {
   const [data, setData] = useState({
     first_name: "",
     last_name: "",
@@ -20,7 +20,8 @@ const AcceptInvitationPage = () => {
     phone_number: "",
   });
   const changeHandler = (e) => {
-    setData({ ...data, [e.target.name]: e.target.value });
+    const {name, value} = e.target;
+    setData({ ...data, [name]: value });
   };
 
   return (
@@ -111,4 +112,4 @@ const AcceptInvitationPage = () => {
   );
 };
 
-export default AcceptInvitationPage;
+export default AcceptInvitation;
