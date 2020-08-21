@@ -16,7 +16,6 @@ import { NavLink } from "react-router-dom";
 import "./index.scss";
 
 const Login = ({ error, loginUser }) => {
-
   const [check, setCheck] = useState(false);
   const [data, setData] = useState({
     email: "",
