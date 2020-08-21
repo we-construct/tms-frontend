@@ -19,22 +19,20 @@ import NotificationsIcon from "@material-ui/icons/Notifications";
 import BadgeAvatars from "./Avatar/index";
 
 import { useStyles } from "./useStyles";
-import { mainListItems } from "./ListItem/mainListItems/mainListItems";
-import { secondaryListItems } from "./ListItem/secondaryListItems/secondaryListItems";
+
+import Main from "./ListItems/Main/index";
+import Secondary from "./ListItems/Secondary/index";
 
 export default function NavBar() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
+  const handleDrawerOpen = () => setOpen(!open);
 
   return (
     <div className={classes.root}>
       <CssBaseline />
+
+      {/* This part is related to header */}
       <AppBar
         position="absolute"
         className={clsx(classes.appBar, open && classes.appBarShift)}
@@ -59,7 +57,7 @@ export default function NavBar() {
             noWrap
             className={classes.title}
           >
-            We-Constract
+            WeConstract
           </Typography>
           <IconButton color="inherit">
             <Badge badgeContent={100} color="secondary">
@@ -77,14 +75,20 @@ export default function NavBar() {
       >
         <div className={classes.toolbarIcon}>
           <BadgeAvatars />
-          <IconButton onClick={handleDrawerClose}>
+          <IconButton onClick={handleDrawerOpen}>
             <ChevronLeftIcon className={classes.arrow} />
           </IconButton>
         </div>
         <Divider />
-        <List>{mainListItems}</List>
+        
+        {/* left sidebar */}
+        <List>
+          <Main />
+        </List>
         <Divider />
-        <List>{secondaryListItems}</List>
+        <List>
+          <Secondary />
+        </List>
       </Drawer>
     </div>
   );
