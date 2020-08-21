@@ -13,11 +13,11 @@ import "./index.scss";
 
 const AcceptInvitation = () => {
   const [data, setData] = useState({
-    first_name: "",
-    last_name: "",
+    firstName: "",
+    lastName: "",
     password: "",
-    confirm_password: "",
-    phone_number: "",
+    confirmPassword: "",
+    phoneNumber: "",
   });
   const changeHandler = (e) => {
     const {name, value} = e.target;
@@ -41,9 +41,9 @@ const AcceptInvitation = () => {
                   margin="normal"
                   required
                   label="First Name"
-                  name="first_name"
+                  name="firstName"
                   inputProps={{ maxLength: 16 }}
-                  value={data.first_name}
+                  value={data.firstName}
                   onChange={changeHandler}
                   autoFocus
                 />
@@ -54,8 +54,8 @@ const AcceptInvitation = () => {
                   margin="normal"
                   required
                   label="Last Name"
-                  name="last_name"
-                  value={data.last_name}
+                  name="lastName"
+                  value={data.lastName}
                   inputProps={{ maxLength: 16 }}
                   onChange={changeHandler}
                 />
@@ -70,7 +70,7 @@ const AcceptInvitation = () => {
                   required
                   fullWidth
                   label="Phone Number"
-                  name="phone_number"
+                  name="phoneNumber"
                 />
               )}
             </InputMask>
@@ -93,7 +93,7 @@ const AcceptInvitation = () => {
               fullWidth
               label="Confirm Password"
               type="password"
-              name="confirm_password"
+              name="confirmPassword"
               onChange={changeHandler}
             />
             <Button
