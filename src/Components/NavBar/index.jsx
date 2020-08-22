@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import clsx from "clsx";
 import {
   CssBaseline,
@@ -20,7 +20,7 @@ import Main from "./ListItems/Main/index";
 import Secondary from "./ListItems/Secondary/index";
 
 const NavBar = () => {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const classes = useStyles();
 
   const handleDrawer = () => setOpen(!open);
