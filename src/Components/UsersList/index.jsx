@@ -6,14 +6,14 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
+import moment from 'moment'
 
 function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
 }
 
 const UsersList = () => {
-  const DATE = new Date();
-  const date = `${DATE.getDay()}.${DATE.getMonth()}.${DATE.getFullYear()}`;
+  const date = moment().format("MMM Do YYYY");;
 
   const custName = "Jonna Jimenez";
   const position = "Developer";

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from "react";
 import { Switch } from "react-router-dom";
 import Router from "./Routes/Router";
 import NavBar from "./Components/NavBar";
@@ -7,7 +7,7 @@ import { useStyles } from "./Containers/MainPage/useStyles";
 
 export default function App() {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
   return (
     <div className={classes.root}>
