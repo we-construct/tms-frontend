@@ -1,13 +1,13 @@
 import React from "react";
 import { Switch } from "react-router-dom";
 import "./Style/index.scss";
-import NavBar from "./NavBar";
+import Router from "./Routes/Router";
 
 const App = () => {
   return (
     <div className="app">
       <Switch>
-        <NavBar />
+        <Router />
       </Switch>
     </div>
   );

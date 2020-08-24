@@ -1,4 +1,4 @@
-import { SET_LOGGED_USER, SET_ERROR } from "./actions";
+import { SET_LOGGED_USER, SET_ERROR, SET_SUCCESS } from "./actions";
 
 const initialState = {
   user: {
@@ -13,6 +13,7 @@ const initialState = {
     createdAt: null,
   },
   error: null,
+  success: null,
 };
 
 const usersReducer = (state = initialState, action) => {
@@ -21,6 +22,8 @@ const usersReducer = (state = initialState, action) => {
       return { ...state, user: action.userData };
     case SET_ERROR:
       return { ...state, error: action.error };
+    case SET_SUCCESS:
+      return { ...state, success: action.success };
     default:
       return state;
   }
