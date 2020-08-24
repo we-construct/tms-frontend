@@ -5,7 +5,10 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-
+        .accepted_user{
+            color: #F50057;
+            font-weight: bold;
+        }
         .avatar {
             background-color: #F50057;
             height: 48px;

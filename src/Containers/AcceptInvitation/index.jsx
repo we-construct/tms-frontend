@@ -18,6 +18,7 @@ const AcceptInvitation = ({ error, success, acceptInvitation }) => {
   const history = useHistory();
   // taking token from url
   const { token } = useParams();
+  const [errorHandler, setErrorHandler] = useState(error);
   const [data, setData] = useState({
     firstName: "",
     lastName: "",
@@ -27,9 +28,12 @@ const AcceptInvitation = ({ error, success, acceptInvitation }) => {
   });
 
   useEffect(() => {
+    // if user enter all fields and complete invitation`
     if (success !== null) {
-      history.push('/');
+      history.push("/");
     }
+    // no history changes needed
+    // eslint-disable-next-line
   }, [success]);
 
   const changeHandler = (e) => {
@@ -37,18 +41,40 @@ const AcceptInvitation = ({ error, success, acceptInvitation }) => {
     setData({ ...data, [name]: value });
   };
   const acceptHandler = () => {
-    const {firstName, lastName, password, confirmPassword, phoneNumber} = data;
-    if (firstName !== '' && lastName !== '' && password !== '' && confirmPassword !== '' && phoneNumber !== '') {
-      acceptInvitation({
-        firstName,
-        lastName,
-        password,
-        confirmPassword,
-        phoneNumber,
-        token,
-      });
-    };
-    }
+    const {
+      firstName,
+      lastName,
+      password,
+      confirmPassword,
+      phoneNumber,
+    } = data;
+    // front validation
+    if (token.length === 0) return setErrorHandler("Token error");
+    if (
+      firstName === "" ||
+      lastName === "" ||
+      password === "" ||
+      confirmPassword === "" ||
+      phoneNumber === ""
+    )
+      return setErrorHandler("Enter all fields");
+    if (phoneNumber.length < 12)
+      return setErrorHandler("Enter correct phone number");
+    if (password.length < 6)
+      return setErrorHandler("Password must be more than 6 characters");
+    if (password !== confirmPassword)
+      return setErrorHandler("Passwords is not matching");
+    // if ok` then
+    setErrorHandler(null);
+    acceptInvitation({
+      firstName,
+      lastName,
+      password,
+      confirmPassword,
+      phoneNumber,
+      token,
+    });
+  };
 
   return (
     <div className="acceptionPage">
@@ -72,8 +98,8 @@ const AcceptInvitation = ({ error, success, acceptInvitation }) => {
                   value={data.firstName}
                   onChange={changeHandler}
                   autoFocus
-                  error={error !== null}
-                  helperText={error !== null ? error : null}
+                  error={errorHandler !== null}
+                  helperText={errorHandler !== null ? errorHandler : null}
                 />
               </Grid>
               <Grid item xs>
@@ -86,8 +112,8 @@ const AcceptInvitation = ({ error, success, acceptInvitation }) => {
                   value={data.lastName}
                   inputProps={{ maxLength: 16 }}
                   onChange={changeHandler}
-                  error={error !== null}
-                  helperText={error !== null ? error : null}
+                  error={errorHandler !== null}
+                  helperText={errorHandler !== null ? errorHandler : null}
                 />
               </Grid>
             </Grid>
@@ -101,8 +127,8 @@ const AcceptInvitation = ({ error, success, acceptInvitation }) => {
                   fullWidth
                   label="Phone Number"
                   name="phoneNumber"
-                  error={error !== null}
-                  helperText={error !== null ? error : null}
+                  error={errorHandler !== null}
+                  helperText={errorHandler !== null ? errorHandler : null}
                 />
               )}
             </InputMask>
@@ -117,8 +143,8 @@ const AcceptInvitation = ({ error, success, acceptInvitation }) => {
               name="password"
               inputProps={{ maxLength: 16 }}
               onChange={changeHandler}
-              error={error !== null}
-              helperText={error !== null ? error : null}
+              error={errorHandler !== null}
+              helperText={errorHandler !== null ? errorHandler : null}
             />
             <TextField
               variant="outlined"
@@ -129,8 +155,8 @@ const AcceptInvitation = ({ error, success, acceptInvitation }) => {
               type="password"
               name="confirmPassword"
               onChange={changeHandler}
-              error={error !== null}
-              helperText={error !== null ? error : null}
+              error={errorHandler !== null}
+              helperText={errorHandler !== null ? errorHandler : null}
             />
             <Button
               type="submit"

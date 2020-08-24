@@ -46,7 +46,7 @@ const Login = ({ error, success, loginUser }) => {
             </Typography>
           ) : (
             <Typography component="h5" variant="body1" color="primary" align="center">
-              Than you {success.firstName} for accepting invitation, plaease
+              Than you <span className="accepted_user">{success.firstName}</span> for accepting invitation, plaease
               sign in!
             </Typography>
           )}
