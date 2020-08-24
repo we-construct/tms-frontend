@@ -50,7 +50,7 @@ const UsersList = () => {
         <TableHead>
           <TableRow>
             <TableCell>Employee</TableCell>
-            <TableCell align="right">Appointment Date</TableCell>
+            <TableCell align="right">Appointment Data</TableCell>
             <TableCell align="right">Customer Name </TableCell>
             <TableCell align="right">Customer Email</TableCell>
             <TableCell align="right">Position</TableCell>
