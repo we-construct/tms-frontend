@@ -1,16 +1,24 @@
-import React from "react";
+import React from 'react';
 import { Switch } from "react-router-dom";
 import Router from "./Routes/Router";
-import "./Style/index.scss";
+import NavBar from "./Components/NavBar";
+import Header from "./Components/Header";
+import { useStyles } from "./Containers/MainPage/useStyles";
 
-const App = () => {
+export default function App() {
+  const classes = useStyles();
+  const [open, setOpen] = React.useState(false);
+
   return (
-    <div className="app">
-      <Switch>
-        <Router />
-      </Switch>
+    <div className={classes.root}>
+      <Header handleDrawer={() => setOpen(!open)} open={open} />
+      <NavBar handleDrawer={() => setOpen(!open)} open={open} />
+      <main className={classes.content}>
+        <div className={classes.toolbar} />
+        <Switch>
+          <Router />
+        </Switch>
+      </main>
     </div>
   );
-};
-
-export default App;
+}

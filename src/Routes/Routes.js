@@ -1,10 +1,10 @@
-import Navbar from "../Components/NavBar/NavBar";
+import MainPage from "../Containers/MainPage";
 
 const routes = [
     {
         path: "/",
         exact: true,
-        component: Navbar,
+        component: MainPage,
     },
 ];
 
