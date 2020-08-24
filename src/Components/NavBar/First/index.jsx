@@ -34,7 +34,7 @@ const MainListItems = () => {
           <ListItemIcon>
             <PeopleIcon />
           </ListItemIcon>
-          <ListItemText primary="Employee" />
+          <ListItemText primary="Employese" />
         </ListItem>
       </NavLink>
 
