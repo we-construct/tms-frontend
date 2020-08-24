@@ -1,18 +1,20 @@
 import React from "react";
+
 import PeopleIcon from "@material-ui/icons/People";
+
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import MoveToInboxIcon from "@material-ui/icons/MoveToInbox";
 import { ListItem, ListItemIcon, ListItemText } from "@material-ui/core";
 
-const MainListItems = () => {
+export default function mainListItems() {
   return (
     <div>
       <ListItem button>
         <ListItemIcon>
           <AccountCircleIcon />
         </ListItemIcon>
-        <ListItemText primary="Admin Panel" />
+        <ListItemText primary="Admin" />
       </ListItem>
       <ListItem button>
         <ListItemIcon>
@@ -24,7 +26,7 @@ const MainListItems = () => {
         <ListItemIcon>
           <PeopleIcon />
         </ListItemIcon>
-        <ListItemText primary="Employees" />
+        <ListItemText primary="Employee" />
       </ListItem>
       <ListItem button>
         <ListItemIcon>
@@ -34,6 +36,4 @@ const MainListItems = () => {
       </ListItem>
     </div>
   );
-};
-
-export default MainListItems;
+}

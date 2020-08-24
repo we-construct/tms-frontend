@@ -1,4 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useParams, useHistory } from "react-router-dom";
+import { connect } from "react-redux";
+import { acceptInvitation } from "../../Redux/Users/actions";
 import {
   Container,
   Typography,
@@ -11,7 +14,11 @@ import {
 import InputMask from "react-input-mask";
 import "./index.scss";
 
-const AcceptInvitation = () => {
+const AcceptInvitation = ({ error, success, acceptInvitation }) => {
+  const history = useHistory();
+  // taking token from url
+  const { token } = useParams();
+  const [errorHandler, setErrorHandler] = useState(error);
   const [data, setData] = useState({
     firstName: "",
     lastName: "",
@@ -19,9 +26,54 @@ const AcceptInvitation = () => {
     confirmPassword: "",
     phoneNumber: "",
   });
+
+  useEffect(() => {
+    // if user enter all fields and complete invitation`
+    if (success !== null) {
+      history.push("/");
+    }
+    // no history changes needed
+    // eslint-disable-next-line
+  }, [success]);
+
   const changeHandler = (e) => {
-    const {name, value} = e.target;
+    const { name, value } = e.target;
     setData({ ...data, [name]: value });
+  };
+  const acceptHandler = () => {
+    const {
+      firstName,
+      lastName,
+      password,
+      confirmPassword,
+      phoneNumber,
+    } = data;
+    // front validation
+    if (token.length === 0) return setErrorHandler("Token error");
+    if (
+      firstName === "" ||
+      lastName === "" ||
+      password === "" ||
+      confirmPassword === "" ||
+      phoneNumber === ""
+    )
+      return setErrorHandler("Enter all fields");
+    if (phoneNumber.length < 12)
+      return setErrorHandler("Enter correct phone number");
+    if (password.length < 6)
+      return setErrorHandler("Password must be more than 6 characters");
+    if (password !== confirmPassword)
+      return setErrorHandler("Passwords is not matching");
+    // if ok` then
+    setErrorHandler(null);
+    acceptInvitation({
+      firstName,
+      lastName,
+      password,
+      confirmPassword,
+      phoneNumber,
+      token,
+    });
   };
 
   return (
@@ -46,6 +98,8 @@ const AcceptInvitation = () => {
                   value={data.firstName}
                   onChange={changeHandler}
                   autoFocus
+                  error={errorHandler !== null}
+                  helperText={errorHandler !== null ? errorHandler : null}
                 />
               </Grid>
               <Grid item xs>
@@ -58,6 +112,8 @@ const AcceptInvitation = () => {
                   value={data.lastName}
                   inputProps={{ maxLength: 16 }}
                   onChange={changeHandler}
+                  error={errorHandler !== null}
+                  helperText={errorHandler !== null ? errorHandler : null}
                 />
               </Grid>
             </Grid>
@@ -71,6 +127,8 @@ const AcceptInvitation = () => {
                   fullWidth
                   label="Phone Number"
                   name="phoneNumber"
+                  error={errorHandler !== null}
+                  helperText={errorHandler !== null ? errorHandler : null}
                 />
               )}
             </InputMask>
@@ -85,6 +143,8 @@ const AcceptInvitation = () => {
               name="password"
               inputProps={{ maxLength: 16 }}
               onChange={changeHandler}
+              error={errorHandler !== null}
+              helperText={errorHandler !== null ? errorHandler : null}
             />
             <TextField
               variant="outlined"
@@ -95,6 +155,8 @@ const AcceptInvitation = () => {
               type="password"
               name="confirmPassword"
               onChange={changeHandler}
+              error={errorHandler !== null}
+              helperText={errorHandler !== null ? errorHandler : null}
             />
             <Button
               type="submit"
@@ -102,6 +164,7 @@ const AcceptInvitation = () => {
               variant="contained"
               color="primary"
               className="acceptBtn"
+              onClick={acceptHandler}
             >
               Accept
             </Button>
@@ -112,4 +175,15 @@ const AcceptInvitation = () => {
   );
 };
 
-export default AcceptInvitation;
+const mapStateToProps = (state) => ({
+  error: state.userData.error,
+  success: state.userData.success,
+});
+
+function mapDispatchToProps(dispatch) {
+  return {
+    acceptInvitation: (data) => dispatch(acceptInvitation(data)),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AcceptInvitation);

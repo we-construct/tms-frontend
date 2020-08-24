@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { loginUser } from '../../Redux/Users/actions';
+import { loginUser } from "../../Redux/Users/actions";
 import {
   Container,
   Typography,
@@ -15,7 +15,7 @@ import {
 import { NavLink } from "react-router-dom";
 import "./index.scss";
 
-const Login = ({ error, loginUser }) => {
+const Login = ({ error, success, loginUser }) => {
   const [check, setCheck] = useState(false);
   const [data, setData] = useState({
     email: "",
@@ -23,7 +23,7 @@ const Login = ({ error, loginUser }) => {
   });
 
   const changeHandler = (e) => {
-    const {name, value} = e.target;
+    const { name, value } = e.target;
     setData({ ...data, [name]: value });
   };
   const loginHandler = () => {
@@ -40,9 +40,16 @@ const Login = ({ error, loginUser }) => {
         <CssBaseline />
         <div className="paper">
           <Avatar className="avatar" />
-          <Typography component="h1" variant="h5">
-            Sign in
-          </Typography>
+          {success === null ? (
+            <Typography component="h1" variant="h5">
+              Sign In
+            </Typography>
+          ) : (
+            <Typography component="h5" variant="body1" color="primary" align="center">
+              Than you <span className="accepted_user">{success.firstName}</span> for accepting invitation, plaease
+              sign in!
+            </Typography>
+          )}
           <div className="signInForm">
             <TextField
               variant="outlined"
@@ -74,7 +81,14 @@ const Login = ({ error, loginUser }) => {
             />
             <FormControlLabel
               onChange={() => setCheck(!check)}
-              control={<Checkbox value="remember" color="primary" name="remember" checked={check} />}
+              control={
+                <Checkbox
+                  value="remember"
+                  color="primary"
+                  name="remember"
+                  checked={check}
+                />
+              }
               label="Remember me"
             />
             <Button
@@ -103,6 +117,7 @@ const Login = ({ error, loginUser }) => {
 
 const mapStateToProps = (state) => ({
   error: state.userData.error,
+  success: state.userData.success,
 });
 
 function mapDispatchToProps(dispatch) {

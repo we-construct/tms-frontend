@@ -80,7 +80,16 @@ export const useStyles = makeStyles((theme) => ({
     fixedHeight: {
         height: 240,
     },
-    arrow: {
-        color: "#fb500c",
+    paper: {
+        padding: theme.spacing(2),
+        display: "flex",
+        overflow: "auto",
+        flexDirection: "column",
     },
+    fixedHeight: {
+        height: 240,
+    },
+    arrow: {
+        color: "#fb500c"
+    }
 }));

@@ -3,7 +3,8 @@ import Avatar from "@material-ui/core/Avatar";
 import { useStyles } from "../useStyles";
 import { StyledBadge } from "./useStyles";
 
-const BadgeAvatars = () => {
+
+export default function BadgeAvatars() {
   const classes = useStyles();
 
   return (
@@ -16,10 +17,11 @@ const BadgeAvatars = () => {
         }}
         variant="dot"
       >
-        <Avatar alt="Remy Sharp" src="./avatar.png" />
+        <Avatar
+          alt="Remy Sharp"
+          src="./avatar.png"
+        />
       </StyledBadge>
     </div>
   );
-};
-
-export default BadgeAvatars;
+}

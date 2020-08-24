@@ -2,7 +2,7 @@ import React from "react";
 import { ListItem, ListItemIcon, ListItemText } from "@material-ui/core";
 import EventAvailableIcon from "@material-ui/icons/EventAvailable";
 
-const SecondaryListItems = () => {
+export default function secondaryListItems() {
   return (
     <div>
       <ListItem button>
@@ -13,6 +13,4 @@ const SecondaryListItems = () => {
       </ListItem>
     </div>
   );
-};
-
-export default SecondaryListItems;
+}

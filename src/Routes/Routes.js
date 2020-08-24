@@ -8,8 +8,8 @@ const routes = [
     component: Login,
   },
   {
-    path: "/invitation",
-    exact: false,
+    path: "/invitation/:token",
+    exact: true,
     component: AcceptInvitation,
   },
 ];
