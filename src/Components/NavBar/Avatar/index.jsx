@@ -1,7 +1,7 @@
-import React from "react";
-import Avatar from "@material-ui/core/Avatar";
-import { StyledBadge } from "./useStyles";
-import { useStyles } from "../../../Containers/MainPage/useStyles";
+import React from 'react';
+import Avatar from '@material-ui/core/Avatar';
+import { StyledBadge } from './useStyles';
+import { useStyles } from '../../PageWrapper/useStyles';
 
 const BadgeAvatars = () => {
   const classes = useStyles();
@@ -11,8 +11,8 @@ const BadgeAvatars = () => {
       <StyledBadge
         overlap="circle"
         anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "right",
+          vertical: 'bottom',
+          horizontal: 'right',
         }}
         variant="dot"
       >
