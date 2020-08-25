@@ -9,6 +9,7 @@ export const useRoutes = (isAuth) => {
       <Switch>
         {privateRoutes.map((route) => (
           <Route
+            key={route.path}
             exact={route.exact}
             path={route.path}
             component={route.component}
@@ -23,6 +24,7 @@ export const useRoutes = (isAuth) => {
     <Switch>
       {publicRoutes.map((route) => (
         <Route
+          key={route.path}
           exact={route.exact}
           path={route.path}
           component={route.component}

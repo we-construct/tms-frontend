@@ -5,9 +5,7 @@ import {
   Toolbar,
   IconButton,
   Typography,
-  Badge,
 } from '@material-ui/core';
-import NotificationsIcon from '@material-ui/icons/Notifications';
 import MenuIcon from '@material-ui/icons/Menu';
 import { useStyles } from '../PageWrapper/useStyles';
 
@@ -17,11 +15,12 @@ const Header = ({ handleDrawer, open }) => {
   return (
     <div>
       <AppBar
+        elevation={0}
         position="absolute"
         className={clsx(classes.appBar, open && classes.appBarShift)}
       >
         <Toolbar className={classes.toolbar}>
-          <IconButton onClick={handleDrawer}>
+          <IconButton onClick={handleDrawer} className={classes.menuButton}>
             <MenuIcon />
           </IconButton>
           <Typography
