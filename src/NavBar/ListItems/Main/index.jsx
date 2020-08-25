@@ -1,7 +1,5 @@
 import React from "react";
-
 import PeopleIcon from "@material-ui/icons/People";
-
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import MoveToInboxIcon from "@material-ui/icons/MoveToInbox";
