@@ -4,8 +4,10 @@ import Router from "./Routes/Router";
 import NavBar from "./Components/NavBar";
 import Header from "./Components/Header";
 import { useStyles } from "./Containers/MainPage/useStyles";
+import { SnackbarProvider } from "notistack";
+import "./Style/index.scss";
 
-export default function App() {
+const App = () => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
 
@@ -16,9 +18,16 @@ export default function App() {
       <main className={classes.content}>
         <div className={classes.toolbar} />
         <Switch>
-          <Router />
+          {/* throw warning w/o fragment */}
+          <>
+            <SnackbarProvider maxSnack={3}>
+              <Router />
+            </SnackbarProvider>
+          </>
         </Switch>
       </main>
     </div>
   );
 }
+
+export default App;
