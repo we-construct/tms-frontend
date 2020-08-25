@@ -1,19 +1,36 @@
-import React from "react";
-import { Route } from "react-router-dom";
-import routes from "./Routes";
+import React from 'react';
+import { Route, Redirect, Switch } from 'react-router-dom';
+import publicRoutes from './publicRoutes';
+import privateRoutes from './privateRoutes';
 
-function Router() {
-  return routes.map((route) => {
-    const RouteComponent = route.component;
+export const useRoutes = (isAuth) => {
+  if (isAuth) {
     return (
-      <Route
-        key={route.path}
-        path={route.path}
-        exact={route.exact}
-        render={() => <RouteComponent />}
-      />
+      <Switch>
+        {privateRoutes.map((route) => (
+          <Route
+            exact={route.exact}
+            path={route.path}
+            component={route.component}
+          />
+        ))}
+        <Redirect to="/" />
+      </Switch>
     );
-  });
-}
+  }
 
-export default Router;
+  return (
+    <Switch>
+      {publicRoutes.map((route) => (
+        <Route
+          exact={route.exact}
+          path={route.path}
+          component={route.component}
+        />
+      ))}
+      <Redirect to="/" />
+    </Switch>
+  );
+};
+
+export default useRoutes;
