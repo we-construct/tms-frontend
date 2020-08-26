@@ -6,7 +6,6 @@ import MoveToInboxIcon from '@material-ui/icons/MoveToInbox';
 import { ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
 import { NavLink } from 'react-router-dom';
 import { useStyles } from '../../PageWrapper/useStyles';
-import BadgeAvatars from '../Avatar';
 
 const MainListItems = () => {
   const styles = useStyles();

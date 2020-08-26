@@ -1,5 +1,5 @@
 import Main from '../Containers/Main';
-import Invitation from '../Containers/Invitation';
+import SendInvitation from '../Containers/Send-invitation';
 
 const privateRoutes = [
   {
@@ -10,7 +10,7 @@ const privateRoutes = [
   {
     path: '/send-invitation',
     exact: true,
-    component: Invitation,
+    component: SendInvitation,
   },
 ];
 
