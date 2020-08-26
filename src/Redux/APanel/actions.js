@@ -4,6 +4,8 @@ export const SET_LOADING = "SET_LOADING";
 export const SEND_INVITATION = "SEND_INVITATION";
 export const GET_ALL_USERS = "GET_ALL_USERS";
 export const SET_ALL_USERS = "SET_ALL_USERS";
+export const SET_STATUS = "SET_STATUS";
+export const DELETE_USER = "DELETE_USER";
 
 // error handling action
 export const setError = (error) => {
@@ -34,10 +36,10 @@ export const sendInvite = (invitationData) => {
   };
 };
 // get all users action
-export const getAllUsers = (accessToken) => {
+export const getAllUsers = (payload) => {
   return {
     type: GET_ALL_USERS,
-    accessToken,
+    payload,
   };
 };
 // get all users action
@@ -45,5 +47,19 @@ export const setAllUsers = (allUsersData) => {
   return {
     type: SET_ALL_USERS,
     allUsersData,
+  };
+};
+// chabge user status
+export const setUserStatus = (payload) => {
+  return {
+    type: SET_STATUS,
+    payload,
+  };
+};
+// chabge user status
+export const deleteUser = (payload) => {
+  return {
+    type: DELETE_USER,
+    payload,
   };
 };

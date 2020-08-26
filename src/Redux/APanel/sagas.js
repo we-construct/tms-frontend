@@ -3,9 +3,12 @@ import axiosInstance from "../../Config/axiosInstance";
 import {
   setError,
   setSuccess,
-  /* setLoading, */ setAllUsers,
+  /* setLoading, */
+  setAllUsers,
   SEND_INVITATION,
   GET_ALL_USERS,
+  SET_STATUS,
+  DELETE_USER,
 } from "./actions";
 
 // user login request
@@ -44,9 +47,25 @@ export function getStatuses(accessToken) {
   });
 }
 // get users list
-export function getUsers({ accessToken }) {
-  return axiosInstance.post(`/get/users`, {
+export function getUsers({ accessToken, page }) {
+  return axiosInstance.post(`/users`, {
     accessToken,
+    page,
+  });
+}
+// activate/deactivate user
+export function updateStatus({ accessToken, statusId, id }) {
+  return axiosInstance.post(`/action/set-status`, {
+    accessToken,
+    statusId,
+    id,
+  });
+}
+// delete user
+export function deleteUser({ accessToken, id }) {
+  return axiosInstance.post(`/action/delete`, {
+    accessToken,
+    id,
   });
 }
 
@@ -66,11 +85,11 @@ export function* watchSendInvitation() {
 // end of send invitation functional
 
 // admin get all users data functional
-export function* workerGetAllUsersData({ accessToken }) {
+export function* workerGetAllUsersData({ payload }) {
   yield put(setAllUsers(null));
-  const res = yield call(getUsers, accessToken);
+  const res = yield call(getUsers, payload);
   if (typeof res.data !== "string") {
-    yield put(setAllUsers(res.data.users));
+    yield put(setAllUsers(res.data));
   } else {
     yield put(setError(res.data));
   }
@@ -81,7 +100,47 @@ export function* watchGetAllUsersData() {
 }
 // end of get all users data functional
 
+// activate/deactivate users
+export function* workerUpdateUserStatus({ payload }) {
+  yield put(setSuccess(null));
+  yield put(setAllUsers(null));
+  const res = yield call(updateStatus, payload);
+  const users = yield call(getUsers, payload);
+  if (typeof res.data !== "string") {
+    yield put(setSuccess(res.data));
+    yield put(setAllUsers(users.data));
+  } else {
+    yield put(setError(res.data));
+  }
+}
+
+export function* watchUpdateUserStatus() {
+  yield takeEvery(SET_STATUS, workerUpdateUserStatus);
+}
+// end of activate/deactivate functional
+
+// admin delete user functional
+export function* workerDeleteUser({ payload }) {
+  yield put(setSuccess(null));
+  yield put(setAllUsers(null));
+  const res = yield call(deleteUser, payload);
+  const users = yield call(getUsers, payload);
+  if (typeof res.data !== "string") {
+    yield put(setSuccess(res.data));
+    yield put(setAllUsers(users.data));
+  } else {
+    yield put(setError(res.data));
+  }
+}
+
+export function* watchDeleteUser() {
+  yield takeEvery(DELETE_USER, workerDeleteUser);
+}
+// end of delete user functional
+
 export function* adminSaga() {
   yield all([fork(watchSendInvitation)]);
   yield all([fork(watchGetAllUsersData)]);
+  yield all([fork(watchUpdateUserStatus)]);
+  yield all([fork(watchDeleteUser)]);
 }
