@@ -5,7 +5,6 @@ import './Style/index.scss';
 
 const App = () => {
   const routes = useRoutes(true);
-
   return <SnackbarProvider maxSnack={3}>{routes}</SnackbarProvider>;
 };
 

@@ -5,7 +5,6 @@ import First from './First/index';
 import Secondary from './Secondary/index';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import BadgeAvatars from './Avatar/index';
 import { useStyles } from '../PageWrapper/useStyles';
 
 const NavBar = ({ handleDrawer, open }) => {
