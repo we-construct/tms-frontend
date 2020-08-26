@@ -1,6 +1,12 @@
 import { takeEvery, put, all, fork, call } from "redux-saga/effects";
 import axiosInstance from "../../Config/axiosInstance";
-import { setError, setSuccess, SEND_INVITATION } from "./actions";
+import {
+  setError,
+  setSuccess,
+  /* setLoading, */ setAllUsers,
+  SEND_INVITATION,
+  GET_ALL_USERS,
+} from "./actions";
 
 // user login request
 export function sendInvitation({
@@ -14,7 +20,7 @@ export function sendInvitation({
     accessToken,
     email,
     roleId,
-    statusId: 4,
+    statusId: 1,
     positionId,
     createdById,
   });
@@ -38,7 +44,7 @@ export function getStatuses(accessToken) {
   });
 }
 // get users list
-export function getUsers(accessToken) {
+export function getUsers({ accessToken }) {
   return axiosInstance.post(`/get/users`, {
     accessToken,
   });
@@ -59,6 +65,23 @@ export function* watchSendInvitation() {
 }
 // end of send invitation functional
 
+// admin get all users data functional
+export function* workerGetAllUsersData({ accessToken }) {
+  yield put(setAllUsers(null));
+  const res = yield call(getUsers, accessToken);
+  if (typeof res.data !== "string") {
+    yield put(setAllUsers(res.data.users));
+  } else {
+    yield put(setError(res.data));
+  }
+}
+
+export function* watchGetAllUsersData() {
+  yield takeEvery(GET_ALL_USERS, workerGetAllUsersData);
+}
+// end of get all users data functional
+
 export function* adminSaga() {
   yield all([fork(watchSendInvitation)]);
+  yield all([fork(watchGetAllUsersData)]);
 }
