@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { getAllUsers } from "../../Redux/APanel/actions";
+import { useSnackbar } from "notistack";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -30,8 +31,9 @@ const skelet = [
   },
 ];
 
-const UsersList = ({ getAllUsers, allUsers }) => {
+const UsersList = ({ error, getAllUsers, allUsers }) => {
   const [page, setPage] = useState(1);
+  const { enqueueSnackbar } = useSnackbar();
 
   // token will be taken from  cookies
   useEffect(() => {
@@ -42,6 +44,17 @@ const UsersList = ({ getAllUsers, allUsers }) => {
     // need rerender only on page change
     // eslint-disable-next-line
   }, [page]);
+  // handle errors
+  useEffect(() => {
+    if (error !== null) {
+      enqueueSnackbar(
+        `${error}!`,
+        {
+          variant: "error",
+        }
+      );
+    }
+  }, [error]);
 
   const handleChange = (event, value) => {
     setPage(value);
