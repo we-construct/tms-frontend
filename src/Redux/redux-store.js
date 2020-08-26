@@ -2,6 +2,7 @@ import { createStore, combineReducers, applyMiddleware } from "redux";
 import logger from "redux-logger";
 import createSagaMiddleware from "redux-saga";
 import usersReducer from "./Users/reducer";
+import appReducer from './app/reducer';
 import adminPanelReducer from "./APanel/reducer";
 import { usersSaga } from "./Users/sagas";
 import { adminSaga } from "./APanel/sagas";
@@ -12,6 +13,7 @@ const sagaMiddleware = createSagaMiddleware();
 let reducer = combineReducers({
   userData: usersReducer,
   adminData: adminPanelReducer,
+  appData: appReducer,
 });
 
 function* allSagas() {

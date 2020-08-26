@@ -1,12 +1,12 @@
-import React from "react";
-import clsx from "clsx";
-import { Drawer, List, Divider, IconButton } from "@material-ui/core";
-import First from "./First/index";
-import Secondary from "./Secondary/index";
-import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import ChevronRightIcon from "@material-ui/icons/ChevronRight";
-import BadgeAvatars from "./Avatar/index";
-import { useStyles } from "../../Containers/MainPage/useStyles";
+import React from 'react';
+import clsx from 'clsx';
+import { Drawer, List, Divider, IconButton } from '@material-ui/core';
+import First from './First/index';
+import Secondary from './Secondary/index';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import BadgeAvatars from './Avatar/index';
+import { useStyles } from '../PageWrapper/useStyles';
 
 const NavBar = ({ handleDrawer, open }) => {
   const classes = useStyles();
@@ -26,7 +26,6 @@ const NavBar = ({ handleDrawer, open }) => {
       }}
     >
       <div className={classes.toolbar}>
-        <BadgeAvatars />
         <IconButton onClick={handleDrawer} className={classes.arrow}>
           {!open ? <ChevronRightIcon /> : <ChevronLeftIcon />}
         </IconButton>
