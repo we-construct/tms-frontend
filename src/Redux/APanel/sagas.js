@@ -3,7 +3,7 @@ import axiosInstance from "../../Config/axiosInstance";
 import {
   setError,
   setSuccess,
-  /* setLoading, */
+  // setLoading,
   setAllUsers,
   SEND_INVITATION,
   GET_ALL_USERS,
@@ -86,6 +86,7 @@ export function* watchSendInvitation() {
 
 // admin get all users data functional
 export function* workerGetAllUsersData({ payload }) {
+  yield put(setSuccess(null));
   yield put(setAllUsers(null));
   const res = yield call(getUsers, payload);
   if (typeof res.data !== "string") {
@@ -102,7 +103,6 @@ export function* watchGetAllUsersData() {
 
 // activate/deactivate users
 export function* workerUpdateUserStatus({ payload }) {
-  yield put(setSuccess(null));
   yield put(setAllUsers(null));
   const res = yield call(updateStatus, payload);
   const users = yield call(getUsers, payload);
@@ -121,7 +121,6 @@ export function* watchUpdateUserStatus() {
 
 // admin delete user functional
 export function* workerDeleteUser({ payload }) {
-  yield put(setSuccess(null));
   yield put(setAllUsers(null));
   const res = yield call(deleteUser, payload);
   const users = yield call(getUsers, payload);

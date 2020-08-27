@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
+import { useSnackbar } from "notistack";
 import { setUserStatus, deleteUser } from "../../../Redux/APanel/actions";
 import { Box, Collapse, IconButton, TableCell, TableRow, Button } from "@material-ui/core";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
+import EditUser from "./EditUser";
 
-const UserItem = ({ user, setUserStatus, deleteUser, page }) => {
+const UserItem = ({ user, page, loading, setUserStatus, deleteUser }) => {
   const [open, setOpen] = useState(false);
+  const { enqueueSnackbar } = useSnackbar();
   const date = new Date(user.created_at);
   const createdAt = `${date.getDate()}/${
     date.getMonth() + 1
@@ -20,6 +23,7 @@ const UserItem = ({ user, setUserStatus, deleteUser, page }) => {
       statusId: user.statusid,
       page,
     });
+    enqueueSnackbar(`Status of ${user.first_name} changed`, {variant: 'info'});
   };
   const deleteUserHandler = () => {
     deleteUser({
@@ -28,6 +32,7 @@ const UserItem = ({ user, setUserStatus, deleteUser, page }) => {
       id: user.id,
       page,
     });
+    enqueueSnackbar(`User ${user.first_name} deleted`, {variant: 'info'});
   };
   return (
     <>
@@ -52,13 +57,15 @@ const UserItem = ({ user, setUserStatus, deleteUser, page }) => {
         <TableCell align="left">{user.position}</TableCell>
         <TableCell align="left">{createdAt}</TableCell>
         <TableCell align="left">{user.created_by_id}</TableCell>
-        {user.status === "Active" ? (
-          <TableCell align="left" style={{ color: "#4caf50" }}>{user.status}</TableCell>
-        ) : user.status === "Vacation" ? (
-          <TableCell align="left" style={{ color: "#ffc107" }}>{user.status}</TableCell>
-        ) : (
-          <TableCell align="left" style={{ color: "#ff1744" }}>{user.status}</TableCell>
-        )}
+        {
+            user.status === "Active" ? (
+              <TableCell align="left" style={{ color: "#4caf50" }}>{user.status}</TableCell>
+            ) : user.status === "Vacation" ? (
+              <TableCell align="left" style={{ color: "#ffc107" }}>{user.status}</TableCell>
+            ) : (
+              <TableCell align="left" style={{ color: "#ff1744" }}>{user.status}</TableCell>
+            )
+        }
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -94,14 +101,7 @@ const UserItem = ({ user, setUserStatus, deleteUser, page }) => {
               >
                 Delete {user.first_name}
               </Button>
-              <Button
-                variant="outlined"
-                size="small"
-                color="primary"
-                style={{ marginRight: "8px" }}
-              >
-                Edit {user.first_name}
-              </Button>
+              <EditUser user={user}/>
             </Box>
           </Collapse>
         </TableCell>

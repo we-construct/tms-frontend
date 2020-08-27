@@ -25,7 +25,7 @@ const skelet = [
   },
 ];
 
-const UsersList = ({ error, success, getAllUsers, allUsers }) => {
+const UsersList = ({ error, loading, getAllUsers, allUsers }) => {
   const [page, setPage] = useState(1);
   const { enqueueSnackbar } = useSnackbar();
 
@@ -37,7 +37,7 @@ const UsersList = ({ error, success, getAllUsers, allUsers }) => {
       page,
     });
     enqueueSnackbar(`Show results from page ${page}!`, {
-      variant: "success",
+      variant: "info",
     });
     // need rerender only on page change
     // eslint-disable-next-line
@@ -50,15 +50,6 @@ const UsersList = ({ error, success, getAllUsers, allUsers }) => {
     }
     // eslint-disable-next-line
   }, [error]);
-
-  useEffect(() => {
-    if (success !== null) {
-      enqueueSnackbar(`${success.message}!`, {
-        variant: "success",
-      });
-    }
-    // eslint-disable-next-line
-  }, [success]);
 
   const handleChange = (event, value) => {
     setPage(value);
