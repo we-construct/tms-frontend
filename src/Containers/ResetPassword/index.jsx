@@ -1,18 +1,9 @@
 import React, { useState } from 'react';
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import Typography from '@material-ui/core/Typography';
-import Container from '@material-ui/core/Container';
-import { connect } from 'react-redux';
+import { Avatar, Button, CssBaseline, TextField, Typography, Container } from '@material-ui/core';
 import './index.scss';
 
-const ResetPasswordPage = ({ resetPassword }) => {
+const ResetPassword = () => {
   const [email, setEmail] = useState('');
-  const handleSubmit = () => {
-    // resetPassword(email);
-  };
 
   return (
     <div className="loginPage">
@@ -36,7 +27,6 @@ const ResetPasswordPage = ({ resetPassword }) => {
               autoFocus
             />
             <Button
-              onClick={handleSubmit}
               type="submit"
               fullWidth
               variant="contained"
@@ -52,11 +42,4 @@ const ResetPasswordPage = ({ resetPassword }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  // isPasswordReset: state.loginData.isPasswordReset,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  // resetPassword: (email) => dispatch(resetPassword(email)),
-});
-export default connect(mapStateToProps, mapDispatchToProps)(ResetPasswordPage);
+export default ResetPassword;
