@@ -1,7 +1,8 @@
-import { NAVBAR_TOGGLE } from './actions';
+import { NAVBAR_TOGGLE, SET_LOADING } from './actions';
 
 const initialState = {
   navbarToggle: false,
+  loading: false,
 };
 
 const appReducer = (state = initialState, action) => {
@@ -10,6 +11,11 @@ const appReducer = (state = initialState, action) => {
       return {
         ...state,
         navbarToggle: !state.navbarToggle,
+      };
+    case SET_LOADING:
+      return {
+        ...state,
+        loading: action.loading,
       };
     default:
       return state;

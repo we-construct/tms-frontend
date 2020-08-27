@@ -6,6 +6,10 @@ export const GET_ALL_USERS = "GET_ALL_USERS";
 export const SET_ALL_USERS = "SET_ALL_USERS";
 export const SET_STATUS = "SET_STATUS";
 export const DELETE_USER = "DELETE_USER";
+export const GET_ROLES = 'GET_ROLES';
+export const SET_ROLES = 'SET_ROLES';
+export const GET_POSITIONS = 'GET_POSITIONS';
+export const SET_POSITIONS = 'SET_POSITIONS';
 
 // error handling action
 export const setError = (error) => {
@@ -35,6 +39,26 @@ export const sendInvite = (invitationData) => {
     invitationData,
   };
 };
+//get roles from db
+export const getRoles = (accessToken) => ({
+  type: GET_ROLES,
+  accessToken,
+});
+//set roles to reducer
+export const setRoles = (roles) => ({
+  type: SET_ROLES,
+  roles,
+});
+//get positions from db
+export const getPositions = (accessToken) => ({
+  type: GET_POSITIONS,
+  accessToken,
+});
+//set positions to reducer
+export const setPositions = (positions) => ({
+  type: SET_POSITIONS,
+  positions,
+});
 // get all users action
 export const getAllUsers = (payload) => {
   return {

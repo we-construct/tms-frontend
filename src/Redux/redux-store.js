@@ -1,12 +1,12 @@
-import { createStore, combineReducers, applyMiddleware } from "redux";
-import logger from "redux-logger";
-import createSagaMiddleware from "redux-saga";
-import usersReducer from "./Users/reducer";
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import logger from 'redux-logger';
+import createSagaMiddleware from 'redux-saga';
+import usersReducer from './Users/reducer';
 import appReducer from './app/reducer';
-import adminPanelReducer from "./APanel/reducer";
-import { usersSaga } from "./Users/sagas";
-import { adminSaga } from "./APanel/sagas";
-import { all, fork } from "redux-saga/effects";
+import adminPanelReducer from './APanel/reducer';
+import { usersSaga } from './Users/sagas';
+import { adminSaga } from './APanel/sagas';
+import { all, fork } from 'redux-saga/effects';
 
 const sagaMiddleware = createSagaMiddleware();
 

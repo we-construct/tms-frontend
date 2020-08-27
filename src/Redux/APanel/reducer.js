@@ -1,10 +1,18 @@
-import { SET_ERROR, SET_SUCCESS, SET_ALL_USERS, SET_LOADING } from "./actions";
+import {
+  SET_ERROR,
+  SET_SUCCESS,
+  SET_ALL_USERS,
+  SET_LOADING,
+  SET_ROLES,
+  SET_POSITIONS,
+} from './actions';
 
 const initialState = {
   allUsers: null,
   totalPages: 0,
   roles: {},
   positions: {},
+  invitedUsers: [],
   statuses: {},
   success: null,
   error: null,
@@ -19,6 +27,10 @@ const adminPanelReducer = (state = initialState, action) => {
       return { ...state, success: action.success };
     case SET_LOADING:
       return { ...state, loading: action.loading };
+    case SET_ROLES:
+      return { ...state, roles: action.roles };
+    case SET_POSITIONS:
+      return { ...state, positions: action.positions };
     case SET_ALL_USERS:
       return { ...state, allUsers: action.allUsersData };
     default:
