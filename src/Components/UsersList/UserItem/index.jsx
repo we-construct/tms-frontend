@@ -34,6 +34,7 @@ const UserItem = ({ user, page, loading, setUserStatus, deleteUser }) => {
     });
     enqueueSnackbar(`User ${user.first_name} deleted`, {variant: 'info'});
   };
+  
   return (
     <>
       <TableRow>

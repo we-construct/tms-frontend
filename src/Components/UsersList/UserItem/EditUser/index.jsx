@@ -1,10 +1,11 @@
 import React, { useState } from "react";
+import { connect } from 'react-redux';
+import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import { makeStyles } from "@material-ui/core/styles";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormHelperText from "@material-ui/core/FormHelperText";
@@ -22,22 +23,21 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function EditUser({ user }) {
+const EditUser = ({ user, roles, positions, statuses}) => {
   const [open, setOpen] = useState(false);
   const classes = useStyles();
   const [data, setData] = useState({
-    firstName: '',
-    lastName: '',
-    roleId: '',
-    positionId: '',
-    statusId: '',
+    firstName: user.first_name,
+    lastName: user.last_name,
+    roleId: user.roleid,
+    positionId: user.positionid,
+    statusId: user.statusid,
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setData({ ...data, [name]: value });
   };
-console.log(data);
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -101,12 +101,11 @@ console.log(data);
               name='roleId'
               className={classes.selectEmpty}
             >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
-              <MenuItem value={1}>Admin</MenuItem>
-              <MenuItem value={2}>Moder</MenuItem>
-              <MenuItem value={3}>User</MenuItem>
+            {roles.map((role) => (
+            <MenuItem key={role.id} value={role.id}>
+              {role.name}
+            </MenuItem>
+          ))}
             </Select>
             <FormHelperText>Required</FormHelperText>
           </FormControl>
@@ -120,12 +119,11 @@ console.log(data);
               name='positionId'
               className={classes.selectEmpty}
             >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
-              <MenuItem value={1}>Manager</MenuItem>
-              <MenuItem value={2}>HR</MenuItem>
-              <MenuItem value={3}>Next...</MenuItem>
+              {positions.map((pos) => (
+            <MenuItem key={pos.id} value={pos.id}>
+              {pos.name}
+            </MenuItem>
+          ))}
             </Select>
             <FormHelperText>Required</FormHelperText>
           </FormControl>
@@ -139,12 +137,11 @@ console.log(data);
               name='statusId'
               className={classes.selectEmpty}
             >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
-              <MenuItem value={1}>Active</MenuItem>
-              <MenuItem value={2}>Deactivated</MenuItem>
-              <MenuItem value={3}>Vacation</MenuItem>
+            {statuses.map((stat) => (
+            <MenuItem key={stat.id} value={stat.id}>
+              {stat.name}
+            </MenuItem>
+          ))}
             </Select>
             <FormHelperText>Required</FormHelperText>
           </FormControl>
@@ -162,3 +159,11 @@ console.log(data);
     </>
   );
 }
+
+const mapStateToProps = (state) => ({
+  roles: state.adminData.roles,
+  positions: state.adminData.positions,
+  statuses: state.adminData.statuses,
+});
+
+export default connect(mapStateToProps, null)(EditUser);

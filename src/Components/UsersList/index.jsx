@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { getAllUsers } from "../../Redux/APanel/actions";
+import { getAllUsers, getRoles, getPositions, getStatuses } from "../../Redux/APanel/actions";
 import { useSnackbar } from "notistack";
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@material-ui/core";
 import Pagination from "@material-ui/lab/Pagination";
@@ -25,7 +25,7 @@ const skelet = [
   },
 ];
 
-const UsersList = ({ error, loading, getAllUsers, allUsers }) => {
+const UsersList = ({ error, getAllUsers, allUsers, getRoles, getPositions, getStatuses  }) => {
   const [page, setPage] = useState(1);
   const { enqueueSnackbar } = useSnackbar();
 
@@ -50,6 +50,21 @@ const UsersList = ({ error, loading, getAllUsers, allUsers }) => {
     }
     // eslint-disable-next-line
   }, [error]);
+  useEffect(() => {
+    getRoles({
+      accessToken:
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjM4Iiwicm9sZSI6MSwic3RhdHVzIjoxLCJlbWFpbCI6InZhYXJzZW55YW5AZ21haWwuY29tIiwiaWF0IjoxNTk4Mzg0MjI2fQ.TBIUwWxx2N3vQsS3Rb96mxh1xGSyBYribxd2qjAqbu8",
+    })
+    getPositions({
+      accessToken:
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjM4Iiwicm9sZSI6MSwic3RhdHVzIjoxLCJlbWFpbCI6InZhYXJzZW55YW5AZ21haWwuY29tIiwiaWF0IjoxNTk4Mzg0MjI2fQ.TBIUwWxx2N3vQsS3Rb96mxh1xGSyBYribxd2qjAqbu8",
+    })
+    getStatuses({
+      accessToken:
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjM4Iiwicm9sZSI6MSwic3RhdHVzIjoxLCJlbWFpbCI6InZhYXJzZW55YW5AZ21haWwuY29tIiwiaWF0IjoxNTk4Mzg0MjI2fQ.TBIUwWxx2N3vQsS3Rb96mxh1xGSyBYribxd2qjAqbu8",
+    })
+    // eslint-disable-next-line
+  }, [])
 
   const handleChange = (event, value) => {
     setPage(value);
@@ -119,6 +134,9 @@ const mapStateToProps = (state) => ({
 function mapDispatchToProps(dispatch) {
   return {
     getAllUsers: (data) => dispatch(getAllUsers(data)),
+    getRoles: (data) => dispatch(getRoles(data)),
+    getPositions: (data) => dispatch(getPositions(data)),
+    getStatuses: (data) => dispatch(getStatuses(data)),
   };
 }
 

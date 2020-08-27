@@ -4,16 +4,17 @@ import {
   SET_ALL_USERS,
   SET_LOADING,
   SET_ROLES,
+  SET_STATUSES,
   SET_POSITIONS,
 } from './actions';
 
 const initialState = {
   allUsers: null,
   totalPages: 0,
-  roles: {},
-  positions: {},
+  roles: null,
+  positions: null,
   invitedUsers: [],
-  statuses: {},
+  statuses: null,
   success: null,
   error: null,
   loading: false,
@@ -31,6 +32,8 @@ const adminPanelReducer = (state = initialState, action) => {
       return { ...state, roles: action.roles };
     case SET_POSITIONS:
       return { ...state, positions: action.positions };
+    case SET_STATUSES:
+      return { ...state, statuses: action.statuses };
     case SET_ALL_USERS:
       return { ...state, allUsers: action.allUsersData };
     default:

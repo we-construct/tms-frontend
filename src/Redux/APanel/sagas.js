@@ -7,9 +7,11 @@ import {
   setAllUsers,
   setRoles,
   setPositions,
+  setStatuses,
   SEND_INVITATION,
   GET_ROLES,
   GET_POSITIONS,
+  GET_STATUSES,
   GET_ALL_USERS,
   SET_STATUS,
   DELETE_USER,
@@ -33,19 +35,19 @@ export function sendInvitation({
   });
 }
 // get roles list
-export function getRoles(accessToken) {
+export function getRoles({ accessToken }) {
   return axiosInstance.post(`/get/roles`, {
     accessToken,
   });
 }
 // get positions list
-export function getPositions(accessToken) {
+export function getPositions({ accessToken }) {
   return axiosInstance.post(`/get/positions`, {
     accessToken,
   });
 }
 // get statuses list
-export function getStatuses(accessToken) {
+export function getStatuses({ accessToken }) {
   return axiosInstance.post(`/get/statuses`, {
     accessToken,
   });
@@ -156,6 +158,21 @@ export function* watchGetPositions() {
 }
 // end get all positions from db
 
+// get all statuses from db
+export function* workerGetStatuses({ accessToken }) {
+  const res = yield call(getStatuses, accessToken);
+  if (typeof res.data !== "string") {
+    yield put(setStatuses(res.data));
+  } else {
+    yield put(setError(res.data));
+  }
+}
+
+export function* watchGetStatuses() {
+  yield takeEvery(GET_STATUSES, workerGetStatuses);
+}
+// end get all statuses from db
+
 // admin delete user functional
 export function* workerDeleteUser({ payload }) {
   yield put(setAllUsers(null));
@@ -178,6 +195,7 @@ export function* adminSaga() {
   yield all([fork(watchSendInvitation)]);
   yield all([fork(watchGetRoles)]);
   yield all([fork(watchGetPositions)]);
+  yield all([fork(watchGetStatuses)]);
   yield all([fork(watchGetAllUsersData)]);
   yield all([fork(watchUpdateUserStatus)]);
   yield all([fork(watchDeleteUser)]);

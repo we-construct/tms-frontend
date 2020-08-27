@@ -1,12 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import MenuItem from '@material-ui/core/MenuItem';
-import TextField from '@material-ui/core/TextField';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import Button from '@material-ui/core/Button';
-import { useStyles } from './styles';
-import { connect } from 'react-redux';
-import { sendInvite, setError } from '../../Redux/APanel/actions';
-import { useSnackbar } from 'notistack';
+import React, { useState, useEffect } from "react";
+import { MenuItem, TextField, CircularProgress, Button, InputLabel, FormHelperText, FormControl, Select } from "@material-ui/core";
+import { useStyles } from "./styles";
+import { connect } from "react-redux";
+import { sendInvite, setError } from "../../Redux/APanel/actions";
+import { useSnackbar } from "notistack";
 
 const InvitationForm = ({
   sendInvite,
@@ -17,19 +14,20 @@ const InvitationForm = ({
   setError,
 }) => {
   const [form, setForm] = useState({
-    email: '',
-    roleId: '',
-    positionId: '',
+    email: "",
+    roleId: "",
+    positionId: "",
   });
   const classes = useStyles();
-
   const { enqueueSnackbar } = useSnackbar();
+
   useEffect(() => {
     if (error) {
-      enqueueSnackbar(error, { variant: 'error' });
+      enqueueSnackbar(error, { variant: "error" });
       setError(null);
     }
-  }, [error, setError, enqueueSnackbar]);
+    //eslint-disable-next-line
+  }, [error]);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -37,9 +35,10 @@ const InvitationForm = ({
   const handleSubmit = (e) => {
     e.preventDefault();
     sendInvite({
-      accessToken: '',
+      accessToken:
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjM4Iiwicm9sZSI6MSwic3RhdHVzIjoxLCJlbWFpbCI6InZhYXJzZW55YW5AZ21haWwuY29tIiwiaWF0IjoxNTk4Mzg0MjI2fQ.TBIUwWxx2N3vQsS3Rb96mxh1xGSyBYribxd2qjAqbu8",
       ...form,
-      createdById: '28',
+      createdById: "28",
     });
   };
 
@@ -55,50 +54,58 @@ const InvitationForm = ({
         variant="outlined"
         helperText="Please enter email"
         required={true}
-        style={{ width: '100%' }}
+        style={{ width: "100%" }}
       />
       <div className={classes.inputsWrapper}>
-        <TextField
-          id="filled-select-currency"
-          value={form.roleId}
-          onChange={handleChange}
-          name="roleId"
-          select
-          label="Role"
-          required={true}
-          variant="outlined"
-          helperText="Please select role"
-        >
-          {roles.map((option) => (
-            <MenuItem key={option.id} value={option.id}>
-              {option.name}
-            </MenuItem>
-          ))}
-        </TextField>
-        <TextField
-          id="filled-select-currency"
-          value={form.positionId}
-          onChange={handleChange}
-          name="positionId"
-          select
-          required={true}
-          label="Position"
-          helperText="Please select position"
-          variant="outlined"
-        >
-          {positions.map((option) => (
-            <MenuItem key={option.id} value={option.id}>
-              {option.name}
-            </MenuItem>
-          ))}
-        </TextField>
+        <FormControl required className={classes.formControl}>
+          <InputLabel id="demo-simple-select-required-label">Role</InputLabel>
+          <Select
+            labelId="demo-simple-select-required-label"
+            id="demo-simple-select-required"
+            value={form.roleId}
+            onChange={handleChange}
+            name="roleId"
+            className={classes.selectEmpty}
+          >
+            {roles !== null
+              ? roles.map((role) => (
+                  <MenuItem key={role.id} value={role.id}>
+                    {role.name}
+                  </MenuItem>
+                ))
+              : null}
+          </Select>
+          <FormHelperText>Required</FormHelperText>
+        </FormControl>
+        <FormControl required className={classes.formControl}>
+          <InputLabel id="demo-simple-select-required-label">
+            Position
+          </InputLabel>
+          <Select
+            labelId="demo-simple-select-required-label"
+            id="demo-simple-select-required"
+            value={form.positionId}
+            onChange={handleChange}
+            name="positionId"
+            className={classes.selectEmpty}
+          >
+            {positions !== null
+              ? positions.map((pos) => (
+                  <MenuItem key={pos.id} value={pos.id}>
+                    {pos.name}
+                  </MenuItem>
+                ))
+              : null}
+          </Select>
+          <FormHelperText>Required</FormHelperText>
+        </FormControl>
       </div>
       <Button
-        style={{ width: '100%' }}
+        style={{ width: "100%" }}
         type="submit"
         variant="contained"
         color="primary"
-        endIcon={loading && <CircularProgress color="#fff" size={20} />}
+        endIcon={loading && <CircularProgress size={20} />}
         disabled={loading}
       >
         Send

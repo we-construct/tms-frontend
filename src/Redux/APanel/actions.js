@@ -10,6 +10,8 @@ export const GET_ROLES = 'GET_ROLES';
 export const SET_ROLES = 'SET_ROLES';
 export const GET_POSITIONS = 'GET_POSITIONS';
 export const SET_POSITIONS = 'SET_POSITIONS';
+export const GET_STATUSES = 'GET_STATUSES';
+export const SET_STATUSES = 'SET_STATUSES';
 
 // error handling action
 export const setError = (error) => {
@@ -58,6 +60,16 @@ export const getPositions = (accessToken) => ({
 export const setPositions = (positions) => ({
   type: SET_POSITIONS,
   positions,
+});
+//get statuses from db
+export const getStatuses = (accessToken) => ({
+  type: GET_STATUSES,
+  accessToken,
+});
+//set statuses to reducer
+export const setStatuses = (statuses) => ({
+  type: SET_STATUSES,
+  statuses,
 });
 // get all users action
 export const getAllUsers = (payload) => {
