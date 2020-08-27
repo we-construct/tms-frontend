@@ -10,7 +10,7 @@ import { useStyles } from '../../PageWrapper/useStyles';
 const MainListItems = () => {
   const styles = useStyles();
   const [list] = useState([
-    { title: 'Admin Panel', link: '/', icon: <AccountCircleIcon /> },
+    { title: 'Admin Panel', link: '/admin-panel', icon: <AccountCircleIcon /> },
     {
       title: 'Send Invitation',
       link: '/send-invitation',

@@ -37,8 +37,7 @@ const InvitationForm = ({
   const handleSubmit = (e) => {
     e.preventDefault();
     sendInvite({
-      accessToken:
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjM4Iiwicm9sZSI6MSwic3RhdHVzIjoxLCJlbWFpbCI6InZhYXJzZW55YW5AZ21haWwuY29tIiwiaWF0IjoxNTk4MzQ1MTMyfQ.1IMHSDzo3PJb92h-tQavAlwPe5gBjNWyb6V7U92E7M0',
+      accessToken: '',
       ...form,
       createdById: '28',
     });

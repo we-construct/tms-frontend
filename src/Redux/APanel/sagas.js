@@ -3,11 +3,13 @@ import axiosInstance from '../../Config/axiosInstance';
 import {
   setError,
   setSuccess,
+  setAllUsers,
   setRoles,
   setPositions,
   SEND_INVITATION,
   GET_ROLES,
   GET_POSITIONS,
+  GET_ALL_USERS,
 } from './actions';
 import { setLoading } from '../app/actions';
 
@@ -47,7 +49,7 @@ export function getStatuses(accessToken) {
   });
 }
 // get users list
-export function getUsers(accessToken) {
+export function getUsers({ accessToken }) {
   return axiosInstance.post(`/get/users`, {
     accessToken,
   });
@@ -86,6 +88,21 @@ export function* watchGetRoles() {
 }
 // end get all roles from db
 
+// admin get all users data functional
+export function* workerGetAllUsersData({ accessToken }) {
+  yield put(setAllUsers(null));
+  const res = yield call(getUsers, accessToken);
+  if (typeof res.data !== 'string') {
+    yield put(setAllUsers(res.data.users));
+  } else {
+    yield put(setError(res.data));
+  }
+}
+export function* watchGetAllUsersData() {
+  yield takeEvery(GET_ALL_USERS, workerGetAllUsersData);
+}
+// end of get all users data functional
+
 // get all positions from db
 export function* workerGetPositions({ accessToken }) {
   const res = yield call(getPositions, accessToken);
@@ -105,4 +122,5 @@ export function* adminSaga() {
   yield all([fork(watchSendInvitation)]);
   yield all([fork(watchGetRoles)]);
   yield all([fork(watchGetPositions)]);
+  yield all([fork(watchGetAllUsersData)]);
 }

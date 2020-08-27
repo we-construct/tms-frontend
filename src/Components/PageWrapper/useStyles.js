@@ -27,6 +27,9 @@ export const useStyles = makeStyles((theme) => ({
         marginRight: 36,
         color: 'white'
     },
+    title: {
+        flexGrow: 1,
+    },
     hide: {
         display: 'none',
     },
@@ -44,15 +47,15 @@ export const useStyles = makeStyles((theme) => ({
     },
     drawerClose: {
         transition: theme.transitions.create('width', {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.leavingScreen,
+          easing: theme.transitions.easing.sharp,
+          duration: theme.transitions.duration.leavingScreen,
         }),
         overflowX: 'hidden',
         width: theme.spacing(7) + 1,
         [theme.breakpoints.up('sm')]: {
-            width: theme.spacing(8) + 1,
+          width: theme.spacing(9) + 1,
         },
-    },
+      },
     toolbar: {
         display: 'flex',
         alignItems: 'center',

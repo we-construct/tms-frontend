@@ -1,7 +1,10 @@
 export const SET_ERROR = 'SET_ERROR';
 export const SET_SUCCESS = 'SET_SUCCESS';
+export const SET_LOADING = 'SET_LOADING';
 export const SEND_INVITATION = 'SEND_INVITATION';
 export const SET_INVITED_USER = 'SET_INVITED_USER';
+export const GET_ALL_USERS = 'GET_ALL_USERS';
+export const SET_ALL_USERS = 'SET_ALL_USERS';
 export const GET_ROLES = 'GET_ROLES';
 export const SET_ROLES = 'SET_ROLES';
 export const GET_POSITIONS = 'GET_POSITIONS';
@@ -21,35 +24,51 @@ export const setSuccess = (success) => {
     success,
   };
 };
-// senc invitation watcher action
+// loading handling action
+export const setLoading = (loading) => {
+  return {
+    type: SET_LOADING,
+    loading,
+  };
+};
+// send invitation watcher action
 export const sendInvite = (invitationData) => {
   return {
     type: SEND_INVITATION,
     invitationData,
   };
 };
-
-//set invited user to state.invitedUsers array
-export const setInvitedUser = (user) => ({
-  type: SEND_INVITATION,
-  user,
-});
-
 //get roles from db
 export const getRoles = (accessToken) => ({
   type: GET_ROLES,
   accessToken,
 });
+//set roles to reducer
 export const setRoles = (roles) => ({
   type: SET_ROLES,
   roles,
 });
-//get roles from db
+//get positions from db
 export const getPositions = (accessToken) => ({
   type: GET_POSITIONS,
   accessToken,
 });
+//set positions to reducer
 export const setPositions = (positions) => ({
   type: SET_POSITIONS,
   positions,
 });
+// get all users action
+export const getAllUsers = (accessToken) => {
+  return {
+    type: GET_ALL_USERS,
+    accessToken,
+  };
+};
+// get all users action
+export const setAllUsers = (allUsersData) => {
+  return {
+    type: SET_ALL_USERS,
+    allUsersData,
+  };
+};

@@ -10,11 +10,12 @@ const Header = ({ handleDrawer, open }) => {
   return (
     <div>
       <AppBar
+        elevation={0}
         position="absolute"
         className={clsx(classes.appBar, open && classes.appBarShift)}
       >
         <Toolbar className={classes.toolbar}>
-          <IconButton onClick={handleDrawer}>
+          <IconButton onClick={handleDrawer} className={classes.menuButton}>
             <MenuIcon />
           </IconButton>
           <Typography
