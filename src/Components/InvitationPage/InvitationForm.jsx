@@ -1,5 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { MenuItem, TextField, CircularProgress, Button, InputLabel, FormHelperText, FormControl, Select } from "@material-ui/core";
+import {
+  MenuItem,
+  TextField,
+  CircularProgress,
+  Button,
+  InputLabel,
+  FormHelperText,
+  FormControl,
+  Select,
+} from "@material-ui/core";
 import { useStyles } from "./styles";
 import { connect } from "react-redux";
 import { sendInvite, setError } from "../../Redux/APanel/actions";
@@ -11,6 +20,7 @@ const InvitationForm = ({
   positions,
   loading,
   error,
+  success,
   setError,
 }) => {
   const [form, setForm] = useState({
@@ -28,6 +38,17 @@ const InvitationForm = ({
     }
     //eslint-disable-next-line
   }, [error]);
+  useEffect(() => {
+    if (success !== null) {
+      enqueueSnackbar(success.message, { variant: "success" });
+      setForm({
+        email: "",
+        roleId: "",
+        positionId: "",
+      });
+    }
+    //eslint-disable-next-line
+  }, [success]);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -35,8 +56,7 @@ const InvitationForm = ({
   const handleSubmit = (e) => {
     e.preventDefault();
     sendInvite({
-      accessToken:
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjM4Iiwicm9sZSI6MSwic3RhdHVzIjoxLCJlbWFpbCI6InZhYXJzZW55YW5AZ21haWwuY29tIiwiaWF0IjoxNTk4Mzg0MjI2fQ.TBIUwWxx2N3vQsS3Rb96mxh1xGSyBYribxd2qjAqbu8",
+      accessToken: "",
       ...form,
       createdById: "28",
     });
@@ -113,14 +133,18 @@ const InvitationForm = ({
     </form>
   );
 };
+
 const mapStateToProps = (state) => ({
   roles: state.adminData.roles,
   positions: state.adminData.positions,
   error: state.adminData.error,
+  success: state.adminData.success,
   loading: state.appData.loading,
 });
+
 const mapDispatchToProps = (dispatch) => ({
   sendInvite: (data) => dispatch(sendInvite(data)),
   setError: (data) => dispatch(setError(data)),
 });
+
 export default connect(mapStateToProps, mapDispatchToProps)(InvitationForm);

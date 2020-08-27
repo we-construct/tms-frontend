@@ -17,8 +17,7 @@ const UserItem = ({ user, page, loading, setUserStatus, deleteUser }) => {
 
   const changeUserStatusHandler = () => {
     setUserStatus({
-      accessToken:
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjM4Iiwicm9sZSI6MSwic3RhdHVzIjoxLCJlbWFpbCI6InZhYXJzZW55YW5AZ21haWwuY29tIiwiaWF0IjoxNTk4Mzg0MjI2fQ.TBIUwWxx2N3vQsS3Rb96mxh1xGSyBYribxd2qjAqbu8",
+      accessToken: '',
       id: user.id,
       statusId: user.statusid,
       page,
@@ -27,8 +26,7 @@ const UserItem = ({ user, page, loading, setUserStatus, deleteUser }) => {
   };
   const deleteUserHandler = () => {
     deleteUser({
-      accessToken:
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjM4Iiwicm9sZSI6MSwic3RhdHVzIjoxLCJlbWFpbCI6InZhYXJzZW55YW5AZ21haWwuY29tIiwiaWF0IjoxNTk4Mzg0MjI2fQ.TBIUwWxx2N3vQsS3Rb96mxh1xGSyBYribxd2qjAqbu8",
+      accessToken: '',
       id: user.id,
       page,
     });
@@ -50,6 +48,7 @@ const UserItem = ({ user, page, loading, setUserStatus, deleteUser }) => {
         <TableCell align="left">{user.id}</TableCell>
         <TableCell align="left">{user.first_name} {user.last_name}</TableCell>
         <TableCell align="left">{user.email}</TableCell>
+        <TableCell align="left">{user.phone_number}</TableCell>
         {user.role === "Admin" ? (
           <TableCell align="left" style={{ color: "#4caf50" }}>{user.role}</TableCell>
         ) : (
@@ -102,7 +101,7 @@ const UserItem = ({ user, page, loading, setUserStatus, deleteUser }) => {
               >
                 Delete {user.first_name}
               </Button>
-              <EditUser user={user}/>
+              <EditUser user={user} page={page}/>
             </Box>
           </Collapse>
         </TableCell>

@@ -1,17 +1,9 @@
 import React, { useState } from "react";
 import { connect } from 'react-redux';
 import { makeStyles } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import InputLabel from "@material-ui/core/InputLabel";
+import { TextField, Button, Dialog, DialogActions, DialogTitle, DialogContent, InputLabel, FormHelperText, FormControl, Select } from "@material-ui/core";
+import { updateUser } from "../../../../Redux/APanel/actions";
 import MenuItem from "@material-ui/core/MenuItem";
-import FormHelperText from "@material-ui/core/FormHelperText";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
-import { TextField } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -23,12 +15,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const EditUser = ({ user, roles, positions, statuses}) => {
+const EditUser = ({ user, roles, positions, statuses, page, updateUser}) => {
   const [open, setOpen] = useState(false);
   const classes = useStyles();
   const [data, setData] = useState({
+    id: user.id,
     firstName: user.first_name,
     lastName: user.last_name,
+    email: user.email,
+    phoneNumber: user.phone_number,
     roleId: user.roleid,
     positionId: user.positionid,
     statusId: user.statusid,
@@ -41,10 +36,16 @@ const EditUser = ({ user, roles, positions, statuses}) => {
   const handleClickOpen = () => {
     setOpen(true);
   };
-
   const handleClose = () => {
     setOpen(false);
   };
+  const handleSave = () => {
+    updateUser({
+      accessToken: '',
+      ...data,
+      page,
+    })
+  }
 
   return (
     <>
@@ -64,7 +65,7 @@ const EditUser = ({ user, roles, positions, statuses}) => {
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          Edit {user.first_name} data?
+          Edit {user.first_name}
         </DialogTitle>
         <DialogContent>
           <TextField
@@ -89,6 +90,30 @@ const EditUser = ({ user, roles, positions, statuses}) => {
             name="lastName"
             size="small"
             value={data.lastName}
+            onChange={handleChange}
+          />
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            label="Email"
+            type="text"
+            name="email"
+            size="small"
+            value={data.email}
+            onChange={handleChange}
+          />
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            label="Phone Number"
+            type="text"
+            name="phoneNumber"
+            size="small"
+            value={data.phoneNumber}
             onChange={handleChange}
           />
           <FormControl required className={classes.formControl}>
@@ -151,7 +176,7 @@ const EditUser = ({ user, roles, positions, statuses}) => {
           <Button onClick={handleClose} color="primary">
             Discard
           </Button>
-          <Button onClick={handleClose} color="primary" autoFocus>
+          <Button onClick={handleSave} color="primary" autoFocus>
             Save
           </Button>
         </DialogActions>
@@ -160,10 +185,16 @@ const EditUser = ({ user, roles, positions, statuses}) => {
   );
 }
 
+function mapDispatchToProps(dispatch) {
+  return {
+    updateUser: (data) => dispatch(updateUser(data)),
+  };
+}
+
 const mapStateToProps = (state) => ({
   roles: state.adminData.roles,
   positions: state.adminData.positions,
   statuses: state.adminData.statuses,
 });
 
-export default connect(mapStateToProps, null)(EditUser);
+export default connect(mapStateToProps, mapDispatchToProps)(EditUser);

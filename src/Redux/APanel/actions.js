@@ -12,6 +12,7 @@ export const GET_POSITIONS = 'GET_POSITIONS';
 export const SET_POSITIONS = 'SET_POSITIONS';
 export const GET_STATUSES = 'GET_STATUSES';
 export const SET_STATUSES = 'SET_STATUSES';
+export const UPDATE_USER = 'UPDATE_USER';
 
 // error handling action
 export const setError = (error) => {
@@ -89,6 +90,13 @@ export const setAllUsers = (allUsersData) => {
 export const setUserStatus = (payload) => {
   return {
     type: SET_STATUS,
+    payload,
+  };
+};
+// update user data
+export const updateUser = (payload) => {
+  return {
+    type: UPDATE_USER,
     payload,
   };
 };

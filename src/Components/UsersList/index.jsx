@@ -32,8 +32,7 @@ const UsersList = ({ error, getAllUsers, allUsers, getRoles, getPositions, getSt
   // token will be taken from  cookies
   useEffect(() => {
     getAllUsers({
-      accessToken:
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjM4Iiwicm9sZSI6MSwic3RhdHVzIjoxLCJlbWFpbCI6InZhYXJzZW55YW5AZ21haWwuY29tIiwiaWF0IjoxNTk4Mzg0MjI2fQ.TBIUwWxx2N3vQsS3Rb96mxh1xGSyBYribxd2qjAqbu8",
+      accessToken: '',
       page,
     });
     enqueueSnackbar(`Show results from page ${page}!`, {
@@ -52,16 +51,13 @@ const UsersList = ({ error, getAllUsers, allUsers, getRoles, getPositions, getSt
   }, [error]);
   useEffect(() => {
     getRoles({
-      accessToken:
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjM4Iiwicm9sZSI6MSwic3RhdHVzIjoxLCJlbWFpbCI6InZhYXJzZW55YW5AZ21haWwuY29tIiwiaWF0IjoxNTk4Mzg0MjI2fQ.TBIUwWxx2N3vQsS3Rb96mxh1xGSyBYribxd2qjAqbu8",
+      accessToken: '',
     })
     getPositions({
-      accessToken:
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjM4Iiwicm9sZSI6MSwic3RhdHVzIjoxLCJlbWFpbCI6InZhYXJzZW55YW5AZ21haWwuY29tIiwiaWF0IjoxNTk4Mzg0MjI2fQ.TBIUwWxx2N3vQsS3Rb96mxh1xGSyBYribxd2qjAqbu8",
+      accessToken: '',
     })
     getStatuses({
-      accessToken:
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjM4Iiwicm9sZSI6MSwic3RhdHVzIjoxLCJlbWFpbCI6InZhYXJzZW55YW5AZ21haWwuY29tIiwiaWF0IjoxNTk4Mzg0MjI2fQ.TBIUwWxx2N3vQsS3Rb96mxh1xGSyBYribxd2qjAqbu8",
+      accessToken: '',
     })
     // eslint-disable-next-line
   }, [])
@@ -85,6 +81,9 @@ const UsersList = ({ error, getAllUsers, allUsers, getRoles, getPositions, getSt
               </TableCell>
               <TableCell align="left" style={{ fontWeight: "bold" }}>
                 Email
+              </TableCell>
+              <TableCell align="left" style={{ fontWeight: "bold" }}>
+                Phone
               </TableCell>
               <TableCell align="left" style={{ fontWeight: "bold" }}>
                 Role
