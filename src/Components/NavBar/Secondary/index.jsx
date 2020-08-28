@@ -1,18 +1,29 @@
 import React from "react";
 import { ListItem, ListItemIcon, ListItemText } from "@material-ui/core";
-import EventAvailableIcon from "@material-ui/icons/EventAvailable";
+import { connect } from 'react-redux';
+import { logoutUser } from '../../../Redux/Users/actions';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
-const SecondaryListItems = () => {
+const SecondaryListItems = ({ logoutUser }) => {
+
+  const logOutHandler = () => {
+    logoutUser();
+  }
+
   return (
     <div>
-      <ListItem button>
+      <ListItem button onClick={logOutHandler}>
         <ListItemIcon>
-          <EventAvailableIcon />
+          <ExitToAppIcon />
         </ListItemIcon>
-        <ListItemText primary="Current month" />
+        <ListItemText primary="Logout" />
       </ListItem>
     </div>
   );
 };
 
-export default SecondaryListItems;
+const mapDispatchToProps = (dispatch) => ({
+  logoutUser: () => dispatch(logoutUser()),
+});
+
+export default connect(null, mapDispatchToProps)(SecondaryListItems);

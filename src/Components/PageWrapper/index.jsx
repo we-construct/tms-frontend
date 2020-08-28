@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 
 const PageWrapper = ({ children, toggle, setNavbarToggle }) => {
   const classes = useStyles();
+  
   return (
     <div className={classes.root}>
       <Header handleDrawer={() => setNavbarToggle()} open={toggle} />

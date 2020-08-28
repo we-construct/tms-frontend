@@ -7,6 +7,7 @@ import {
   setUserData,
   setError,
   setSuccess,
+  LOGOUT,
 } from "./actions";
 
 // user login request
@@ -53,6 +54,18 @@ export function* watchLoginUser() {
 }
 // end of login functional
 
+// user logout functional
+export function* workerLogoutUser() {
+    yield put(setUserData(null));
+    yield localStorage.setItem('token', '');
+    yield document.cookie = `''; path=/; expires=''`;
+}
+
+export function* watchLogoutUser() {
+  yield takeEvery(LOGOUT, workerLogoutUser);
+}
+// end of logout functional
+
 // user login functional
 export function* workerTokenLogin() {
   const res = yield call(tokenLogin);
@@ -91,6 +104,7 @@ export function* watchAcceptUser() {
 
 export function* usersSaga() {
   yield all([fork(watchLoginUser)]);
+  yield all([fork(watchLogoutUser)]);
   yield all([fork(watchAcceptUser)]);
   yield all([fork(watchTokenLogin)]);
 }
