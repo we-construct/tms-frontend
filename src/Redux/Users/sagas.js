@@ -2,6 +2,7 @@ import { takeEvery, put, all, fork, call } from "redux-saga/effects";
 import axiosInstance from "../../Config/axiosInstance";
 import {
   LOGIN_USER,
+  COOKIE_LOGIN,
   ACCEPT_INVITATION,
   setUserData,
   setError,
@@ -13,6 +14,11 @@ export function logUser(loginData) {
   return axiosInstance.post(`/login/`, {
     email: loginData.email,
     password: loginData.password,
+  });
+}
+// user login request
+export function tokenLogin() {
+  return axiosInstance.post(`/token`, {
   });
 }
 // accept invitation request
@@ -47,6 +53,26 @@ export function* watchLoginUser() {
 }
 // end of login functional
 
+// user login functional
+export function* workerTokenLogin() {
+  const res = yield call(tokenLogin);
+  if (typeof res.data !== "string") {
+    //clearing error
+    yield put(setError(null));
+    yield put(setUserData(res.data));
+    yield localStorage.setItem('token', res.data.accessToken);
+    // update cookie token
+    yield document.cookie = `${res.data.accessToken}; path=/; expires=${res.data.tokenExpiry}`;
+  } else {
+    yield put(setError(res.data));
+  }
+}
+
+export function* watchTokenLogin() {
+  yield takeEvery(COOKIE_LOGIN, workerTokenLogin);
+}
+// end of login functional
+
 // accepit invitation functional
 export function* workerAcceptUser({ payload }) {
   const res = yield call(acceptUser, payload);
@@ -66,4 +92,5 @@ export function* watchAcceptUser() {
 export function* usersSaga() {
   yield all([fork(watchLoginUser)]);
   yield all([fork(watchAcceptUser)]);
+  yield all([fork(watchTokenLogin)]);
 }
