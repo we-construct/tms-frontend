@@ -1,11 +1,16 @@
 import React from 'react';
 import { useRoutes } from './Routes/Router';
+import { connect } from 'react-redux';
 import { SnackbarProvider } from 'notistack';
 import './Style/index.scss';
 
-const App = () => {
-  const routes = useRoutes(true);
+const App = ({ userId }) => {
+  const routes = useRoutes(userId);
   return <SnackbarProvider maxSnack={3}>{routes}</SnackbarProvider>;
 };
 
-export default App;
+const mapStateToProps = (state) => ({
+  userId: state.userData.user.id,
+});
+
+export default connect(mapStateToProps, null)(App);

@@ -56,7 +56,6 @@ const InvitationForm = ({
   const handleSubmit = (e) => {
     e.preventDefault();
     sendInvite({
-      accessToken: "",
       ...form,
       createdById: "28",
     });

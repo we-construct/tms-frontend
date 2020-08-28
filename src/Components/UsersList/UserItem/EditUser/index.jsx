@@ -41,7 +41,6 @@ const EditUser = ({ user, roles, positions, statuses, page, updateUser}) => {
   };
   const handleSave = () => {
     updateUser({
-      accessToken: '',
       ...data,
       page,
     })

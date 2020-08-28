@@ -43,9 +43,8 @@ export const sendInvite = (invitationData) => {
   };
 };
 //get roles from db
-export const getRoles = (accessToken) => ({
+export const getRoles = () => ({
   type: GET_ROLES,
-  accessToken,
 });
 //set roles to reducer
 export const setRoles = (roles) => ({
@@ -53,9 +52,8 @@ export const setRoles = (roles) => ({
   roles,
 });
 //get positions from db
-export const getPositions = (accessToken) => ({
+export const getPositions = () => ({
   type: GET_POSITIONS,
-  accessToken,
 });
 //set positions to reducer
 export const setPositions = (positions) => ({
@@ -63,9 +61,8 @@ export const setPositions = (positions) => ({
   positions,
 });
 //get statuses from db
-export const getStatuses = (accessToken) => ({
+export const getStatuses = () => ({
   type: GET_STATUSES,
-  accessToken,
 });
 //set statuses to reducer
 export const setStatuses = (statuses) => ({

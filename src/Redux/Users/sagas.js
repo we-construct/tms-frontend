@@ -34,8 +34,9 @@ export function* workerLoginUser({ loginData }) {
     //clearing error
     yield put(setError(null));
     yield put(setUserData(res.data));
+    yield localStorage.setItem('token', res.data.accessToken);
     // if checked Remember me checkbox save cookies
-    yield loginData.isCheckedRememberMe ? (document.cookie = `access_token=${res.data.accessToken}; path=/; expires=${res.data.tokenExpiry}`) : null;
+    yield loginData.isCheckedRememberMe ? (document.cookie = `${res.data.accessToken}; path=/; expires=${res.data.tokenExpiry}`) : null;
   } else {
     yield put(setError(res.data));
   }
