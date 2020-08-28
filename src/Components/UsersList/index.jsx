@@ -1,14 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { getAllUsers } from "../../Redux/APanel/actions";
+import { getAllUsers, getRoles, getPositions, getStatuses } from "../../Redux/APanel/actions";
 import { useSnackbar } from "notistack";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import Paper from "@material-ui/core/Paper";
+import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@material-ui/core";
 import Pagination from "@material-ui/lab/Pagination";
 import UserItem from "./UserItem";
 import UserItemSkelet from "./UserItemSkelet";
@@ -31,30 +25,42 @@ const skelet = [
   },
 ];
 
-const UsersList = ({ error, getAllUsers, allUsers }) => {
+const UsersList = ({ error, getAllUsers, allUsers, getRoles, getPositions, getStatuses  }) => {
   const [page, setPage] = useState(1);
   const { enqueueSnackbar } = useSnackbar();
 
   // token will be taken from  cookies
   useEffect(() => {
     getAllUsers({
-      accessToken:
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjM4Iiwicm9sZSI6MSwic3RhdHVzIjoxLCJlbWFpbCI6InZhYXJzZW55YW5AZ21haWwuY29tIiwiaWF0IjoxNTk4Mzg0MjI2fQ.TBIUwWxx2N3vQsS3Rb96mxh1xGSyBYribxd2qjAqbu8",
+      accessToken: '',
+      page,
+    });
+    enqueueSnackbar(`Show results from page ${page}!`, {
+      variant: "info",
     });
     // need rerender only on page change
     // eslint-disable-next-line
   }, [page]);
-  // handle errors
   useEffect(() => {
     if (error !== null) {
-      enqueueSnackbar(
-        `${error}!`,
-        {
-          variant: "error",
-        }
-      );
+      enqueueSnackbar(`${error}!`, {
+        variant: "error",
+      });
     }
+    // eslint-disable-next-line
   }, [error]);
+  useEffect(() => {
+    getRoles({
+      accessToken: '',
+    })
+    getPositions({
+      accessToken: '',
+    })
+    getStatuses({
+      accessToken: '',
+    })
+    // eslint-disable-next-line
+  }, [])
 
   const handleChange = (event, value) => {
     setPage(value);
@@ -77,6 +83,9 @@ const UsersList = ({ error, getAllUsers, allUsers }) => {
                 Email
               </TableCell>
               <TableCell align="left" style={{ fontWeight: "bold" }}>
+                Phone
+              </TableCell>
+              <TableCell align="left" style={{ fontWeight: "bold" }}>
                 Role
               </TableCell>
               <TableCell align="left" style={{ fontWeight: "bold" }}>
@@ -96,10 +105,20 @@ const UsersList = ({ error, getAllUsers, allUsers }) => {
           <TableBody>
             {allUsers === null
               ? skelet.map((s) => <UserItemSkelet key={s.id} />)
-              : allUsers.map((user) => <UserItem key={user.id} user={user} />)}
+              : allUsers.users.map((user) => (
+                  <UserItem key={user.id} user={user} page={page}/>
+                ))}
           </TableBody>
         </Table>
-        <Pagination count={5} page={page} onChange={handleChange} />
+        {allUsers === null ? (
+          <Pagination count={0} page={page} onChange={handleChange} />
+        ) : (
+          <Pagination
+            count={allUsers.pages}
+            page={page}
+            onChange={handleChange}
+          />
+        )}
       </TableContainer>
     </>
   );
@@ -114,6 +133,9 @@ const mapStateToProps = (state) => ({
 function mapDispatchToProps(dispatch) {
   return {
     getAllUsers: (data) => dispatch(getAllUsers(data)),
+    getRoles: (data) => dispatch(getRoles(data)),
+    getPositions: (data) => dispatch(getPositions(data)),
+    getStatuses: (data) => dispatch(getStatuses(data)),
   };
 }
 
