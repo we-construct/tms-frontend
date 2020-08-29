@@ -2,10 +2,12 @@ import { takeEvery, put, all, fork, call } from "redux-saga/effects";
 import axiosInstance from "../../Config/axiosInstance";
 import {
   LOGIN_USER,
+  COOKIE_LOGIN,
   ACCEPT_INVITATION,
   setUserData,
   setError,
   setSuccess,
+  LOGOUT,
 } from "./actions";
 
 // user login request
@@ -13,6 +15,11 @@ export function logUser(loginData) {
   return axiosInstance.post(`/login/`, {
     email: loginData.email,
     password: loginData.password,
+  });
+}
+// user login request
+export function tokenLogin() {
+  return axiosInstance.post(`/token`, {
   });
 }
 // accept invitation request
@@ -34,8 +41,9 @@ export function* workerLoginUser({ loginData }) {
     //clearing error
     yield put(setError(null));
     yield put(setUserData(res.data));
+    yield localStorage.setItem('token', res.data.accessToken);
     // if checked Remember me checkbox save cookies
-    yield loginData.isCheckedRememberMe ? (document.cookie = `access_token=${res.data.accessToken}; path=/; expires=${res.data.tokenExpiry}`) : null;
+    yield loginData.isCheckedRememberMe ? (document.cookie = `${res.data.accessToken}; path=/; expires=${res.data.tokenExpiry}`) : null;
   } else {
     yield put(setError(res.data));
   }
@@ -43,6 +51,38 @@ export function* workerLoginUser({ loginData }) {
 
 export function* watchLoginUser() {
   yield takeEvery(LOGIN_USER, workerLoginUser);
+}
+// end of login functional
+
+// user logout functional
+export function* workerLogoutUser() {
+    yield put(setUserData(null));
+    yield localStorage.setItem('token', '');
+    yield document.cookie = `''; path=/; expires=''`;
+}
+
+export function* watchLogoutUser() {
+  yield takeEvery(LOGOUT, workerLogoutUser);
+}
+// end of logout functional
+
+// user login functional
+export function* workerTokenLogin() {
+  const res = yield call(tokenLogin);
+  if (typeof res.data !== "string") {
+    //clearing error
+    yield put(setError(null));
+    yield put(setUserData(res.data));
+    yield localStorage.setItem('token', res.data.accessToken);
+    // update cookie token
+    yield document.cookie = `${res.data.accessToken}; path=/; expires=${res.data.tokenExpiry}`;
+  } else {
+    yield put(setError(res.data));
+  }
+}
+
+export function* watchTokenLogin() {
+  yield takeEvery(COOKIE_LOGIN, workerTokenLogin);
 }
 // end of login functional
 
@@ -64,5 +104,7 @@ export function* watchAcceptUser() {
 
 export function* usersSaga() {
   yield all([fork(watchLoginUser)]);
+  yield all([fork(watchLogoutUser)]);
   yield all([fork(watchAcceptUser)]);
+  yield all([fork(watchTokenLogin)]);
 }

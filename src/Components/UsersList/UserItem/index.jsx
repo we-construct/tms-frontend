@@ -17,7 +17,6 @@ const UserItem = ({ user, page, loading, setUserStatus, deleteUser }) => {
 
   const changeUserStatusHandler = () => {
     setUserStatus({
-      accessToken: '',
       id: user.id,
       statusId: user.statusid,
       page,
@@ -26,7 +25,6 @@ const UserItem = ({ user, page, loading, setUserStatus, deleteUser }) => {
   };
   const deleteUserHandler = () => {
     deleteUser({
-      accessToken: '',
       id: user.id,
       page,
     });

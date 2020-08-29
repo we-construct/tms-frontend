@@ -32,7 +32,6 @@ const UsersList = ({ error, getAllUsers, allUsers, getRoles, getPositions, getSt
   // token will be taken from  cookies
   useEffect(() => {
     getAllUsers({
-      accessToken: '',
       page,
     });
     enqueueSnackbar(`Show results from page ${page}!`, {
@@ -51,13 +50,10 @@ const UsersList = ({ error, getAllUsers, allUsers, getRoles, getPositions, getSt
   }, [error]);
   useEffect(() => {
     getRoles({
-      accessToken: '',
     })
     getPositions({
-      accessToken: '',
     })
     getStatuses({
-      accessToken: '',
     })
     // eslint-disable-next-line
   }, [])

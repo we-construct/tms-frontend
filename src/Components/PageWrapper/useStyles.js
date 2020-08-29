@@ -1,7 +1,7 @@
 import { makeStyles } from "@material-ui/core/styles";
 
 const drawerWidth = 240;
-const COLOR = "#FB500C";
+const COLOR = "#2196f3";
 
 export const useStyles = makeStyles((theme) => ({
     root: {
@@ -53,7 +53,7 @@ export const useStyles = makeStyles((theme) => ({
         overflowX: 'hidden',
         width: theme.spacing(7) + 1,
         [theme.breakpoints.up('sm')]: {
-          width: theme.spacing(9) + 1,
+          width: theme.spacing(7) + 1,
         },
       },
     toolbar: {
@@ -68,7 +68,10 @@ export const useStyles = makeStyles((theme) => ({
         padding: theme.spacing(3),
     },
     link: {
-        color: '#000',
-        textDecoration: 'none'
+        color: '#757575',
+        textDecoration: 'none',
+    },
+    icon: {
+        color: '#757575',
     }
 }));

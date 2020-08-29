@@ -25,6 +25,14 @@ const Login = ({ error, success, loginUser }) => {
   });
 
   useEffect(() => {
+    if (document.cookie !== "") {
+      enqueueSnackbar('Please wait...', {variant: 'info'})
+    }else{
+      enqueueSnackbar('Token date is expired', {variant: 'error'})
+    }
+    //eslint-disable-next-line
+  }, []);
+  useEffect(() => {
     if (success !== null) {
       enqueueSnackbar(
         `${success.firstName}, thanks for accepting invitation.`,

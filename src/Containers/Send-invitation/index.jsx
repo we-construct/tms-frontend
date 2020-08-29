@@ -8,10 +8,8 @@ import { getRoles, getPositions } from '../../Redux/APanel/actions';
 const SendInvitation = ({ getRoles, getPositions }) => {
   useEffect(() => {
     getRoles({
-      accessToken: '',
     });
     getPositions({
-      accessToken: '',
     });
   }, [getRoles, getPositions]);
 

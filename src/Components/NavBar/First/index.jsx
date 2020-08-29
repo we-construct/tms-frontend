@@ -10,7 +10,7 @@ import { useStyles } from '../../PageWrapper/useStyles';
 const MainListItems = () => {
   const styles = useStyles();
   const [list] = useState([
-    { title: 'Admin Panel', link: '/admin-panel', icon: <AccountCircleIcon /> },
+    { title: 'Profile', link: '/', icon: <AccountCircleIcon /> },
     {
       title: 'Send Invitation',
       link: '/send-invitation',
@@ -25,7 +25,7 @@ const MainListItems = () => {
       {list.map((item) => (
         <NavLink key={item.link} to={item.link} className={styles.link}>
           <ListItem button>
-            <ListItemIcon>{item.icon}</ListItemIcon>
+            <ListItemIcon className={styles.icon}>{item.icon}</ListItemIcon>
             <ListItemText primary={item.title} />
           </ListItem>
         </NavLink>

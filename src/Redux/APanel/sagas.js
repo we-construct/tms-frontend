@@ -18,18 +18,14 @@ import {
   UPDATE_USER,
 } from "./actions";
 
-const tokenPlaceholder ="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjM4Iiwicm9sZSI6MSwic3RhdHVzIjoxLCJlbWFpbCI6InZhYXJzZW55YW5AZ21haWwuY29tIiwiaWF0IjoxNTk4Mzg0MjI2fQ.TBIUwWxx2N3vQsS3Rb96mxh1xGSyBYribxd2qjAqbu8";
-
 // user login request
 export function sendInvitation({
-  accessToken,
   email,
   roleId,
   positionId,
   createdById,
 }) {
   return axiosInstance.post(`/send-invitation/`, {
-    accessToken: tokenPlaceholder,
     email,
     roleId,
     statusId: "1",
@@ -38,42 +34,36 @@ export function sendInvitation({
   });
 }
 // get roles list
-export function getRoles({ accessToken }) {
+export function getRoles() {
   return axiosInstance.post(`/get/roles`, {
-    accessToken: tokenPlaceholder,
   });
 }
 // get positions list
-export function getPositions({ accessToken }) {
+export function getPositions() {
   return axiosInstance.post(`/get/positions`, {
-    accessToken: tokenPlaceholder,
   });
 }
 // get statuses list
-export function getStatuses({ accessToken }) {
+export function getStatuses() {
   return axiosInstance.post(`/get/statuses`, {
-    accessToken: tokenPlaceholder,
   });
 }
 // get users list
-export function getUsers({ accessToken, page }) {
+export function getUsers({ page }) {
   return axiosInstance.post(`/users`, {
-    accessToken: tokenPlaceholder,
     page,
   });
 }
 // activate/deactivate user
-export function updateStatus({ accessToken, statusId, id }) {
+export function updateStatus({ statusId, id }) {
   return axiosInstance.post(`/action/set-status`, {
-    accessToken: tokenPlaceholder,
     statusId,
     id,
   });
 }
 // edit user data
-export function updateUser({ accessToken, firstName, lastName, statusId, roleId, positionId, phoneNumber, email, id }) {
+export function updateUser({ firstName, lastName, statusId, roleId, positionId, phoneNumber, email, id }) {
   return axiosInstance.post(`/action/update-user`, {
-    accessToken: tokenPlaceholder,
     firstName,
     lastName,
     email,
@@ -85,9 +75,8 @@ export function updateUser({ accessToken, firstName, lastName, statusId, roleId,
   });
 }
 // delete user
-export function deleteUser({ accessToken, id }) {
+export function deleteUser({ id }) {
   return axiosInstance.post(`/action/delete`, {
-    accessToken: tokenPlaceholder,
     id,
   });
 }
@@ -110,8 +99,8 @@ export function* watchSendInvitation() {
 // end of send invitation functional
 
 // get all roles from db
-export function* workerGetRoles({ accessToken }) {
-  const res = yield call(getRoles, accessToken);
+export function* workerGetRoles() {
+  const res = yield call(getRoles);
   if (typeof res.data !== "string") {
     yield put(setRoles(res.data));
   } else {
@@ -178,8 +167,8 @@ export function* watchEditUser() {
 // end of edit user data functional
 
 // get all positions from db
-export function* workerGetPositions({ accessToken }) {
-  const res = yield call(getPositions, accessToken);
+export function* workerGetPositions() {
+  const res = yield call(getPositions);
   if (typeof res.data !== "string") {
     yield put(setPositions(res.data));
   } else {
@@ -193,8 +182,8 @@ export function* watchGetPositions() {
 // end get all positions from db
 
 // get all statuses from db
-export function* workerGetStatuses({ accessToken }) {
-  const res = yield call(getStatuses, accessToken);
+export function* workerGetStatuses() {
+  const res = yield call(getStatuses);
   if (typeof res.data !== "string") {
     yield put(setStatuses(res.data));
   } else {

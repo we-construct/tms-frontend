@@ -1,6 +1,8 @@
 export const SET_ERROR = "SET_ERROR";
 export const SET_SUCCESS = "SET_SUCCESS";
 export const LOGIN_USER = "LOGIN_USER";
+export const LOGOUT = "LOGOUT";
+export const COOKIE_LOGIN = "COOKIE_LOGIN";
 export const SET_LOGGED_USER = "SET_LOGGED_USER";
 export const ACCEPT_INVITATION = "ACCEPT_INVITATION";
 
@@ -23,6 +25,18 @@ export const loginUser = (loginData) => {
   return {
     type: LOGIN_USER,
     loginData,
+  };
+};
+// logout user
+export const logoutUser = () => {
+  return {
+    type: LOGOUT,
+  };
+};
+// login user with cookie token
+export const loginCookie = () => {
+  return {
+    type: COOKIE_LOGIN,
   };
 };
 // saving user data in state action

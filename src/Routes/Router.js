@@ -15,7 +15,7 @@ export const useRoutes = (isAuth) => {
             component={route.component}
           />
         ))}
-        <Redirect to="/" />
+        <Redirect to="/404" />
       </Switch>
     );
   }
