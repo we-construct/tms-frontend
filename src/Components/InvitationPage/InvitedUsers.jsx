@@ -19,6 +19,7 @@ const InvitedUsers = ({ users, getInvitedUsers }) => {
 
   useEffect(() => {
     getInvitedUsers();
+    // eslint-disable-next-line
   }, [])
 
   const handleChangePage = (event, newPage) => {
