@@ -6,6 +6,7 @@ import {
   SET_ROLES,
   SET_STATUSES,
   SET_POSITIONS,
+  SET_INVITED_USERS,
 } from './actions';
 
 const initialState = {
@@ -36,6 +37,8 @@ const adminPanelReducer = (state = initialState, action) => {
       return { ...state, statuses: action.statuses };
     case SET_ALL_USERS:
       return { ...state, allUsers: action.allUsersData };
+    case SET_INVITED_USERS:
+      return { ...state, invitedUsers: action.users };
     default:
       return state;
   }

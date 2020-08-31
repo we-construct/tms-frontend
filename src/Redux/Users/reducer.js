@@ -11,6 +11,7 @@ const initialState = {
     statusId: null,
     positionId: null,
     createdAt: null,
+    isAuth: false,
   },
   error: null,
   success: null,

@@ -8,6 +8,8 @@ export const SET_STATUS = "SET_STATUS";
 export const DELETE_USER = "DELETE_USER";
 export const GET_ROLES = 'GET_ROLES';
 export const SET_ROLES = 'SET_ROLES';
+export const GET_INVITED_USERS = 'GET_INVITED_USERS';
+export const SET_INVITED_USERS = 'SET_INVITED_USERS';
 export const GET_POSITIONS = 'GET_POSITIONS';
 export const SET_POSITIONS = 'SET_POSITIONS';
 export const GET_STATUSES = 'GET_STATUSES';
@@ -50,6 +52,15 @@ export const getRoles = () => ({
 export const setRoles = (roles) => ({
   type: SET_ROLES,
   roles,
+});
+//get invited users
+export const getInvitedUsers = () => ({
+  type: GET_INVITED_USERS,
+});
+//set invited users
+export const setInvitedUsers = (users) => ({
+  type: SET_INVITED_USERS,
+  users,
 });
 //get positions from db
 export const getPositions = () => ({

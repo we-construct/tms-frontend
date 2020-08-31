@@ -56,9 +56,20 @@ export function* watchLoginUser() {
 
 // user logout functional
 export function* workerLogoutUser() {
-    yield put(setUserData(null));
+    yield put(setUserData({
+      id: null,
+      firstName: null,
+      lastName: null,
+      phoneNumber: null,
+      email: null,
+      roleId: null,
+      statusId: null,
+      positionId: null,
+      createdAt: null,
+      isAuth: false, 
+    }));
     yield localStorage.setItem('token', '');
-    yield document.cookie = `''; path=/; expires=''`;
+    yield document.cookie = "; expires = Thu, 01 Jan 1970 00:00:00 GMT";
 }
 
 export function* watchLogoutUser() {
