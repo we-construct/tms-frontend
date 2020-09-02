@@ -8,15 +8,23 @@ const ProgressBar = (props) => {
     <Box display="flex" alignItems="center">
       <Box width="100%" mr={1}>
         {props.value === 100 ? (
-          <LinearProgress variant="determinate" {...props} color="secondary" />
+          <LinearProgress
+            variant="determinate"
+            {...props}
+            color="secondary"
+            style={{ height: "10px" }}
+          />
         ) : (
-          <LinearProgress variant="determinate" {...props} color="primary" />
+          <LinearProgress
+            variant="determinate"
+            {...props}
+            color="primary"
+            style={{ height: "10px" }}
+          />
         )}
       </Box>
       <Box minWidth={35}>
-        <Typography variant="body2" color="textSecondary">{`${Math.round(
-          props.value
-        )}%`}</Typography>
+        <Typography variant="body2" color="textSecondary">{`${Math.round(props.value)}%`}</Typography>
       </Box>
     </Box>
   );

@@ -1,6 +1,5 @@
 import React from "react";
 import Card from "@material-ui/core/Card";
-import CardActionArea from "@material-ui/core/CardActionArea";
 import Typography from "@material-ui/core/Typography";
 import CardContent from "@material-ui/core/CardContent";
 
@@ -57,48 +56,46 @@ const Experience = () => {
                 spacing={2}
                 elevation={0}
               >
-                <CardActionArea>
-                  <CardContent>
-                    <Typography gutterBottom variant="h6" component="h2">
-                      {job.company}
-                    </Typography>
-                    <Typography
-                      variant="body2"
-                      color="textSecondary"
-                      component="p"
-                    >
-                      Company: {job.company}
-                    </Typography>
-                    <Typography
-                      variant="body2"
-                      color="textSecondary"
-                      component="p"
-                    >
-                      Job: {job.name}
-                    </Typography>
-                    <Typography
-                      variant="body2"
-                      color="textSecondary"
-                      component="p"
-                    >
-                      Job Type: {job.jobTime}
-                    </Typography>
-                    <Typography
-                      variant="body2"
-                      color="textSecondary"
-                      component="p"
-                    >
-                      From: {job.from}
-                    </Typography>
-                    <Typography
-                      variant="body2"
-                      color="textSecondary"
-                      component="p"
-                    >
-                      To: {job.to}
-                    </Typography>
-                  </CardContent>
-                </CardActionArea>
+                <CardContent>
+                  <Typography gutterBottom variant="h6" component="h2">
+                    {job.company}
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    color="textSecondary"
+                    component="p"
+                  >
+                    Company: {job.company}
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    color="textSecondary"
+                    component="p"
+                  >
+                    Job: {job.name}
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    color="textSecondary"
+                    component="p"
+                  >
+                    Job Type: {job.jobTime}
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    color="textSecondary"
+                    component="p"
+                  >
+                    From: {job.from}
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    color="textSecondary"
+                    component="p"
+                  >
+                    To: {job.to}
+                  </Typography>
+                </CardContent>
               </Card>
             );
           })

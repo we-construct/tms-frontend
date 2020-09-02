@@ -1,6 +1,5 @@
 import React from "react";
 import Card from "@material-ui/core/Card";
-import CardActionArea from "@material-ui/core/CardActionArea";
 import Typography from "@material-ui/core/Typography";
 import CardContent from "@material-ui/core/CardContent";
 
@@ -61,41 +60,39 @@ const Education = () => {
                 spacing={2}
                 elevation={0}
               >
-                <CardActionArea>
-                  <CardContent>
-                    <Typography gutterBottom variant="h6" component="h2">
-                      {e.name}
-                    </Typography>
-                    <Typography
-                      variant="body2"
-                      color="textSecondary"
-                      component="p"
-                    >
-                      Uni: {e.name}
-                    </Typography>
-                    <Typography
-                      variant="body2"
-                      color="textSecondary"
-                      component="p"
-                    >
-                      Faculty: {e.faculty}
-                    </Typography>
-                    <Typography
-                      variant="body2"
-                      color="textSecondary"
-                      component="p"
-                    >
-                      From: {e.from}
-                    </Typography>
-                    <Typography
-                      variant="body2"
-                      color="textSecondary"
-                      component="p"
-                    >
-                      To: {e.to}
-                    </Typography>
-                  </CardContent>
-                </CardActionArea>
+                <CardContent>
+                  <Typography gutterBottom variant="h6" component="h2">
+                    {e.name}
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    color="textSecondary"
+                    component="p"
+                  >
+                    Uni: {e.name}
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    color="textSecondary"
+                    component="p"
+                  >
+                    Faculty: {e.faculty}
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    color="textSecondary"
+                    component="p"
+                  >
+                    From: {e.from}
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    color="textSecondary"
+                    component="p"
+                  >
+                    To: {e.to}
+                  </Typography>
+                </CardContent>
               </Card>
             );
           })

@@ -1,6 +1,6 @@
 import React from "react";
 import Card from "@material-ui/core/Card";
-import CardActionArea from "@material-ui/core/CardActionArea";
+import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 
 // placeholder for data from db
@@ -62,12 +62,8 @@ const HardSkills = () => {
         ) : (
           skills.map((skill) => {
             return (
-              <Card
-                className="profileCard"
-                key={skill.id}
-                elevation={0}
-              >
-                <CardActionArea className="skillItem">
+              <Card className="profileCard" key={skill.id} elevation={0}>
+                <CardContent className="skillItem">
                   <Typography
                     variant="body2"
                     color="textSecondary"
@@ -76,7 +72,7 @@ const HardSkills = () => {
                   >
                     {skill.name}
                   </Typography>
-                </CardActionArea>
+                </CardContent>
               </Card>
             );
           })
