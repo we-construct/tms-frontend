@@ -1,0 +1,53 @@
+.mainProfileSection {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 10px;
+
+    .userInfoList {
+        width: 100%;
+
+        .listItemPrimary {
+            text-align: right;
+        }
+    }
+
+    .avatar {
+        width: 64px;
+        height: 64px;
+        background-color: #2096F3;
+    }
+}
+
+.rightSection {
+    padding: 0 10px;
+
+    .cardSection {
+        padding-bottom: 16px;
+
+        .cards {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+
+            .profileCard {
+                margin-right: 16px;
+                margin-top: 16px;
+
+                .skillItem {
+                    padding: 8px;
+                    background: #2096F3;
+                    transition: .2s all ease-in-out;
+
+                    &:hover {
+                        background-color: #d81d5b;
+                    }
+                }
+            }
+        }
+    }
+
+    .itemTitle {
+        margin-top: 16px;
+    }
+}
