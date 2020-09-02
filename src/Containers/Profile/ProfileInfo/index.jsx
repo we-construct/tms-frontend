@@ -19,7 +19,7 @@ const ProfileInfo = ({ user }) => {
   return (
     <>
       <Grid item lg={3} xl={4} md={4} sm={12} xs={12}>
-        <Paper className="mainProfileSection" elevation={2}>
+        <Paper className="mainProfileSection" elevation={0}>
           <Avatar className="avatar">{`${user.firstName[0]}. ${user.lastName[0]}`}</Avatar>
           <List component="nav" className="userInfoList">
             <ListItem>

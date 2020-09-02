@@ -59,7 +59,7 @@ const Education = () => {
                 className="profileCard"
                 key={e.id}
                 spacing={2}
-                elevation={2}
+                elevation={0}
               >
                 <CardActionArea>
                   <CardContent>

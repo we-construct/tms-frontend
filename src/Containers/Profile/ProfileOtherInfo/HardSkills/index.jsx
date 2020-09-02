@@ -65,8 +65,7 @@ const HardSkills = () => {
               <Card
                 className="profileCard"
                 key={skill.id}
-                spacing={2}
-                elevation={2}
+                elevation={0}
               >
                 <CardActionArea className="skillItem">
                   <Typography

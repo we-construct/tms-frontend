@@ -11,13 +11,12 @@ const ProfileOtherInfo = () => {
   return (
     <>
       <Grid item lg={9} xl={4} md={8} sm={12} xs={12}>
-        <Paper className="rightSection">
+        <Paper className="rightSection" elevation={0}>
           <Education />
           <Divider />
           <Experience />
           <Divider />
           <SoftSkills />
-          <Divider />
           <HardSkills />
         </Paper>
       </Grid>

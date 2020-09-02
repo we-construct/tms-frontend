@@ -55,7 +55,7 @@ const Experience = () => {
                 className="profileCard"
                 key={job.id}
                 spacing={2}
-                elevation={2}
+                elevation={0}
               >
                 <CardActionArea>
                   <CardContent>
