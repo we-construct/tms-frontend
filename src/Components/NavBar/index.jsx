@@ -1,13 +1,15 @@
-import React from 'react';
-import clsx from 'clsx';
-import { Drawer, List, Divider, IconButton } from '@material-ui/core';
-import First from './First/index';
-import Secondary from './Secondary/index';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import { useStyles } from '../PageWrapper/useStyles';
+import React from "react";
+import clsx from "clsx";
+import { Drawer, List, Divider, IconButton } from "@material-ui/core";
+import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
+import ChevronRightIcon from "@material-ui/icons/ChevronRight";
+import { useStyles } from "../PageWrapper/useStyles";
+import Logout from "./Logout";
+import { connect } from "react-redux";
+import AdminLinks from "./Adminlinks";
+import UserLinks from "./UserLinks";
 
-const NavBar = ({ handleDrawer, open }) => {
+const NavBar = ({ handleDrawer, open, role }) => {
   const classes = useStyles();
 
   return (
@@ -29,16 +31,27 @@ const NavBar = ({ handleDrawer, open }) => {
           {!open ? <ChevronRightIcon /> : <ChevronLeftIcon />}
         </IconButton>
       </div>
-      <Divider />
       <List>
-        <First />
+        <UserLinks />
       </List>
       <Divider />
+      {role === "Admin" || role === 'Moder'? (
+        <>
+          <List>
+            <AdminLinks />
+          </List>
+          <Divider />
+        </>
+      ) : null}
       <List>
-        <Secondary />
+        <Logout />
       </List>
     </Drawer>
   );
 };
 
-export default NavBar;
+const mapStateToProps = (state) => ({
+  role: state.userData.user.role,
+});
+
+export default connect(mapStateToProps, null)(NavBar);
