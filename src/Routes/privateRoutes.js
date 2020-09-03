@@ -2,6 +2,7 @@ import Main from '../Containers/Main';
 import SendInvitation from '../Containers/Send-invitation';
 import Profile from '../Containers/Profile';
 import ErrorPage from '../Containers/404';
+import Goals from '../Containers/Goals';
 
 const privateRoutes = [
   {
@@ -18,6 +19,11 @@ const privateRoutes = [
     path: '/send-invitation',
     exact: true,
     component: SendInvitation,
+  },
+  {
+    path: '/goals',
+    exact: true,
+    component: Goals,
   },
   {
     path: '/404',
