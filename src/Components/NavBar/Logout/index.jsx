@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { logoutUser } from '../../../Redux/Users/actions';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
-const SecondaryListItems = ({ logoutUser }) => {
+const Logout = ({ logoutUser }) => {
 
   const logOutHandler = () => {
     logoutUser();
@@ -26,4 +26,4 @@ const mapDispatchToProps = (dispatch) => ({
   logoutUser: () => dispatch(logoutUser()),
 });
 
-export default connect(null, mapDispatchToProps)(SecondaryListItems);
+export default connect(null, mapDispatchToProps)(Logout);
