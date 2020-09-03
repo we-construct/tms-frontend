@@ -1,13 +1,19 @@
 import Main from '../Containers/Main';
 import SendInvitation from '../Containers/Send-invitation';
-import Profile from '../Containers/Profile';
+import UserProfile from '../Containers/UserProfile';
 import ErrorPage from '../Containers/404';
+import ViewProfile from '../Containers/ViewProfile';
 
 const privateRoutes = [
   {
     path: '/',
     exact: true,
-    component: Profile,
+    component: UserProfile,
+  },
+  {
+    path: '/edit/:user',
+    exact: true,
+    component: ViewProfile,
   },
   {
     path: '/employees',

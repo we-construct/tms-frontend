@@ -6,7 +6,7 @@ import ProfileInfo from "./ProfileInfo";
 import ProfileOtherInfo from "./ProfileOtherInfo";
 import "./index.scss";
 
-const Profile = ({ user }) => {
+const UserProfile = ({ user }) => {
   return (
     <PageWrapper>
       <Grid container spacing={2}>
@@ -21,4 +21,4 @@ const mapStateToProps = (state) => ({
   user: state.userData.user,
 });
 
-export default connect(mapStateToProps, null)(Profile);
+export default connect(mapStateToProps, null)(UserProfile);

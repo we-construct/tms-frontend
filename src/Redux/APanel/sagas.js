@@ -18,6 +18,8 @@ import {
   DELETE_USER,
   UPDATE_USER,
   setInvitedUsers,
+  GET_CURRENT_USER,
+  setCurrentUser,
 } from "./actions";
 
 // user login request
@@ -85,6 +87,11 @@ export function updateUser({ firstName, lastName, statusId, roleId, positionId, 
 export function deleteUser({ id }) {
   return axiosInstance.post(`/action/delete`, {
     id,
+  });
+}
+// get current user
+export function getUser({ id }) {
+  return axiosInstance.post(`/user/${id}`, {
   });
 }
 
@@ -172,9 +179,8 @@ export function* watchUpdateUserStatus() {
 
 // edit user data
 export function* workerEditUser({ payload }) {
-  yield put(setAllUsers(null));
   const res = yield call(updateUser, payload);
-  const users = yield call(getUsers, payload);
+  const users = yield call(getUsers, {page: 1});
   if (typeof res.data !== "string") {
     yield put(setSuccess(res.data));
     yield put(setAllUsers(users.data));
@@ -236,6 +242,22 @@ export function* watchDeleteUser() {
 }
 // end of delete user functional
 
+// admin get user data functional
+export function* workerGetUser({ payload }) {
+  yield put(setCurrentUser(null));
+  const res = yield call(getUser, payload);
+  if (typeof res.data !== "string") {
+    yield put(setCurrentUser(res.data));
+  } else {
+    yield put(setError(res.data));
+  }
+}
+
+export function* watchGetUser() {
+  yield takeEvery(GET_CURRENT_USER, workerGetUser);
+}
+// end of get user data functional
+
 export function* adminSaga() {
   yield all([fork(watchSendInvitation)]);
   yield all([fork(watchGetRoles)]);
@@ -246,4 +268,5 @@ export function* adminSaga() {
   yield all([fork(watchUpdateUserStatus)]);
   yield all([fork(watchDeleteUser)]);
   yield all([fork(watchEditUser)]);
+  yield all([fork(watchGetUser)]);
 }

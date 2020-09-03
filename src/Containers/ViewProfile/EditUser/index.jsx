@@ -1,8 +1,20 @@
 import React, { useState } from "react";
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
-import { TextField, Button, Dialog, DialogActions, DialogTitle, DialogContent, InputLabel, FormHelperText, FormControl, Select } from "@material-ui/core";
-import { updateUser } from "../../../../Redux/APanel/actions";
+import {
+  TextField,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogTitle,
+  DialogContent,
+  InputLabel,
+  FormHelperText,
+  FormControl,
+  Select,
+} from "@material-ui/core";
+import { updateUser } from "../../../Redux/APanel/actions";
+import EditIcon from "@material-ui/icons/Edit";
 import MenuItem from "@material-ui/core/MenuItem";
 
 const useStyles = makeStyles((theme) => ({
@@ -15,18 +27,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const EditUser = ({ user, roles, positions, statuses, page, updateUser}) => {
+const EditUser = ({ user, roles, positions, statuses, updateUser }) => {
   const [open, setOpen] = useState(false);
   const classes = useStyles();
   const [data, setData] = useState({
     id: user.id,
-    firstName: user.first_name,
-    lastName: user.last_name,
+    firstName: user.firstName,
+    lastName: user.lastName,
     email: user.email,
-    phoneNumber: user.phone_number,
-    roleId: user.roleid,
-    positionId: user.positionid,
-    statusId: user.statusid,
+    phoneNumber: user.phoneNumber,
+    roleId: user.roleId,
+    positionId: user.positionId,
+    statusId: user.statusId,
   });
 
   const handleChange = (e) => {
@@ -42,30 +54,21 @@ const EditUser = ({ user, roles, positions, statuses, page, updateUser}) => {
   const handleSave = () => {
     updateUser({
       ...data,
-      page,
-    })
-  }
-
+    });
+    setOpen(false);
+  };
   return (
     <>
-      <Button
-        variant="outlined"
-        size="small"
-        color="primary"
-        style={{ marginRight: "8px" }}
-        onClick={handleClickOpen}
-      >
-        Edit {user.first_name}
-      </Button>
+      <EditIcon className="editBtn" onClick={handleClickOpen}>
+        Edit
+      </EditIcon>
       <Dialog
         open={open}
         onClose={handleClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">
-          Edit {user.first_name}
-        </DialogTitle>
+        <DialogTitle id="alert-dialog-title">Edit {user.firstName}</DialogTitle>
         <DialogContent>
           <TextField
             variant="outlined"
@@ -122,54 +125,57 @@ const EditUser = ({ user, roles, positions, statuses, page, updateUser}) => {
               id="demo-simple-select-required"
               value={data.roleId}
               onChange={handleChange}
-              name='roleId'
+              name="roleId"
               className={classes.selectEmpty}
             >
-            {roles.map((role) => (
-            <MenuItem key={role.id} value={role.id}>
-              {role.name}
-            </MenuItem>
-          ))}
+              {roles.map((role) => (
+                <MenuItem key={role.id} value={role.id}>
+                  {role.name}
+                </MenuItem>
+              ))}
             </Select>
             <FormHelperText>Required</FormHelperText>
           </FormControl>
           <FormControl required className={classes.formControl}>
-            <InputLabel id="demo-simple-select-required-label">Position</InputLabel>
+            <InputLabel id="demo-simple-select-required-label">
+              Position
+            </InputLabel>
             <Select
               labelId="demo-simple-select-required-label"
               id="demo-simple-select-required"
               value={data.positionId}
               onChange={handleChange}
-              name='positionId'
+              name="positionId"
               className={classes.selectEmpty}
             >
               {positions.map((pos) => (
-            <MenuItem key={pos.id} value={pos.id}>
-              {pos.name}
-            </MenuItem>
-          ))}
+                <MenuItem key={pos.id} value={pos.id}>
+                  {pos.name}
+                </MenuItem>
+              ))}
             </Select>
             <FormHelperText>Required</FormHelperText>
           </FormControl>
           <FormControl required className={classes.formControl}>
-            <InputLabel id="demo-simple-select-required-label">Status</InputLabel>
+            <InputLabel id="demo-simple-select-required-label">
+              Status
+            </InputLabel>
             <Select
               labelId="demo-simple-select-required-label"
               id="demo-simple-select-required"
               value={data.statusId}
               onChange={handleChange}
-              name='statusId'
+              name="statusId"
               className={classes.selectEmpty}
             >
-            {statuses.map((stat) => (
-            <MenuItem key={stat.id} value={stat.id}>
-              {stat.name}
-            </MenuItem>
-          ))}
+              {statuses.map((stat) => (
+                <MenuItem key={stat.id} value={stat.id}>
+                  {stat.name}
+                </MenuItem>
+              ))}
             </Select>
             <FormHelperText>Required</FormHelperText>
           </FormControl>
-          
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
@@ -182,7 +188,7 @@ const EditUser = ({ user, roles, positions, statuses, page, updateUser}) => {
       </Dialog>
     </>
   );
-}
+};
 
 function mapDispatchToProps(dispatch) {
   return {
