@@ -7,6 +7,8 @@ import adminPanelReducer from './APanel/reducer';
 import { usersSaga } from './Users/sagas';
 import { adminSaga } from './APanel/sagas';
 import { all, fork } from 'redux-saga/effects';
+import vacationReducer from './vacation/reducer';
+import { vacationsSaga } from './vacation/saga';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -14,10 +16,11 @@ let reducer = combineReducers({
   userData: usersReducer,
   adminData: adminPanelReducer,
   appData: appReducer,
+  vacationData: vacationReducer,
 });
 
 function* allSagas() {
-  yield all([fork(usersSaga), fork(adminSaga)]);
+  yield all([fork(usersSaga), fork(adminSaga), fork(vacationsSaga)]);
 }
 
 let store = createStore(reducer, applyMiddleware(logger, sagaMiddleware));
