@@ -1,24 +1,41 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import PageWrapper from "../../Components/PageWrapper";
 import Grid from "@material-ui/core/Grid";
 import ProfileInfo from "./ProfileInfo";
 import ProfileOtherInfo from "./ProfileOtherInfo";
+import { getProfileData } from "../../Redux/Users/actions";
 import "./index.scss";
 
-const UserProfile = ({ user }) => {
+const UserProfile = ({ getProfileData, profileData, id }) => {
+  useEffect(() => {
+    getProfileData({
+      id,
+    });
+    // eslint-disable-next-line
+  }, []);
+
   return (
     <PageWrapper>
-      <Grid container spacing={2}>
-        <ProfileInfo user={user} />
-        <ProfileOtherInfo />
-      </Grid>
+      {profileData === null ? null : (
+        <Grid container spacing={2}>
+          <ProfileInfo user={profileData} />
+          <ProfileOtherInfo />
+        </Grid>
+      )}
     </PageWrapper>
   );
 };
 
 const mapStateToProps = (state) => ({
-  user: state.userData.user,
+  profileData: state.userData.profileData,
+  id: state.userData.user.id,
 });
 
-export default connect(mapStateToProps, null)(UserProfile);
+function mapDispatchToProps(dispatch) {
+  return {
+    getProfileData: (data) => dispatch(getProfileData(data)),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserProfile);

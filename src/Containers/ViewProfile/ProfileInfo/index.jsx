@@ -57,6 +57,22 @@ const ProfileInfo = ({ user }) => {
               />
             </ListItem>
             <ListItem divider>
+              <ListItemText secondary="Address:" />
+              <ListItemText
+              // todo add address to db
+                primary="Yerevan, Armenia"
+                className="listItemPrimary"
+              />
+            </ListItem>
+            <ListItem divider>
+              <ListItemText secondary="Birth date:" />
+              <ListItemText
+              // todo add address to db
+                primary="19/07/1998"
+                className="listItemPrimary"
+              />
+            </ListItem>
+            <ListItem divider>
               <ListItemText secondary="Email:" />
               <ListItemText primary={user.email} className="listItemPrimary" />
             </ListItem>

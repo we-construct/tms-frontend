@@ -1,0 +1,6 @@
+.userListRow{
+    transition: .2s all linear;
+    &:hover{
+        background-color: #f1f1f1;
+    }
+}

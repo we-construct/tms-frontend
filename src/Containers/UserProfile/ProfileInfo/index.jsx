@@ -6,20 +6,22 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import ProgressBar from "./ProgressBar";
-import EditIcon from "@material-ui/icons/Edit";
 import Languages from "./Languages";
+import EditUser from "../EditUser";
 
 const ProfileInfo = ({ user }) => {
   const today = new Date();
   const regDate = new Date(user.createdAt);
   const oneDay = 1000 * 60 * 60 * 24;
-  const workingOnCompany = Math.ceil((today.getTime() - regDate.getTime()) / oneDay);
+  const workingOnCompany = Math.ceil(
+    (today.getTime() - regDate.getTime()) / oneDay
+  );
 
   return (
     <>
       <Grid item lg={3} xl={4} md={4} sm={12} xs={12}>
         <Paper className="mainProfileSection" elevation={0}>
-          <EditIcon className="editBtn" />
+          <EditUser user={user} />
           <Avatar className="avatar">{`${user.firstName[0]}. ${user.lastName[0]}`}</Avatar>
           <List component="nav" className="userInfoList">
             <ListItem>
@@ -51,6 +53,22 @@ const ProfileInfo = ({ user }) => {
               <ListItemText secondary="Last Name:" />
               <ListItemText
                 primary={user.lastName}
+                className="listItemPrimary"
+              />
+            </ListItem>
+            <ListItem divider>
+              <ListItemText secondary="Address:" />
+              <ListItemText
+                // todo add address to db
+                primary="Yerevan, Armenia"
+                className="listItemPrimary"
+              />
+            </ListItem>
+            <ListItem divider>
+              <ListItemText secondary="Birth date:" />
+              <ListItemText
+                // todo add address to db
+                primary="19/07/1998"
                 className="listItemPrimary"
               />
             </ListItem>

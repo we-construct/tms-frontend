@@ -34,6 +34,9 @@ const UserItemSkelet = () => {
         <TableCell align="left">
           <Skeleton variant="text" />
         </TableCell>
+        <TableCell align="left">
+          <Skeleton variant="text" />
+        </TableCell>
       </TableRow>
     </>
   );

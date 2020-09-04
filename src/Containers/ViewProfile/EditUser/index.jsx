@@ -59,9 +59,7 @@ const EditUser = ({ user, roles, positions, statuses, updateUser }) => {
   };
   return (
     <>
-      <EditIcon className="editBtn" onClick={handleClickOpen}>
-        Edit
-      </EditIcon>
+      <EditIcon className="editBtn" onClick={handleClickOpen} />
       <Dialog
         open={open}
         onClose={handleClose}

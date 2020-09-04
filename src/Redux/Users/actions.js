@@ -5,6 +5,9 @@ export const LOGOUT = "LOGOUT";
 export const COOKIE_LOGIN = "COOKIE_LOGIN";
 export const SET_LOGGED_USER = "SET_LOGGED_USER";
 export const ACCEPT_INVITATION = "ACCEPT_INVITATION";
+export const EDIT_PROFILE = "EDIT_PROFILE";
+export const SET_PROFILE_DATA = "SET_PROFILE_DATA";
+export const GET_PROFILE_DATA = "GET_PROFILE_DATA";
 
 // error handling action
 export const setError = (error) => {
@@ -50,6 +53,26 @@ export const setUserData = (userData) => {
 export const acceptInvitation = (payload) => {
   return {
     type: ACCEPT_INVITATION,
+    payload,
+  };
+};
+// accept invitation watcher action
+export const editProfile = (payload) => {
+  return {
+    type: EDIT_PROFILE,
+    payload,
+  };
+};
+// accept invitation watcher action
+export const setProfileData = (payload) => {
+  return {
+    type: SET_PROFILE_DATA,
+    payload,
+  };
+};
+export const getProfileData = (payload) => {
+  return {
+    type: GET_PROFILE_DATA,
     payload,
   };
 };

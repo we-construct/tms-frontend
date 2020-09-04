@@ -17,6 +17,7 @@ import {
 } from "@material-ui/core";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
+import "./index.scss";
 
 const UserItem = ({
   user,
@@ -28,9 +29,7 @@ const UserItem = ({
   const [open, setOpen] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
   const date = new Date(user.created_at);
-  const createdAt = `${date.getDate()}/${
-    date.getMonth() + 1
-  }/${date.getFullYear()}`;
+  const createdAt = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
 
   const changeUserStatusHandler = () => {
     setUserStatus({
@@ -54,10 +53,10 @@ const UserItem = ({
       id: user.id,
     });
   };
-  
+
   return (
     <>
-      <TableRow>
+      <TableRow className="userListRow">
         <TableCell>
           <IconButton
             aria-label="expand row"
@@ -84,11 +83,11 @@ const UserItem = ({
         <TableCell align="left">{createdAt}</TableCell>
         <TableCell align="left">{user.created_by_id}</TableCell>
         {user.status === "Active" ? (
-          <TableCell align="left" style={{ color: "#4caf50" }}>
+          <TableCell align="left" style={{ color: "#00c997" }}>
             {user.status}
           </TableCell>
         ) : user.status === "Vacation" ? (
-          <TableCell align="left" style={{ color: "#ffc107" }}>
+          <TableCell align="left" style={{ color: "#f59f00" }}>
             {user.status}
           </TableCell>
         ) : (
@@ -140,12 +139,11 @@ const UserItem = ({
                   size="small"
                   style={{
                     marginRight: "8px",
-                    backgroundColor: "#2096F3",
-                    color: "#fff",
                   }}
+                  color="primary"
                   onClick={getUser}
                 >
-                  View/Edit Profile
+                  View / Edit
                 </Button>
               </NavLink>
             </Box>

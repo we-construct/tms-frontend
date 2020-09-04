@@ -23,12 +23,7 @@ import {
 } from "./actions";
 
 // user login request
-export function sendInvitation({
-  email,
-  roleId,
-  positionId,
-  createdById,
-}) {
+export function sendInvitation({ email, roleId, positionId, createdById }) {
   return axiosInstance.post(`/send-invitation/`, {
     email,
     roleId,
@@ -39,23 +34,19 @@ export function sendInvitation({
 }
 // get roles list
 export function getRoles() {
-  return axiosInstance.post(`/get/roles`, {
-  });
+  return axiosInstance.post(`/get/roles`, {});
 }
 // get positions list
 export function getPositions() {
-  return axiosInstance.post(`/get/positions`, {
-  });
+  return axiosInstance.post(`/get/positions`, {});
 }
 // get statuses list
 export function getStatuses() {
-  return axiosInstance.post(`/get/statuses`, {
-  });
+  return axiosInstance.post(`/get/statuses`, {});
 }
 // get statuses list
 export function getInvitedUsers() {
-  return axiosInstance.post(`/get/invitations`, {
-  });
+  return axiosInstance.post(`/get/invitations`, {});
 }
 // get users list
 export function getUsers({ page }) {
@@ -71,7 +62,16 @@ export function updateStatus({ statusId, id }) {
   });
 }
 // edit user data
-export function updateUser({ firstName, lastName, statusId, roleId, positionId, phoneNumber, email, id }) {
+export function updateUser({
+  firstName,
+  lastName,
+  statusId,
+  roleId,
+  positionId,
+  phoneNumber,
+  email,
+  id,
+}) {
   return axiosInstance.post(`/action/update-user`, {
     firstName,
     lastName,
@@ -91,8 +91,7 @@ export function deleteUser({ id }) {
 }
 // get current user
 export function getUser({ id }) {
-  return axiosInstance.post(`/user/${id}`, {
-  });
+  return axiosInstance.post(`/user/${id}`, {});
 }
 
 // admin send invitation functional
@@ -180,10 +179,10 @@ export function* watchUpdateUserStatus() {
 // edit user data
 export function* workerEditUser({ payload }) {
   const res = yield call(updateUser, payload);
-  const users = yield call(getUsers, {page: 1});
+  const user = yield call(getUser, payload);
   if (typeof res.data !== "string") {
     yield put(setSuccess(res.data));
-    yield put(setAllUsers(users.data));
+    yield put(setCurrentUser(user.data));
   } else {
     yield put(setError(res.data));
   }

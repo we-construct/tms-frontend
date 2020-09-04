@@ -4,7 +4,7 @@ import PageWrapper from "../../Components/PageWrapper";
 import Grid from "@material-ui/core/Grid";
 import ProfileInfo from "./ProfileInfo";
 import ProfileOtherInfo from "./ProfileOtherInfo";
-import "./index.scss";
+import "../UserProfile/index.scss";
 
 const ViewProfile = ({ user }) => {
   return (

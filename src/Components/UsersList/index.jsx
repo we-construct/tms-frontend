@@ -23,6 +23,15 @@ const skelet = [
   {
     id: 5,
   },
+  {
+    id: 6,
+  },
+  {
+    id: 7,
+  },
+  {
+    id: 8,
+  },
 ];
 
 const UsersList = ({ error, getAllUsers, allUsers, getRoles, getPositions, getStatuses  }) => {
@@ -34,7 +43,7 @@ const UsersList = ({ error, getAllUsers, allUsers, getRoles, getPositions, getSt
     getAllUsers({
       page,
     });
-    enqueueSnackbar(`Show results from page ${page}!`, {
+    enqueueSnackbar(`Show results from page ${page}`, {
       variant: "info",
     });
     // need rerender only on page change
@@ -64,9 +73,9 @@ const UsersList = ({ error, getAllUsers, allUsers, getRoles, getPositions, getSt
 
   return (
     <>
-      <TableContainer component={Paper}>
+      <TableContainer component={Paper} elevation={0}>
         <Table aria-label="collapsible table">
-          <TableHead>
+          <TableHead style={{backgroundColor: '#F0F0F0'}}>
             <TableRow>
               <TableCell />
               <TableCell align="left" style={{ fontWeight: "bold" }}>
