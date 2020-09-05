@@ -4,7 +4,7 @@ import style from "./style.module.scss";
 const Header = () => {
   return (
     <header className={style.header}>
-      <h1>YOUR GOALS</h1>
+      <h1>My GOALS</h1>
     </header>
   );
 };

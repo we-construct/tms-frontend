@@ -1,73 +1,56 @@
-import React, { Component } from "react";
+import React from "react";
 import uuid from "uuid";
-import { BrowserRouter as Router, Route } from "react-router-dom";
 // Importing Components
 import Goal from "./Goal/index";
 import Header from "./GoalsHeader/index";
 import AddGoals from "./AddGoals/index";
 import PageWrapper from "../../Components/PageWrapper/index";
+import { useState } from "react";
 
-class Goals extends Component {
-  state = {
-    todos: [
-      { title: "Learning any new language", id: 1 },
-      { title: "Improve knowledge of English", id: 2 },
-      { title: "Become a full-cycle developer", id: 3 },
+const Goals = () => {
+  const [state, setState] = useState({
+    goals: [
+      { title: "Learning any new language", id: 1, date: new Date() },
+      { title: "Improve knowledge of English", id: 2, date: new Date() },
+      { title: "Become a full-cycle developer", id: 3, date: new Date() },
     ],
-  };
+  });
 
   // Toggle Complete
-  markComplete = (id) => {
-    this.setState({
-      todos: this.state.todos.map((todo) => {
-        if (todo.id === id) todo.completed = !todo.completed;
-        return todo;
+  const markComplete = (id) => {
+    setState({
+      goals: state.goals.map((goal) => {
+        if (goal.id === id) {
+          goal.completed = !goal.completed;
+        }
+        return goal;
       }),
     });
   };
 
-  // Delete Todo
-  delTodo = (id) => {
-    this.setState({
-      todos: [...this.state.todos.filter((todo) => todo.id !== id)],
+  // Delete goal
+  const delGoal = (id) => {
+    setState({
+      goals: [...state.goals.filter((goal) => goal.id !== id)],
     });
   };
 
-  addTodo = (title) => {
-    const newTodo = {
+  const addGoal = (title) => {
+    const newgoal = {
       id: uuid.v4(),
       title: title,
       completed: false,
     };
-    this.setState({ todos: [...this.state.todos, newTodo] });
+    setState({ goals: [...state.goals, newgoal] });
   };
 
-  render() {
-    return (
-      <PageWrapper>
-        <Router>
-          <div>
-            <Header />
-            <br />
-            <Route
-              exact
-              path="/goals"
-              render={(props) => (
-                <React.Fragment>
-                  <AddGoals addTodo={this.addTodo} />
-                  <Goal
-                    todos={this.state.todos}
-                    markComplete={this.markComplete}
-                    delTodo={this.delTodo}
-                  />
-                </React.Fragment>
-              )}
-            />
-          </div>
-        </Router>
-      </PageWrapper>
-    );
-  }
-}
+  return (
+    <PageWrapper>
+      <Header />
+      <AddGoals addGoal={addGoal} />
+      <Goal goals={state.goals} markComplete={markComplete} delGoal={delGoal} />
+    </PageWrapper>
+  );
+};
 
 export default Goals;

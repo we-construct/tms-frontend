@@ -1,8 +1,8 @@
 import React from 'react';
 import { Chip } from '@material-ui/core';
 
-const Tag = () => {
-  return <Chip size="small" label="Pending" color="primary" />;
+const Tag = ({ status }) => {
+  return <Chip size="small" label={status} color={status === 'Pending' ? 'primary' : 'secondary'} />;
 };
 
 export default Tag;

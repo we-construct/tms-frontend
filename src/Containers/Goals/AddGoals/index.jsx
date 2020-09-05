@@ -1,25 +1,22 @@
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { TextField, Button } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
+import { useState } from "react";
 
-export class AddGoals extends Component {
-  state = {
-    title: "",
-  };
+const AddGoals = (props) => {
+  const [state, setState] = useState({ title: "" });
 
-  onSubmit = (e) => {
+  const onSubmit = (e) => {
     e.preventDefault();
-    this.props.addTodo(this.state.title);
-    this.setState({ title: "" });
+    props.addGoal(state);
+    setState({ title: "" });
   };
 
-  onChange = (e) => this.setState({ title: e.target.value });
-
-  render() {
-    return (
+  return (
+    <>
       <form
-        onSubmit={this.onSubmit}
+        onSubmit={onSubmit}
         style={{ display: "flex" }}
         noValidate
         autoComplete="off"
@@ -33,10 +30,9 @@ export class AddGoals extends Component {
           label="Add"
           variant="outlined"
           placeholder="Add Goal..."
-          value={this.state.title}
-          onChange={this.onChange}
+          value={state.title}
+          onChange={(e) => setState(e.target.value)}
         />
-
         <Button
           variant="contained"
           color="primary"
@@ -48,13 +44,13 @@ export class AddGoals extends Component {
           <AddIcon />
         </Button>
       </form>
-    );
-  }
-}
+    </>
+  );
+};
 
 // PropTypes
 AddGoals.propTypes = {
-  addTodo: PropTypes.func.isRequired,
+  addGoal: PropTypes.func.isRequired,
 };
 
 export default AddGoals;

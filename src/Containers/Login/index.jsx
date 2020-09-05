@@ -27,8 +27,6 @@ const Login = ({ error, success, loginUser }) => {
   useEffect(() => {
     if (document.cookie !== "") {
       enqueueSnackbar('Please wait...', {variant: 'info'})
-    }else{
-      enqueueSnackbar('Token date is expired', {variant: 'error'})
     }
     //eslint-disable-next-line
   }, []);
@@ -44,7 +42,9 @@ const Login = ({ error, success, loginUser }) => {
     //eslint-disable-next-line
   }, [success]);
   useEffect(() => {
-    check ? enqueueSnackbar('I\'ll remember you!', {variant: 'info'}) : enqueueSnackbar('I will not remember you!', {variant: 'warning'});
+    if (check) {
+      enqueueSnackbar('I\'ll set cookies!', {variant: 'info'});
+    }
     //eslint-disable-next-line
   }, [check]);
 

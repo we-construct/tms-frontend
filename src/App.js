@@ -5,8 +5,8 @@ import { SnackbarProvider } from "notistack";
 import { loginCookie } from "./Redux/Users/actions";
 import "./Style/index.scss";
 
-const App = ({ userId, loginCookie }) => {
-  const routes = useRoutes(userId);
+const App = ({ isAuth, loginCookie }) => {
+  const routes = useRoutes(isAuth);
 
   useEffect(() => {
     if (document.cookie !== "") {
@@ -23,7 +23,7 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const mapStateToProps = (state) => ({
-  userId: state.userData.user.id,
+  isAuth: state.userData.user.isAuth,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
