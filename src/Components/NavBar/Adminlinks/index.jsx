@@ -1,19 +1,19 @@
-import React, { useState } from 'react';
-import PeopleIcon from '@material-ui/icons/People';
-import PersonAddIcon from '@material-ui/icons/PersonAdd';
-import { ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
-import { NavLink } from 'react-router-dom';
-import { useStyles } from '../../PageWrapper/useStyles';
+import React, { useState } from "react";
+import PeopleIcon from "@material-ui/icons/People";
+import PersonAddIcon from "@material-ui/icons/PersonAdd";
+import { ListItem, ListItemIcon, ListItemText } from "@material-ui/core";
+import { NavLink } from "react-router-dom";
+import { useStyles } from "../../PageWrapper/useStyles";
 
 const AdminLinks = () => {
   const styles = useStyles();
-  const [list] = useState([
+  const [list, setList] = useState([
     {
-      title: 'Send Invitation',
-      link: '/send-invitation',
+      title: "Send Invitation",
+      link: "/send-invitation",
       icon: <PersonAddIcon />,
     },
-    { title: 'Employees', link: '/employees', icon: <PeopleIcon /> },
+    { title: "Employees", link: "/employees", icon: <PeopleIcon /> },
   ]);
 
   return (

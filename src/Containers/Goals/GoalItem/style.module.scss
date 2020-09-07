@@ -1,0 +1,37 @@
+.goal {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 8px 0;
+  padding: 5px;
+  font-family: Arial, Helvetica, sans-serif;
+  text-decoration: none;
+
+  &:hover {
+    background: #f1f1f1;
+  }
+}
+
+.title {
+  width: 550px;
+  padding: 4px;
+  border-bottom: 1px solid #4d4d4da2;
+
+  &:hover {
+    border-bottom: 2px solid #000;
+  }
+}
+.titleComplete {
+  width: 550px;
+  padding: 4px;
+  text-decoration: line-through #000;
+}
+
+.check {
+  height: 20px;
+  background: #000;
+}
+
+.delIcon {
+  margin-top: 5px;
+}
