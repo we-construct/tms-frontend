@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { Checkbox, TextField, Snackbar, Typography } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import MuiAlert from "@material-ui/lab/Alert";
+import style from "./style.module.scss";
 
 const GoalItem = ({ goal, markComplete, delGoal }) => {
   const [open, setOpen] = useState(false);
@@ -10,26 +11,11 @@ const GoalItem = ({ goal, markComplete, delGoal }) => {
   const handleClick = () => {
     setOpen(true);
   };
-  const handleClose = (e, reason) => {
+  const handleClose = (reason) => {
     if (reason === "clickaway") {
       return;
     }
-
     setOpen(false);
-  };
-
-  const getStyle = () => {
-    return {
-      display: "flex",
-      justifyContent: "space-between",
-      alignItems: "center",
-      margin: "8px 0",
-      background: "#F4F4F4",
-      padding: "5px",
-      // borderBottom: "1px #000 dotted",
-      fontFamily: "Arial, Helvetica, sans-serif",
-      textDecoration: goal.completed ? "line-through #f50057" : "none",
-    };
   };
 
   function Alert(props) {
@@ -39,14 +25,10 @@ const GoalItem = ({ goal, markComplete, delGoal }) => {
   const { id, title, completed } = goal;
 
   return (
-    <div style={getStyle()}>
+    <div className={style.goal}>
       <div>
         <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
-          <Alert
-            onClose={handleClose}
-            severity="success"
-            style={{ margin: "0" }}
-          >
+          <Alert onClose={handleClose} severity="success">
             <span>
               You are completed
               <i>
@@ -56,14 +38,15 @@ const GoalItem = ({ goal, markComplete, delGoal }) => {
             </span>
           </Alert>
         </Snackbar>
-        <Typography label="Goal" style={{ padding: "0px" }}>
+        <Typography
+          label="Goal"
+          className={goal.completed ? style.titleComplete : style.title}
+        >
           {title}
         </Typography>
       </div>
       <div>
         <TextField
-          style={{ padding: "0px" }}
-          // label="Due date"
           type="date"
           InputLabelProps={{
             shrink: true,
@@ -73,20 +56,20 @@ const GoalItem = ({ goal, markComplete, delGoal }) => {
 
       <div>
         <Checkbox
-          style={{ margin: "15px 0px 0px 0px" }}
           color="primary"
           inputProps={{ "aria-label": "secondary checkbox" }}
           type="checkbox"
-          onChange={markComplete.bind(this, id)}
+          onChange={() => markComplete(id)}
           checked={completed ? true : false}
           onClick={handleClick}
+          className={style.check}
         />
       </div>
       <div>
         <DeleteIcon
-          onClick={delGoal.bind(this, id)}
+          onClick={() => delGoal(id)}
           color="secondary"
-          style={{ margin: "20px 10px 0px 0px" }}
+          className={style.delIcon}
         />
       </div>
     </div>

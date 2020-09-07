@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { TextField, Button } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import { useState } from "react";
+import style from "./style.module.scss";
 
 const AddGoals = ({ addGoal }) => {
   const [state, setState] = useState({ title: "" });
@@ -19,9 +20,9 @@ const AddGoals = ({ addGoal }) => {
   };
 
   return (
-    <div style={{ display: "flex" }}>
+    <div className={style.addForm}>
       <TextField
-        style={{ flex: "10" }}
+        className={style.input}
         type="text"
         name="title"
         size="small"
@@ -39,7 +40,7 @@ const AddGoals = ({ addGoal }) => {
         type="submit"
         value="Submit"
         size="medium"
-        style={{ flex: "0", height: "40px" }}
+        className={style.button}
         onClick={onSubmit}
       >
         <AddIcon />

@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import { ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
-import { NavLink } from 'react-router-dom';
-import { useStyles } from '../../PageWrapper/useStyles';
+import React, { useState } from "react";
+import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+import AssignmentTurnedInIcon from "@material-ui/icons/AssignmentTurnedIn";
+import { ListItem, ListItemIcon, ListItemText } from "@material-ui/core";
+import { NavLink } from "react-router-dom";
+import { useStyles } from "../../PageWrapper/useStyles";
 
 const UserLinks = () => {
   const styles = useStyles();
   const [list] = useState([
-    { title: 'Profile', link: '/', icon: <AccountCircleIcon /> },
-    { title: 'Goals', link: '/goals', icon: <AccountCircleIcon /> },
+    { title: "Profile", link: "/", icon: <AccountCircleIcon /> },
+    { title: "Goals", link: "/goals", icon: <AssignmentTurnedInIcon /> },
   ]);
 
   return (

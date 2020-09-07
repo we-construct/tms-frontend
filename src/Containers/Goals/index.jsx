@@ -29,11 +29,11 @@ const Goals = () => {
   };
 
   // Delete goal
-  const delGoal = (id) => {
+  function delGoal(id) {
     setState({
       goals: [...state.goals.filter((goal) => goal.id !== id)],
     });
-  };
+  }
 
   const addGoal = (title) => {
     const newgoal = {
