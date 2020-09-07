@@ -8,6 +8,7 @@ const UserLinks = () => {
   const styles = useStyles();
   const [list] = useState([
     { title: 'Profile', link: '/', icon: <AccountCircleIcon /> },
+    { title: 'Goals', link: '/goals', icon: <AccountCircleIcon /> },
   ]);
 
   return (

@@ -16,8 +16,8 @@ const Goals = ({ markComplete, delGoal, goals }) => {
 // PropTypes
 Goals.propTypes = {
   goals: PropTypes.array.isRequired,
-  markComplete: PropTypes.func.isRequired,
-  delgoal: PropTypes.func.isRequired,
+  markComplete: PropTypes.func,
+  delgoal: PropTypes.func,
 };
 
 export default Goals;

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { Checkbox, TextField, Snackbar } from "@material-ui/core";
+import { Checkbox, TextField, Snackbar, Typography } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import MuiAlert from "@material-ui/lab/Alert";
 
@@ -22,10 +22,11 @@ const GoalItem = ({ goal, markComplete, delGoal }) => {
     return {
       display: "flex",
       justifyContent: "space-between",
+      alignItems: "center",
       margin: "8px 0",
       background: "#F4F4F4",
       padding: "5px",
-      borderBottom: "1px #000 dotted",
+      // borderBottom: "1px #000 dotted",
       fontFamily: "Arial, Helvetica, sans-serif",
       textDecoration: goal.completed ? "line-through #f50057" : "none",
     };
@@ -37,39 +38,33 @@ const GoalItem = ({ goal, markComplete, delGoal }) => {
 
   const { id, title, completed } = goal;
 
-  const defaultValueDate = new Date();
-
   return (
     <div style={getStyle()}>
       <div>
-        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-          <Alert onClose={handleClose} severity="success">
+        <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
+          <Alert
+            onClose={handleClose}
+            severity="success"
+            style={{ margin: "0" }}
+          >
             <span>
-              You are completed{" "}
+              You are completed
               <i>
-                <b>"{title}"</b>{" "}
-              </i>{" "}
+                <b>"{title}"</b>
+              </i>
               goal!
             </span>
           </Alert>
         </Snackbar>
-        <TextField
-          id="goal"
-          value={title}
-          label="Goal"
-          InputProps={{
-            readOnly: true,
-          }}
-          style={{ width: "500px" }}
-        />
+        <Typography label="Goal" style={{ padding: "0px" }}>
+          {title}
+        </Typography>
       </div>
       <div>
         <TextField
           style={{ padding: "0px" }}
-          id="date"
-          label="Due date"
+          // label="Due date"
           type="date"
-          defaultValue={defaultValueDate}
           InputLabelProps={{
             shrink: true,
           }}
@@ -83,7 +78,7 @@ const GoalItem = ({ goal, markComplete, delGoal }) => {
           inputProps={{ "aria-label": "secondary checkbox" }}
           type="checkbox"
           onChange={markComplete.bind(this, id)}
-          checked={completed ? "checked" : ""}
+          checked={completed ? true : false}
           onClick={handleClick}
         />
       </div>
@@ -91,7 +86,7 @@ const GoalItem = ({ goal, markComplete, delGoal }) => {
         <DeleteIcon
           onClick={delGoal.bind(this, id)}
           color="secondary"
-          style={{ margin: "25px 0px 0px 0px" }}
+          style={{ margin: "20px 10px 0px 0px" }}
         />
       </div>
     </div>
@@ -100,9 +95,9 @@ const GoalItem = ({ goal, markComplete, delGoal }) => {
 
 // PropTypes
 GoalItem.propTypes = {
-  goals: PropTypes.object.isRequired,
-  markComplete: PropTypes.func.isRequired,
-  delgoal: PropTypes.func.isRequired,
+  goals: PropTypes.object,
+  markComplete: PropTypes.func,
+  delgoal: PropTypes.func,
 };
 
 export default GoalItem;
