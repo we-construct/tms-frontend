@@ -1,14 +1,13 @@
 import React from "react";
 import { ListItem, ListItemIcon, ListItemText } from "@material-ui/core";
-import { connect } from 'react-redux';
-import { logoutUser } from '../../../Redux/Users/actions';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import { connect } from "react-redux";
+import { logoutUser } from "../../../Redux/Users/actions";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 
 const Logout = ({ logoutUser }) => {
-
   const logOutHandler = () => {
     logoutUser();
-  }
+  };
 
   return (
     <div>
