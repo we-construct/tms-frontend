@@ -15,6 +15,8 @@ export const SET_POSITIONS = 'SET_POSITIONS';
 export const GET_STATUSES = 'GET_STATUSES';
 export const SET_STATUSES = 'SET_STATUSES';
 export const UPDATE_USER = 'UPDATE_USER';
+export const GET_CURRENT_USER = 'GET_CURRENT_USER';
+export const SET_CURRENT_USER = 'SET_CURRENT_USER';
 
 // error handling action
 export const setError = (error) => {
@@ -92,6 +94,20 @@ export const setAllUsers = (allUsersData) => {
   return {
     type: SET_ALL_USERS,
     allUsersData,
+  };
+};
+// get current user action
+export const getCurrentUser = (payload) => {
+  return {
+    type: GET_CURRENT_USER,
+    payload,
+  };
+};
+// get current user action
+export const setCurrentUser = (currentUserData) => {
+  return {
+    type: SET_CURRENT_USER,
+    currentUserData,
   };
 };
 // chabge user status

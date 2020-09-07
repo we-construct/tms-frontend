@@ -4,10 +4,13 @@ import {
   LOGIN_USER,
   COOKIE_LOGIN,
   ACCEPT_INVITATION,
+  EDIT_PROFILE,
+  GET_PROFILE_DATA,
+  LOGOUT,
   setUserData,
   setError,
   setSuccess,
-  LOGOUT,
+  setProfileData,
 } from "./actions";
 
 // user login request
@@ -19,11 +22,31 @@ export function logUser(loginData) {
 }
 // user login request
 export function tokenLogin() {
-  return axiosInstance.post(`/token`, {
+  return axiosInstance.post(`/token`, {});
+}
+// user login request
+export function getData({ id }) {
+  return axiosInstance.post(`/user/${id}`, {});
+}
+// edit user data
+export function updateProfile({ firstName, lastName, phoneNumber, email, id }) {
+  return axiosInstance.post(`/edit-profile`, {
+    firstName,
+    lastName,
+    email,
+    phoneNumber,
+    id,
   });
 }
 // accept invitation request
-export function acceptUser({ firstName, lastName, password, confirmPassword, phoneNumber, token }) {
+export function acceptUser({
+  firstName,
+  lastName,
+  password,
+  confirmPassword,
+  phoneNumber,
+  token,
+}) {
   return axiosInstance.post(`/accept-initation/`, {
     firstName,
     lastName,
@@ -41,9 +64,11 @@ export function* workerLoginUser({ loginData }) {
     //clearing error
     yield put(setError(null));
     yield put(setUserData(res.data));
-    yield localStorage.setItem('token', res.data.accessToken);
+    yield localStorage.setItem("token", res.data.accessToken);
     // if checked Remember me checkbox save cookies
-    yield loginData.isCheckedRememberMe ? (document.cookie = `${res.data.accessToken}; path=/; expires=${res.data.tokenExpiry}`) : null;
+    yield loginData.isCheckedRememberMe
+      ? (document.cookie = `${res.data.accessToken}; path=/; expires=${res.data.tokenExpiry}`)
+      : null;
   } else {
     yield put(setError(res.data));
   }
@@ -56,20 +81,16 @@ export function* watchLoginUser() {
 
 // user logout functional
 export function* workerLogoutUser() {
-    yield put(setUserData({
+  yield put(
+    setUserData({
       id: null,
-      firstName: null,
-      lastName: null,
-      phoneNumber: null,
-      email: null,
-      roleId: null,
-      statusId: null,
-      positionId: null,
-      createdAt: null,
-      isAuth: false, 
-    }));
-    yield localStorage.setItem('token', '');
-    yield document.cookie = "; expires = Thu, 01 Jan 1970 00:00:00 GMT";
+      isAuth: false,
+      accessToken: null,
+      tokenExpiry: null,
+    })
+  );
+  yield localStorage.setItem("token", "");
+  yield (document.cookie = "; expires = Thu, 01 Jan 1970 00:00:00 GMT");
 }
 
 export function* watchLogoutUser() {
@@ -84,9 +105,9 @@ export function* workerTokenLogin() {
     //clearing error
     yield put(setError(null));
     yield put(setUserData(res.data));
-    yield localStorage.setItem('token', res.data.accessToken);
+    yield localStorage.setItem("token", res.data.accessToken);
     // update cookie token
-    yield document.cookie = `${res.data.accessToken}; path=/; expires=${res.data.tokenExpiry}`;
+    yield (document.cookie = `${res.data.accessToken}; path=/; expires=${res.data.tokenExpiry}`);
   } else {
     yield put(setError(res.data));
   }
@@ -113,9 +134,43 @@ export function* watchAcceptUser() {
 }
 // end of accept invitation
 
+// edit user data
+export function* workerGetProfileData({ payload }) {
+  const res = yield call(getData, payload);
+  if (typeof res.data !== "string") {
+    yield put(setProfileData(res.data));
+  } else {
+    yield put(setError(res.data));
+  }
+}
+
+export function* watchGetProfileData() {
+  yield takeEvery(GET_PROFILE_DATA, workerGetProfileData);
+}
+// end of edit user data functional
+
+// edit user data
+export function* workerEditProfile({ payload }) {
+  const res = yield call(updateProfile, payload);
+  const user = yield call(getData, { id: payload.id });
+  if (typeof res.data !== "string") {
+    yield put(setProfileData(user.data));
+    yield put(setSuccess(res.data));
+  } else {
+    yield put(setError(res.data));
+  }
+}
+
+export function* watchEditProfile() {
+  yield takeEvery(EDIT_PROFILE, workerEditProfile);
+}
+// end of edit user data functional
+
 export function* usersSaga() {
   yield all([fork(watchLoginUser)]);
   yield all([fork(watchLogoutUser)]);
   yield all([fork(watchAcceptUser)]);
   yield all([fork(watchTokenLogin)]);
+  yield all([fork(watchEditProfile)]);
+  yield all([fork(watchGetProfileData)]);
 }

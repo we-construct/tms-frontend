@@ -6,7 +6,7 @@ import { NavLink } from "react-router-dom";
 import { useStyles } from "../../PageWrapper/useStyles";
 
 const AdminLinks = () => {
-  const [styles, setStyles] = useStyles();
+  const styles = useStyles();
   const [list, setList] = useState([
     {
       title: "Send Invitation",
