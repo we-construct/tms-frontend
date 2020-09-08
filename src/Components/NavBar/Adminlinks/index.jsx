@@ -7,7 +7,7 @@ import { useStyles } from "../../PageWrapper/useStyles";
 
 const AdminLinks = () => {
   const styles = useStyles();
-  const [list, setList] = useState([
+  const [list] = useState([
     {
       title: "Send Invitation",
       link: "/send-invitation",

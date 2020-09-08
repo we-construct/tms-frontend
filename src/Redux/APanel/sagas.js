@@ -65,6 +65,7 @@ export function updateStatus({ statusId, id }) {
 export function updateUser({
   firstName,
   lastName,
+  birthday,
   statusId,
   roleId,
   positionId,
@@ -75,6 +76,7 @@ export function updateUser({
   return axiosInstance.post(`/action/update-user`, {
     firstName,
     lastName,
+    birthday,
     email,
     phoneNumber,
     positionId,

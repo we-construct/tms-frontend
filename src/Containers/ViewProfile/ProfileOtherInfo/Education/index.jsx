@@ -3,39 +3,7 @@ import Card from "@material-ui/core/Card";
 import Typography from "@material-ui/core/Typography";
 import CardContent from "@material-ui/core/CardContent";
 
-// placeholder for data from db
-const educationList = [
-  {
-    id: 1,
-    name: "Armenian State University of Economics",
-    faculty: "Management",
-    from: "01/09/2015",
-    to: "01/09/2021",
-  },
-  {
-    id: 2,
-    name: "RAU",
-    faculty: "CS",
-    from: "01/09/2015",
-    to: "01/09/2021",
-  },
-  {
-    id: 3,
-    name: "UFAR",
-    faculty: "Management",
-    from: "01/09/2031",
-    to: "01/09/2033",
-  },
-  {
-    id: 4,
-    name: "AUA",
-    faculty: "CS",
-    from: "01/09/2015",
-    to: "01/09/2021",
-  },
-];
-
-const Education = () => {
+const Education = ({ educationList }) => {
   return (
     <div className="cardSection">
       <Typography
@@ -47,9 +15,14 @@ const Education = () => {
         Education
       </Typography>
       <div className="cards">
-        {educationList.length === 0 ? (
-          <Typography gutterBottom variant="h6" component="h2">
-            Please fill your profile data.
+        {educationList === null ? (
+          <Typography
+            gutterBottom
+            variant="body2"
+            color="textSecondary"
+            component="p"
+          >
+            No education data inserted.
           </Typography>
         ) : (
           educationList.map((e) => {
@@ -77,6 +50,13 @@ const Education = () => {
                     component="p"
                   >
                     Faculty: {e.faculty}
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    color="textSecondary"
+                    component="p"
+                  >
+                    Grade: {e.grade}
                   </Typography>
                   <Typography
                     variant="body2"

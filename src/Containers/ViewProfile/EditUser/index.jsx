@@ -36,6 +36,7 @@ const EditUser = ({ user, roles, positions, statuses, updateUser }) => {
     lastName: user.lastName,
     email: user.email,
     phoneNumber: user.phoneNumber,
+    birthday: user.birthday.slice(0, 10),
     roleId: user.roleId,
     positionId: user.positionId,
     statusId: user.statusId,
@@ -57,6 +58,7 @@ const EditUser = ({ user, roles, positions, statuses, updateUser }) => {
     });
     setOpen(false);
   };
+  
   return (
     <>
       <EditIcon className="editBtn" onClick={handleClickOpen} />
@@ -174,6 +176,17 @@ const EditUser = ({ user, roles, positions, statuses, updateUser }) => {
             </Select>
             <FormHelperText>Required</FormHelperText>
           </FormControl>
+          <TextField
+            id="date"
+            label="Birthday (MM/DD/YY)"
+            type="date"
+            name="birthday"
+            value={data.birthday}
+            onChange={handleChange}
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">

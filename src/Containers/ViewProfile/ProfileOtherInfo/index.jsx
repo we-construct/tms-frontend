@@ -7,17 +7,17 @@ import Experience from "./Experience";
 import SoftSkills from "./SoftSkills";
 import HardSkills from "./HardSkills";
 
-const ProfileOtherInfo = () => {
+const ProfileOtherInfo = ({ user }) => {
   return (
     <>
       <Grid item lg={9} xl={4} md={8} sm={12} xs={12}>
         <Paper className="rightSection" elevation={0}>
-          <Education />
+          <Education educationList={user.education} />
           <Divider />
-          <Experience />
+          <Experience experienceList={user.experience} />
           <Divider />
-          <SoftSkills />
-          <HardSkills />
+          <SoftSkills skills={user.softSkills} />
+          <HardSkills skills={user.hardSkills} />
         </Paper>
       </Grid>
     </>

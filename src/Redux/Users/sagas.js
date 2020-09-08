@@ -29,11 +29,11 @@ export function getData({ id }) {
   return axiosInstance.post(`/user/${id}`, {});
 }
 // edit user data
-export function updateProfile({ firstName, lastName, phoneNumber, email, id }) {
+export function updateProfile({ firstName, lastName, phoneNumber, birthday, id }) {
   return axiosInstance.post(`/edit-profile`, {
     firstName,
     lastName,
-    email,
+    birthday,
     phoneNumber,
     id,
   });

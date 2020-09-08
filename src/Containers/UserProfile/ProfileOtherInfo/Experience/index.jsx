@@ -3,35 +3,7 @@ import Card from "@material-ui/core/Card";
 import Typography from "@material-ui/core/Typography";
 import CardContent from "@material-ui/core/CardContent";
 
-// placeholder for data from db
-const experienceList = [
-  {
-    id: 1,
-    company: "WeConstruct",
-    jobTime: "Full Time",
-    name: "Full Stack Developer",
-    from: "01/09/2015",
-    to: "01/09/2021",
-  },
-  {
-    id: 2,
-    company: "SoftConstruct",
-    jobTime: "Full Time",
-    name: "HR",
-    from: "01/09/2015",
-    to: "01/09/2021",
-  },
-  {
-    id: 3,
-    company: "PicsArt",
-    jobTime: "Part Time",
-    name: "QA Engineer",
-    from: "01/09/2015",
-    to: "01/09/2021",
-  },
-];
-
-const Experience = () => {
+const Experience = ({ experienceList }) => {
   return (
     <div className="cardSection">
       <Typography
@@ -43,9 +15,14 @@ const Experience = () => {
         Experience
       </Typography>
       <div className="cards">
-        {experienceList.length === 0 ? (
-          <Typography gutterBottom variant="h6" component="h2">
-            Please fill your profile data.
+        {experienceList === null ? (
+          <Typography
+            gutterBottom
+            variant="body2"
+            color="textSecondary"
+            component="p"
+          >
+            No experience data inserted.
           </Typography>
         ) : (
           experienceList.map((job) => {
