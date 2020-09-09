@@ -1,4 +1,3 @@
-
 import Main from '../Containers/Main';
 import SendInvitation from '../Containers/Send-invitation';
 import UserProfile from '../Containers/UserProfile';
