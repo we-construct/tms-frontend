@@ -36,7 +36,7 @@ const EditUser = ({ user, roles, positions, statuses, updateUser }) => {
     lastName: user.lastName,
     email: user.email,
     phoneNumber: user.phoneNumber,
-    birthday: user.birthday.slice(0, 10),
+    birthday: user.birthday,
     roleId: user.roleId,
     positionId: user.positionId,
     statusId: user.statusId,
@@ -58,7 +58,7 @@ const EditUser = ({ user, roles, positions, statuses, updateUser }) => {
     });
     setOpen(false);
   };
-  
+
   return (
     <>
       <EditIcon className="editBtn" onClick={handleClickOpen} />

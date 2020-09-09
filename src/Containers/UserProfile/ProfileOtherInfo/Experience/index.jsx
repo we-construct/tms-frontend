@@ -2,8 +2,9 @@ import React from "react";
 import Card from "@material-ui/core/Card";
 import Typography from "@material-ui/core/Typography";
 import CardContent from "@material-ui/core/CardContent";
+import AddExperience from "./AddExperience";
 
-const Experience = ({ experienceList }) => {
+const Experience = ({ id, experienceList }) => {
   return (
     <div className="cardSection">
       <Typography
@@ -13,6 +14,7 @@ const Experience = ({ experienceList }) => {
         className="itemTitle"
       >
         Experience
+        <AddExperience id={id} length={experienceList.length}/>
       </Typography>
       <div className="cards">
         {experienceList === null ? (

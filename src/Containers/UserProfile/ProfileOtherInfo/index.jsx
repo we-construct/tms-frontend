@@ -10,14 +10,14 @@ import HardSkills from "./HardSkills";
 const ProfileOtherInfo = ({ user }) => {
   return (
     <>
-      <Grid item lg={9} xl={4} md={8} sm={12} xs={12}>
+      <Grid item lg={9} xl={8} md={8} sm={12} xs={12}>
         <Paper className="rightSection" elevation={0}>
-          <Education educationList={user.education} />
+          <Education educationList={user.education} id={user.id} />
           <Divider />
-          <Experience experienceList={user.experience} />
+          <Experience experienceList={user.experience} id={user.id} />
           <Divider />
-          <SoftSkills skills={user.softSkills} />
-          <HardSkills skills={user.hardSkills} />
+          <SoftSkills skills={user.softSkills} id={user.id} />
+          <HardSkills skills={user.hardSkills} id={user.id} />
         </Paper>
       </Grid>
     </>

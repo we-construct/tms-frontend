@@ -2,8 +2,9 @@ import React from "react";
 import Card from "@material-ui/core/Card";
 import Typography from "@material-ui/core/Typography";
 import CardContent from "@material-ui/core/CardContent";
+import AddEducation from "./AddEducation";
 
-const Education = ({ educationList }) => {
+const Education = ({ id, educationList }) => {
   return (
     <div className="cardSection">
       <Typography
@@ -13,6 +14,7 @@ const Education = ({ educationList }) => {
         className="itemTitle"
       >
         Education
+        <AddEducation length={educationList.length} id={id} />
       </Typography>
       <div className="cards">
         {educationList === null ? (

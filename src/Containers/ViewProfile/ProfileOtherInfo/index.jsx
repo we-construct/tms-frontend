@@ -10,7 +10,7 @@ import HardSkills from "./HardSkills";
 const ProfileOtherInfo = ({ user }) => {
   return (
     <>
-      <Grid item lg={9} xl={4} md={8} sm={12} xs={12}>
+      <Grid item lg={9} xl={8} md={8} sm={12} xs={12}>
         <Paper className="rightSection" elevation={0}>
           <Education educationList={user.education} />
           <Divider />
