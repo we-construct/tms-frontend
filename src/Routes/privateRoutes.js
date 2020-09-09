@@ -1,9 +1,11 @@
-import Main from "../Containers/Main";
-import SendInvitation from "../Containers/Send-invitation";
-import UserProfile from "../Containers/UserProfile";
-import ErrorPage from "../Containers/404";
-import Goals from "../Containers/Goals";
-import ViewProfile from "../Containers/ViewProfile";
+
+import Main from '../Containers/Main';
+import SendInvitation from '../Containers/Send-invitation';
+import UserProfile from '../Containers/UserProfile';
+import ErrorPage from '../Containers/404';
+import ViewProfile from '../Containers/ViewProfile';
+import Goals from '../Containers/Goals';
+import Vacations from '../Containers/Vacations';
 
 const privateRoutes = [
   {
@@ -32,7 +34,12 @@ const privateRoutes = [
     component: Goals,
   },
   {
-    path: "/404",
+    path: '/vacations',
+    exact: true,
+    component: Vacations,
+  },
+  {
+    path: '/404',
     exact: true,
     component: ErrorPage,
   },

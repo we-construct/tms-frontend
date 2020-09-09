@@ -4,12 +4,14 @@ import AssignmentTurnedInIcon from "@material-ui/icons/AssignmentTurnedIn";
 import { ListItem, ListItemIcon, ListItemText } from "@material-ui/core";
 import { NavLink } from "react-router-dom";
 import { useStyles } from "../../PageWrapper/useStyles";
+import CardTravelIcon from '@material-ui/icons/CardTravel';
 
 const UserLinks = () => {
   const styles = useStyles();
   const [list] = useState([
     { title: "Profile", link: "/", icon: <AccountCircleIcon /> },
     { title: "Goals", link: "/goals", icon: <AssignmentTurnedInIcon /> },
+    { title: 'Vacations', link: '/vacations', icon: <CardTravelIcon /> },
   ]);
 
   return (

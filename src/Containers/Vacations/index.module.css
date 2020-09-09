@@ -1,0 +1,66 @@
+.vacations{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.container{
+    width: 60%;
+}
+/* createRequest */
+.createRequest{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+.requestInput{
+    width: 40%;
+    margin-right: 10px!important;
+}
+.requestInput input{
+    padding-top: 10px!important;
+    padding-bottom: 10px!important;
+}
+.requestBtn{
+    width: 35%;
+    text-transform: capitalize!important;
+}
+/* ---------------------------------------- */
+/* form */
+.form{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+}
+.pickers{
+    width: 80%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+.picker{
+    width: 35%;
+}
+.days input{
+    padding: 10px 5px 10px 5px!important;
+}
+.days{
+    width: 20%;
+}
+.description{
+    width: 80%;
+    margin-bottom: 10px!important;
+}
+/* table */
+.table{
+    position: relative;
+}
+.empty{
+    position: absolute;
+    top: 50%;
+    left: 40%;
+}

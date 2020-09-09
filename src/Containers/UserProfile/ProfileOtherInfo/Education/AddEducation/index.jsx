@@ -65,7 +65,7 @@ const AddEducation = ({ id, length }) => {
     const { name, value } = e.target;
     setData({ ...data, [name]: value });
   };
-  
+
   return (
     <>
       <PlusOneIcon className="plusOne" onClick={handleClickOpen} />
