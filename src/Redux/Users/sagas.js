@@ -24,12 +24,43 @@ export function logUser(loginData) {
 export function tokenLogin() {
   return axiosInstance.post(`/token`, {});
 }
-// user login request
+// user get userdata
 export function getData({ id }) {
   return axiosInstance.post(`/user/${id}`, {});
 }
+export function getLanguages({ id }) {
+  return axiosInstance.post(`/profile/languages`, {
+    id,
+  });
+}
+export function getEducation({ id }) {
+  return axiosInstance.post(`/profile/education`, {
+    id,
+  });
+}
+export function getExperience({ id }) {
+  return axiosInstance.post(`/profile/experience`, {
+    id,
+  });
+}
+export function getSoftSkills({ id }) {
+  return axiosInstance.post(`/profile/soft-skills`, {
+    id,
+  });
+}
+export function getHardSkills({ id }) {
+  return axiosInstance.post(`/profile/hard-skills`, {
+    id,
+  });
+}
 // edit user data
-export function updateProfile({ firstName, lastName, phoneNumber, birthday, id }) {
+export function updateProfile({
+  firstName,
+  lastName,
+  phoneNumber,
+  birthday,
+  id,
+}) {
   return axiosInstance.post(`/edit-profile`, {
     firstName,
     lastName,

@@ -15,6 +15,8 @@ import {
 import { makeStyles } from "@material-ui/core/styles";
 import PlusOneIcon from "@material-ui/icons/PlusOne";
 import MenuItem from "@material-ui/core/MenuItem";
+import { useSnackbar } from "notistack";
+import { addExperience } from "../../../../../Redux/Profile/actions";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -26,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const AddEducation = ({ id, length }) => {
+const AddExperience = ({ id, addExperience }) => {
   const classes = useStyles();
   const jobTimes = [
     {
@@ -43,8 +45,8 @@ const AddEducation = ({ id, length }) => {
     },
   ];
   const [open, setOpen] = useState(false);
+  const { enqueueSnackbar } = useSnackbar();
   const [data, setData] = useState({
-    id: length + 1,
     name: "",
     company: "",
     jobTime: "",
@@ -59,7 +61,28 @@ const AddEducation = ({ id, length }) => {
     setOpen(false);
   };
   const handleSave = () => {
-    setOpen(false);
+    if (
+      data.name !== "" &&
+      data.company !== "" &&
+      data.jobTime !== "" &&
+      data.from !== "" &&
+      data.to !== ""
+    ) {
+      addExperience({
+        ...data,
+        id,
+      });
+      setData({
+        name: "",
+        company: "",
+        jobTime: "",
+        from: "",
+        to: "",
+      });
+      setOpen(false);
+    } else {
+      enqueueSnackbar("Enter all fields!", { variant: "error" });
+    }
   };
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -75,8 +98,8 @@ const AddEducation = ({ id, length }) => {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">
-          Add Experience №{data.id}
+        <DialogTitle>
+          Add Experience
         </DialogTitle>
         <DialogContent>
           <TextField
@@ -134,11 +157,10 @@ const AddEducation = ({ id, length }) => {
             }}
           />
           <FormControl required className={classes.formControl}>
-            <InputLabel id="demo-simple-select-required-label">
+            <InputLabel>
               Job Type
             </InputLabel>
             <Select
-              labelId="demo-simple-select-required-label"
               id="demo-simple-select-required"
               value={data.jobTime}
               onChange={handleChange}
@@ -167,10 +189,11 @@ const AddEducation = ({ id, length }) => {
   );
 };
 
-// function mapDispatchToProps(dispatch) {
-//   return {
-//     editProfile: (data) => dispatch(editProfile(data)),
-//   };
-// }
 
-export default connect(null, null)(AddEducation);
+function mapDispatchToProps(dispatch) {
+  return {
+    addExperience: (data) => dispatch(addExperience(data)),
+  };
+}
+
+export default connect(null, mapDispatchToProps)(AddExperience);

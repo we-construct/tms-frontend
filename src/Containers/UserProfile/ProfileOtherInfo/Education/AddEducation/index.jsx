@@ -13,8 +13,10 @@ import {
   Select,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import { useSnackbar } from "notistack";
 import PlusOneIcon from "@material-ui/icons/PlusOne";
 import MenuItem from "@material-ui/core/MenuItem";
+import { addEducation } from "../../../../../Redux/Profile/actions";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -26,8 +28,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const AddEducation = ({ id, length }) => {
+const AddEducation = ({ id, addEducation }) => {
   const classes = useStyles();
+  const { enqueueSnackbar } = useSnackbar();
   const grades = [
     {
       id: 1,
@@ -44,7 +47,6 @@ const AddEducation = ({ id, length }) => {
   ];
   const [open, setOpen] = useState(false);
   const [data, setData] = useState({
-    id: length + 1,
     name: "",
     faculty: "",
     grade: "",
@@ -59,7 +61,28 @@ const AddEducation = ({ id, length }) => {
     setOpen(false);
   };
   const handleSave = () => {
-    setOpen(false);
+    if (
+      data.name !== "" &&
+      data.faculty !== "" &&
+      data.grade !== "" &&
+      data.from !== "" &&
+      data.to !== ""
+    ) {
+      addEducation({
+        ...data,
+        id,
+      });
+      setData({
+        name: "",
+        faculty: "",
+        grade: "",
+        from: "",
+        to: "",
+      });
+      setOpen(false);
+    } else {
+      enqueueSnackbar("Enter all fields!", { variant: "error" });
+    }
   };
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -75,9 +98,7 @@ const AddEducation = ({ id, length }) => {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">
-          Add Education №{data.id}
-        </DialogTitle>
+        <DialogTitle id="alert-dialog-title">Add Education</DialogTitle>
         <DialogContent>
           <TextField
             variant="outlined"
@@ -134,12 +155,8 @@ const AddEducation = ({ id, length }) => {
             }}
           />
           <FormControl required className={classes.formControl}>
-            <InputLabel id="demo-simple-select-required-label">
-              Grade
-            </InputLabel>
+            <InputLabel>Grade</InputLabel>
             <Select
-              labelId="demo-simple-select-required-label"
-              id="demo-simple-select-required"
               value={data.grade}
               onChange={handleChange}
               name="grade"
@@ -167,10 +184,10 @@ const AddEducation = ({ id, length }) => {
   );
 };
 
-// function mapDispatchToProps(dispatch) {
-//   return {
-//     editProfile: (data) => dispatch(editProfile(data)),
-//   };
-// }
+function mapDispatchToProps(dispatch) {
+  return {
+    addEducation: (data) => dispatch(addEducation(data)),
+  };
+}
 
-export default connect(null, null)(AddEducation);
+export default connect(null, mapDispatchToProps)(AddEducation);

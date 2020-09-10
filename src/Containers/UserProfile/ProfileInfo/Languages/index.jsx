@@ -3,7 +3,8 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import ProgressBar from "../ProgressBar";
 
-const Languages = ({ languages }) => {
+const Languages = () => {
+  const languages = null;
   return (
     <>
       <ListItem>

@@ -3,8 +3,21 @@ import Card from "@material-ui/core/Card";
 import Typography from "@material-ui/core/Typography";
 import CardContent from "@material-ui/core/CardContent";
 import AddExperience from "./AddExperience";
+import { makeStyles } from "@material-ui/core/styles";
+import LinearProgress from "@material-ui/core/LinearProgress";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: "100%",
+    "& > * + *": {
+      marginTop: theme.spacing(2),
+    },
+  },
+}));
 
 const Experience = ({ id, experienceList }) => {
+  const classes = useStyles();
+
   return (
     <div className="cardSection">
       <Typography
@@ -14,18 +27,13 @@ const Experience = ({ id, experienceList }) => {
         className="itemTitle"
       >
         Experience
-        <AddExperience id={id} length={experienceList.length}/>
+        <AddExperience id={id} />
       </Typography>
       <div className="cards">
         {experienceList === null ? (
-          <Typography
-            gutterBottom
-            variant="body2"
-            color="textSecondary"
-            component="p"
-          >
-            No experience data inserted.
-          </Typography>
+          <div className={classes.root}>
+            <LinearProgress color="secondary" />
+          </div>
         ) : (
           experienceList.map((job) => {
             return (
@@ -65,14 +73,14 @@ const Experience = ({ id, experienceList }) => {
                     color="textSecondary"
                     component="p"
                   >
-                    From: {job.from}
+                    From: {job.from_date.slice(0, 10)}
                   </Typography>
                   <Typography
                     variant="body2"
                     color="textSecondary"
                     component="p"
                   >
-                    To: {job.to}
+                    To: {job.to_date.slice(0, 10)}
                   </Typography>
                 </CardContent>
               </Card>

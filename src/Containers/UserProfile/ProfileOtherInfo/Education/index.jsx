@@ -3,8 +3,21 @@ import Card from "@material-ui/core/Card";
 import Typography from "@material-ui/core/Typography";
 import CardContent from "@material-ui/core/CardContent";
 import AddEducation from "./AddEducation";
+import LinearProgress from '@material-ui/core/LinearProgress';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: '100%',
+    '& > * + *': {
+      marginTop: theme.spacing(2),
+    },
+  },
+}));
 
 const Education = ({ id, educationList }) => {
+  const classes = useStyles();
+
   return (
     <div className="cardSection">
       <Typography
@@ -14,18 +27,13 @@ const Education = ({ id, educationList }) => {
         className="itemTitle"
       >
         Education
-        <AddEducation length={educationList.length} id={id} />
+        <AddEducation id={id} />
       </Typography>
       <div className="cards">
         {educationList === null ? (
-          <Typography
-            gutterBottom
-            variant="body2"
-            color="textSecondary"
-            component="p"
-          >
-            No education data inserted.
-          </Typography>
+              <div className={classes.root}>
+                <LinearProgress color="secondary" />
+                </div>
         ) : (
           educationList.map((e) => {
             return (
@@ -65,14 +73,14 @@ const Education = ({ id, educationList }) => {
                     color="textSecondary"
                     component="p"
                   >
-                    From: {e.from}
+                    From: {e.from_date.slice(0,10)}
                   </Typography>
                   <Typography
                     variant="body2"
                     color="textSecondary"
                     component="p"
                   >
-                    To: {e.to}
+                    To: {e.to_date.slice(0,10)}
                   </Typography>
                 </CardContent>
               </Card>
