@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -6,66 +6,57 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import { TablePagination } from '@material-ui/core';
-import Tag from '../common/Tag';
 import { connect } from 'react-redux';
-import style from '../../Containers/Vacations/index.module.css'
+import '../../Containers/Vacations/index.scss'
+import VacationTableItem from './VacationTableItem';
+import Pagination from '@material-ui/lab/Pagination';
 
-const VacationTable = ({ vacations }) => {
-  const [page, setPage] = useState(0);
-  const rowsPerPage = 5;
-
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
+const VacationTable = ({ vacations, page, handleChangePage, totalPages }) => {
 
   return (
-    <TableContainer component={Paper} className={style.table}>
-      <Table aria-label="simple table">
+    <TableContainer component={Paper} className='table' >
+      <Table aria-label="collapsible table">
         <TableHead>
           <TableRow>
+            <TableCell align="center"></TableCell>
             <TableCell align="center">Start date</TableCell>
             <TableCell align="center">Return date</TableCell>
             <TableCell align="center">Number of days</TableCell>
             <TableCell align="center">Status</TableCell>
           </TableRow>
         </TableHead>
-        <TableBody>
-          {vacations.length ? (
-            vacations
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .sort((a, b) => (a.id < b.id ? 1 : -1))
-              .map((row) => (
-                <TableRow key={row.id}>
-                  <TableCell align="center">{row.startDate}</TableCell>
-                  <TableCell align="center">{row.returnDate}</TableCell>
-                  <TableCell align="center">{row.daysNumber}</TableCell>
-                  <TableCell align="center">
-                    <Tag status={row.status}/>
-                  </TableCell>
-                </TableRow>
-              ))
-          ) : (
-            <TableRow>
-              <TableCell className={style.empty}>Table is empty...</TableCell>
-            </TableRow>
+        {vacations.length ?
+          <TableBody>
+            {vacations
+              .map(row => <VacationTableItem key={row.id} row={row} />)
+            }
+          </TableBody>
+          : (
+            <TableBody className='empty'>
+              <TableRow>
+                <TableCell>Table is empty...</TableCell>
+              </TableRow>
+            </TableBody>
           )}
-        </TableBody>
       </Table>
-      <TablePagination
-        component="div"
-        count={vacations.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        rowsPerPageOptions={[]}
-        onChangePage={handleChangePage}
-      />
+      {vacations.length > 0 &&
+        <div className='footer'>
+          <Pagination
+            className='pagination'
+            count={totalPages}
+            page={page}
+            onChange={handleChangePage}
+          />
+        </div>
+      }
     </TableContainer>
   );
 };
 
 const mapStateToProps = (state) => ({
   vacations: state.vacationData.vacations,
+  totalPages: state.vacationData.totalPages,
+  page: state.vacationData.page,
 });
 
-export default connect(mapStateToProps, null)(VacationTable);
+export default connect(mapStateToProps, {})(VacationTable);

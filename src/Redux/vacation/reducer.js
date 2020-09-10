@@ -1,20 +1,20 @@
-import { SET_VACATION_REQUEST, LOADING, SET_ERROR, SET_SUCCESS } from "./actions"
+import { LOADING, SET_ERROR, SET_SUCCESS, SET_VACATIONS, SET_TOTAL_PAGES_COUNT, SET_PAGE } from "./actions"
 
 const initialState = {
-    vacations: [
-      {id: 1, startDate: '03.09.2020', returnDate: '04.09.2020', status: 'Resolved', daysNumber: '1', description: ''},
-    ],
+    vacations: [],
     loading: false,
     success: null,
-    error: null
+    error: null,
+    totalPages: 0,
+    page: 1
 }
 
 const vacationReducer = (state=initialState, action) => {
   switch(action.type){
-    case SET_VACATION_REQUEST:
+    case SET_VACATIONS:
       return{
         ...state,
-        vacations: [...state.vacations, action.payload]
+        vacations: action.payload
       }
     case LOADING:
       return{
@@ -30,6 +30,16 @@ const vacationReducer = (state=initialState, action) => {
       return{
         ...state,
         error: action.payload
+      }
+    case SET_TOTAL_PAGES_COUNT:
+      return{
+        ...state,
+        totalPages: action.count
+      }
+    case SET_PAGE:
+      return{
+        ...state,
+        page: action.page
       }
       default: return state
   }
