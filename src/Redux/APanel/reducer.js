@@ -8,7 +8,8 @@ import {
   SET_POSITIONS,
   SET_INVITED_USERS,
   SET_CURRENT_USER,
-} from './actions';
+  ADMIN_SET_PROFILE_DATA,
+} from "./actions";
 
 const initialState = {
   allUsers: null,
@@ -17,6 +18,13 @@ const initialState = {
   positions: null,
   invitedUsers: [],
   currentUser: [],
+  userProfile: {
+    languages: null,
+    experience: null,
+    education: null,
+    hardSkills: null,
+    softSkills: null,
+  },
   statuses: null,
   success: null,
   error: null,
@@ -43,6 +51,8 @@ const adminPanelReducer = (state = initialState, action) => {
       return { ...state, invitedUsers: action.users };
     case SET_CURRENT_USER:
       return { ...state, currentUser: action.currentUserData };
+    case ADMIN_SET_PROFILE_DATA:
+      return { ...state, userProfile: { ...action.payload } };
     default:
       return state;
   }

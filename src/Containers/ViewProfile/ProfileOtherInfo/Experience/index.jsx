@@ -15,7 +15,7 @@ const Experience = ({ experienceList }) => {
         Experience
       </Typography>
       <div className="cards">
-        {experienceList === null ? (
+        {experienceList === null || experienceList.length === 0 ? (
           <Typography
             gutterBottom
             variant="body2"

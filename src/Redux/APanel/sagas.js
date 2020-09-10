@@ -20,6 +20,8 @@ import {
   setInvitedUsers,
   GET_CURRENT_USER,
   setCurrentUser,
+  ADMIN_GET_PROFILE_DATA,
+  adminSetProfileData
 } from "./actions";
 
 // user login request
@@ -52,6 +54,31 @@ export function getInvitedUsers() {
 export function getUsers({ page }) {
   return axiosInstance.post(`/users`, {
     page,
+  });
+}
+export function getLanguages({ id }) {
+  return axiosInstance.post(`/profile/languages`, {
+    id,
+  });
+}
+export function getEducation({ id }) {
+  return axiosInstance.post(`/profile/education`, {
+    id,
+  });
+}
+export function getExperience({ id }) {
+  return axiosInstance.post(`/profile/experience`, {
+    id,
+  });
+}
+export function getSoftSkills({ id }) {
+  return axiosInstance.post(`/profile/soft-skills`, {
+    id,
+  });
+}
+export function getHardSkills({ id }) {
+  return axiosInstance.post(`/profile/hard-skills`, {
+    id,
   });
 }
 // activate/deactivate user
@@ -259,6 +286,26 @@ export function* watchGetUser() {
 }
 // end of get user data functional
 
+// admin get user data functional
+export function* workerAdminGetProfileData({ payload }) {
+  yield put(adminSetProfileData(null));
+  const lang = yield call(getLanguages, { id: payload.id });
+  const exp = yield call(getExperience, { id: payload.id });
+  const edu = yield call(getEducation, { id: payload.id });
+  const hard = yield call(getHardSkills, { id: payload.id });
+  const soft = yield call(getSoftSkills, { id: payload.id });
+  if (typeof lang.data !== "string") {
+    yield put(adminSetProfileData({languages: lang.data, experience: exp.data, education: edu.data, hardSkills: hard.data, softSkills: soft.data}));
+  } else {
+    yield put(setError('Error'));
+  }
+}
+
+export function* watchAdminGetProfileData() {
+  yield takeEvery(ADMIN_GET_PROFILE_DATA, workerAdminGetProfileData);
+}
+// end of get user data functional
+
 export function* adminSaga() {
   yield all([fork(watchSendInvitation)]);
   yield all([fork(watchGetRoles)]);
@@ -270,4 +317,5 @@ export function* adminSaga() {
   yield all([fork(watchDeleteUser)]);
   yield all([fork(watchEditUser)]);
   yield all([fork(watchGetUser)]);
+  yield all([fork(watchAdminGetProfileData)]);
 }

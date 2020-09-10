@@ -15,7 +15,7 @@ const HardSkills = ({ skills }) => {
         Hard Skills
       </Typography>
       <div className="cards">
-        {skills === null ? (
+        {skills === null || skills.length === 0 ? (
           <Typography
             gutterBottom
             variant="body2"
