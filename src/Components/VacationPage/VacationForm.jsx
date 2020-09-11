@@ -8,7 +8,7 @@ import { addVacation, setSuccess, setError } from '../../Redux/vacation/actions'
 import { connect } from 'react-redux';
 import { useSnackbar } from "notistack";
 
-const VacationForm = ({ userId, form, setForm, addVacation, loading, setCreateForm, setSuccess, success, setError, error }) => {
+const VacationForm = ({ user, userId, form, setForm, addVacation, loading, setCreateForm, setSuccess, success, setError, error }) => {
     const { enqueueSnackbar } = useSnackbar();
     const colculateDates = form.returnDate.getTime() - form.startDate.getTime()
     const daysCount = Math.round(colculateDates / (1000 * 3600 * 24))
@@ -39,7 +39,9 @@ const VacationForm = ({ userId, form, setForm, addVacation, loading, setCreateFo
             returnDate: `${alz(returnDate.getDate())}.${alz(returnDate.getMonth() + 1)}.${returnDate.getFullYear()}`,
             description: description,
             daysNumber: daysCount.toString(),
-            userId
+            userId,
+            firstName: user.firstName,
+            lastName: user.lastName
         }
         if(daysCount<='30'){
             addVacation(payload)
@@ -115,7 +117,8 @@ const mapStateToProps = (state) => ({
     loading: state.vacationData.loading,
     success: state.vacationData.success,
     error: state.vacationData.error,
-    userId: state.userData.user.id
+    userId: state.userData.user.id,
+    user: state.userData.profileData,
 })
 const mapDispatchToProps = (dispatch) => ({
     addVacation: (payload) => dispatch(addVacation(payload)),
