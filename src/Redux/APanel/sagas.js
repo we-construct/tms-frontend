@@ -20,6 +20,10 @@ import {
   setInvitedUsers,
   GET_CURRENT_USER,
   setCurrentUser,
+  GET_VACATION_REQUESTS,
+  setVacationRequests,
+  APPROVE_VACATION,
+  REJECT_VACATION
 } from "./actions";
 
 // user login request
@@ -92,6 +96,18 @@ export function deleteUser({ id }) {
 // get current user
 export function getUser({ id }) {
   return axiosInstance.post(`/user/${id}`, {});
+}
+// get vacation requests
+export function getVacationRequests() {
+  return axiosInstance.get(`/vacation-requests`);
+}
+// approve vacation
+export function approveVacation(id) {
+  return axiosInstance.put(`/vacation-requests/approve/${id}`);
+}
+// реэцт vacation
+export function rejectVacation(id) {
+  return axiosInstance.put(`/vacation-requests/reject/${id}`);
 }
 
 // admin send invitation functional
@@ -257,6 +273,47 @@ export function* watchGetUser() {
 }
 // end of get user data functional
 
+export function* workerGetVacationRequests() {
+  const res = yield call(getVacationRequests);
+  if (typeof res.data !== "string") {
+    yield put(setVacationRequests(res.data));
+    } else {
+    yield put(setError(res.data));
+  }
+}
+
+export function* watchGetVacationRequests() {
+  yield takeEvery(GET_VACATION_REQUESTS, workerGetVacationRequests);
+}
+// end of get vacation requests functional
+
+export function* workerApproveVacation({id}) {
+  const res = yield call(approveVacation, id);
+  if (typeof res.data !== "string") {
+    yield put(setSuccess(res.data.success));
+    } else {
+    yield put(setError(res.data));
+  }
+}
+
+export function* watchApproveVacation() {
+  yield takeEvery(APPROVE_VACATION, workerApproveVacation);
+}
+// end of approve vacation functional
+
+export function* workerRejectVacation({id}) {
+  const res = yield call(rejectVacation, id);
+  if (typeof res.data !== "string") {
+    yield put(setSuccess(res.data.success));
+    } else {
+    yield put(setError(res.data));
+  }
+}
+export function* watchRejectVacation() {
+  yield takeEvery(REJECT_VACATION, workerRejectVacation);
+}
+// end of reject vacation functional
+
 export function* adminSaga() {
   yield all([fork(watchSendInvitation)]);
   yield all([fork(watchGetRoles)]);
@@ -268,4 +325,7 @@ export function* adminSaga() {
   yield all([fork(watchDeleteUser)]);
   yield all([fork(watchEditUser)]);
   yield all([fork(watchGetUser)]);
+  yield all([fork(watchGetVacationRequests)]);
+  yield all([fork(watchApproveVacation)]);
+  yield all([fork(watchRejectVacation)]);
 }

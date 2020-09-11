@@ -8,6 +8,7 @@ import {
   SET_POSITIONS,
   SET_INVITED_USERS,
   SET_CURRENT_USER,
+  SET_VACATION_REQUESTS,
 } from './actions';
 
 const initialState = {
@@ -17,6 +18,7 @@ const initialState = {
   positions: null,
   invitedUsers: [],
   currentUser: [],
+  vacationRequests: [],
   statuses: null,
   success: null,
   error: null,
@@ -43,6 +45,8 @@ const adminPanelReducer = (state = initialState, action) => {
       return { ...state, invitedUsers: action.users };
     case SET_CURRENT_USER:
       return { ...state, currentUser: action.currentUserData };
+    case SET_VACATION_REQUESTS:
+      return { ...state, vacationRequests: action.payload };
     default:
       return state;
   }

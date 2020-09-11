@@ -1,0 +1,17 @@
+.vacationRequests{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+};
+.card{
+    width: 20%;
+    margin: 0 30px 30px 0;
+};
+.noRequests{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+};
