@@ -32,7 +32,6 @@ const ProfileInfo = ({ user }) => {
               </div>
             </ListItem>
             <ListItem>
-              {/* //todo take profile full status data from db */}
               <ListItemText
                 primary="Main information`"
                 style={{ color: "#2096F3" }}
@@ -66,11 +65,12 @@ const ProfileInfo = ({ user }) => {
             </ListItem>
             <ListItem divider>
               <ListItemText secondary="Birth date:" />
-              <ListItemText
-                // todo add address to db
-                primary="19/07/1998"
-                className="listItemPrimary"
-              />
+              {user.birthday === null ? null : (
+                <ListItemText
+                  primary={user.birthday.slice(0, 10)}
+                  className="listItemPrimary"
+                />
+              )}
             </ListItem>
             <ListItem divider>
               <ListItemText secondary="Email:" />
@@ -106,7 +106,7 @@ const ProfileInfo = ({ user }) => {
               />
             </ListItem>
             {/* languages (will be taken from db) */}
-            <Languages />
+            <Languages languages={user.languages} />
           </List>
         </Paper>
       </Grid>

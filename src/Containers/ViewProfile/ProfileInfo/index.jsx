@@ -25,14 +25,12 @@ const ProfileInfo = ({ user }) => {
           <Avatar className="avatar">{`${user.firstName[0]}. ${user.lastName[0]}`}</Avatar>
           <List component="nav" className="userInfoList">
             <ListItem>
-              {/* //todo take profile full status data from db */}
               <div style={{ width: "100%", paddingBottom: "16px" }}>
-                <ListItemText secondary="Profile is 100% full!" />
+                <ListItemText secondary={`Profile is ${100}% full`} />
                 <ProgressBar value={100} />
               </div>
             </ListItem>
             <ListItem>
-              {/* //todo take profile full status data from db */}
               <ListItemText
                 primary="Main information`"
                 style={{ color: "#2096F3" }}
@@ -59,18 +57,19 @@ const ProfileInfo = ({ user }) => {
             <ListItem divider>
               <ListItemText secondary="Address:" />
               <ListItemText
-              // todo add address to db
+                // todo add address to db
                 primary="Yerevan, Armenia"
                 className="listItemPrimary"
               />
             </ListItem>
             <ListItem divider>
               <ListItemText secondary="Birth date:" />
-              <ListItemText
-              // todo add address to db
-                primary="19/07/1998"
-                className="listItemPrimary"
-              />
+              {user.birthday === null ? null : (
+                <ListItemText
+                  primary={user.birthday.slice(0, 10)}
+                  className="listItemPrimary"
+                />
+              )}
             </ListItem>
             <ListItem divider>
               <ListItemText secondary="Email:" />
@@ -106,7 +105,7 @@ const ProfileInfo = ({ user }) => {
               />
             </ListItem>
             {/* languages (will be taken from db) */}
-            <Languages />
+            <Languages languages={user.languages} />
           </List>
         </Paper>
       </Grid>

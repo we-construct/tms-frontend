@@ -13,14 +13,15 @@ import EditIcon from "@material-ui/icons/Edit";
 
 const EditUser = ({ user, editProfile }) => {
   const [open, setOpen] = useState(false);
+  const [error, setError] = useState(null);
   const [data, setData] = useState({
     id: user.id,
     firstName: user.firstName,
     lastName: user.lastName,
-    email: user.email,
     phoneNumber: user.phoneNumber,
+    birthday: user.birthday.slice(0, 10),
   });
-
+  
   const handleChange = (e) => {
     const { name, value } = e.target;
     setData({ ...data, [name]: value });
@@ -29,14 +30,32 @@ const EditUser = ({ user, editProfile }) => {
     setOpen(true);
   };
   const handleClose = () => {
+    setData({
+      id: user.id,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      phoneNumber: user.phoneNumber,
+      birthday: user.birthday.slice(0, 10),
+    });
+    setError(null);
     setOpen(false);
   };
   const handleSave = () => {
-    editProfile({
-      ...data,
-    });
-    setOpen(false);
+    if (
+      data.firstName === "" ||
+      data.lastName === "" ||
+      data.phoneNumber.length < 12
+    ) {
+      setError("Fields error!");
+    } else {
+      editProfile({
+        ...data,
+      });
+      setOpen(false);
+      setError(null);
+    }
   };
+
   return (
     <>
       <EditIcon className="editBtn" onClick={handleClickOpen} />
@@ -59,6 +78,8 @@ const EditUser = ({ user, editProfile }) => {
             size="small"
             value={data.firstName}
             onChange={handleChange}
+            error={error !== null}
+            helperText={error !== null ? error : null}
           />
           <TextField
             variant="outlined"
@@ -71,18 +92,8 @@ const EditUser = ({ user, editProfile }) => {
             size="small"
             value={data.lastName}
             onChange={handleChange}
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            label="Email"
-            type="text"
-            name="email"
-            size="small"
-            value={data.email}
-            onChange={handleChange}
+            error={error !== null}
+            helperText={error !== null ? error : null}
           />
           <TextField
             variant="outlined"
@@ -95,6 +106,19 @@ const EditUser = ({ user, editProfile }) => {
             size="small"
             value={data.phoneNumber}
             onChange={handleChange}
+            error={error !== null}
+            helperText={error !== null ? error : null}
+          />
+          <TextField
+            id="date"
+            label="Birthday (MM/DD/YY)"
+            type="date"
+            name="birthday"
+            value={data.birthday}
+            onChange={handleChange}
+            InputLabelProps={{
+              shrink: true,
+            }}
           />
         </DialogContent>
         <DialogActions>

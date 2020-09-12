@@ -20,7 +20,7 @@ const UserProfile = ({ getProfileData, profileData, id }) => {
       {profileData === null ? null : (
         <Grid container spacing={2}>
           <ProfileInfo user={profileData} />
-          <ProfileOtherInfo />
+          <ProfileOtherInfo user={profileData} />
         </Grid>
       )}
     </PageWrapper>

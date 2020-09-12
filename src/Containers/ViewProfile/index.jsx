@@ -9,14 +9,12 @@ import "../UserProfile/index.scss";
 const ViewProfile = ({ user }) => {
   return (
     <PageWrapper>
-      {
-        user === null ? null : (
+      {user === null ? null : (
         <Grid container spacing={2}>
           <ProfileInfo user={user} />
-          <ProfileOtherInfo />
+          <ProfileOtherInfo user={user} />
         </Grid>
-        )
-      }
+      )}
     </PageWrapper>
   );
 };

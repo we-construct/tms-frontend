@@ -2,40 +2,22 @@ import React from "react";
 import Card from "@material-ui/core/Card";
 import Typography from "@material-ui/core/Typography";
 import CardContent from "@material-ui/core/CardContent";
+import AddEducation from "./AddEducation";
+import LinearProgress from '@material-ui/core/LinearProgress';
+import { makeStyles } from '@material-ui/core/styles';
 
-// placeholder for data from db
-const educationList = [
-  {
-    id: 1,
-    name: "Armenian State University of Economics",
-    faculty: "Management",
-    from: "01/09/2015",
-    to: "01/09/2021",
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: '100%',
+    '& > * + *': {
+      marginTop: theme.spacing(2),
+    },
   },
-  {
-    id: 2,
-    name: "RAU",
-    faculty: "CS",
-    from: "01/09/2015",
-    to: "01/09/2021",
-  },
-  {
-    id: 3,
-    name: "UFAR",
-    faculty: "Management",
-    from: "01/09/2031",
-    to: "01/09/2033",
-  },
-  {
-    id: 4,
-    name: "AUA",
-    faculty: "CS",
-    from: "01/09/2015",
-    to: "01/09/2021",
-  },
-];
+}));
 
-const Education = () => {
+const Education = ({ id, educationList }) => {
+  const classes = useStyles();
+
   return (
     <div className="cardSection">
       <Typography
@@ -45,12 +27,13 @@ const Education = () => {
         className="itemTitle"
       >
         Education
+        <AddEducation id={id} />
       </Typography>
       <div className="cards">
-        {educationList.length === 0 ? (
-          <Typography gutterBottom variant="h6" component="h2">
-            Please fill your profile data.
-          </Typography>
+        {educationList === null ? (
+              <div className={classes.root}>
+                <LinearProgress color="secondary" />
+                </div>
         ) : (
           educationList.map((e) => {
             return (
@@ -83,14 +66,21 @@ const Education = () => {
                     color="textSecondary"
                     component="p"
                   >
-                    From: {e.from}
+                    Grade: {e.grade}
                   </Typography>
                   <Typography
                     variant="body2"
                     color="textSecondary"
                     component="p"
                   >
-                    To: {e.to}
+                    From: {e.from_date.slice(0,10)}
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    color="textSecondary"
+                    component="p"
+                  >
+                    To: {e.to_date.slice(0,10)}
                   </Typography>
                 </CardContent>
               </Card>

@@ -2,36 +2,22 @@ import React from "react";
 import Card from "@material-ui/core/Card";
 import Typography from "@material-ui/core/Typography";
 import CardContent from "@material-ui/core/CardContent";
+import AddExperience from "./AddExperience";
+import { makeStyles } from "@material-ui/core/styles";
+import LinearProgress from "@material-ui/core/LinearProgress";
 
-// placeholder for data from db
-const experienceList = [
-  {
-    id: 1,
-    company: "WeConstruct",
-    jobTime: "Full Time",
-    name: "Full Stack Developer",
-    from: "01/09/2015",
-    to: "01/09/2021",
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: "100%",
+    "& > * + *": {
+      marginTop: theme.spacing(2),
+    },
   },
-  {
-    id: 2,
-    company: "SoftConstruct",
-    jobTime: "Full Time",
-    name: "HR",
-    from: "01/09/2015",
-    to: "01/09/2021",
-  },
-  {
-    id: 3,
-    company: "PicsArt",
-    jobTime: "Part Time",
-    name: "QA Engineer",
-    from: "01/09/2015",
-    to: "01/09/2021",
-  },
-];
+}));
 
-const Experience = () => {
+const Experience = ({ id, experienceList }) => {
+  const classes = useStyles();
+
   return (
     <div className="cardSection">
       <Typography
@@ -41,12 +27,13 @@ const Experience = () => {
         className="itemTitle"
       >
         Experience
+        <AddExperience id={id} />
       </Typography>
       <div className="cards">
-        {experienceList.length === 0 ? (
-          <Typography gutterBottom variant="h6" component="h2">
-            Please fill your profile data.
-          </Typography>
+        {experienceList === null ? (
+          <div className={classes.root}>
+            <LinearProgress color="secondary" />
+          </div>
         ) : (
           experienceList.map((job) => {
             return (
@@ -86,14 +73,14 @@ const Experience = () => {
                     color="textSecondary"
                     component="p"
                   >
-                    From: {job.from}
+                    From: {job.from_date.slice(0, 10)}
                   </Typography>
                   <Typography
                     variant="body2"
                     color="textSecondary"
                     component="p"
                   >
-                    To: {job.to}
+                    To: {job.to_date.slice(0, 10)}
                   </Typography>
                 </CardContent>
               </Card>

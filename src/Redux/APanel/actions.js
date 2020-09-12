@@ -6,17 +6,19 @@ export const GET_ALL_USERS = "GET_ALL_USERS";
 export const SET_ALL_USERS = "SET_ALL_USERS";
 export const SET_STATUS = "SET_STATUS";
 export const DELETE_USER = "DELETE_USER";
-export const GET_ROLES = 'GET_ROLES';
-export const SET_ROLES = 'SET_ROLES';
-export const GET_INVITED_USERS = 'GET_INVITED_USERS';
-export const SET_INVITED_USERS = 'SET_INVITED_USERS';
-export const GET_POSITIONS = 'GET_POSITIONS';
-export const SET_POSITIONS = 'SET_POSITIONS';
-export const GET_STATUSES = 'GET_STATUSES';
-export const SET_STATUSES = 'SET_STATUSES';
-export const UPDATE_USER = 'UPDATE_USER';
-export const GET_CURRENT_USER = 'GET_CURRENT_USER';
-export const SET_CURRENT_USER = 'SET_CURRENT_USER';
+export const GET_ROLES = "GET_ROLES";
+export const SET_ROLES = "SET_ROLES";
+export const GET_INVITED_USERS = "GET_INVITED_USERS";
+export const SET_INVITED_USERS = "SET_INVITED_USERS";
+export const GET_POSITIONS = "GET_POSITIONS";
+export const SET_POSITIONS = "SET_POSITIONS";
+export const GET_STATUSES = "GET_STATUSES";
+export const SET_STATUSES = "SET_STATUSES";
+export const UPDATE_USER = "UPDATE_USER";
+export const GET_CURRENT_USER = "GET_CURRENT_USER";
+export const SET_CURRENT_USER = "SET_CURRENT_USER";
+export const ADMIN_GET_PROFILE_DATA = "ADMIN_GET_PROFILE_DATA";
+export const ADMIN_SET_PROFILE_DATA = "ADMIN_SET_PROFILE_DATA";
 export const GET_VACATION_REQUESTS = 'GET_VACATION_REQUESTS';
 export const SET_VACATION_REQUESTS = 'SET_VACATION_REQUESTS';
 export const APPROVE_VACATION = 'APPROVE_VACATION';
@@ -132,6 +134,19 @@ export const updateUser = (payload) => {
 export const deleteUser = (payload) => {
   return {
     type: DELETE_USER,
+    payload,
+  };
+};
+// get user profile data
+export const adminGetProfileData = (payload) => {
+  return {
+    type: ADMIN_GET_PROFILE_DATA,
+    payload,
+  };
+};
+export const adminSetProfileData = (payload) => {
+  return {
+    type: ADMIN_SET_PROFILE_DATA,
     payload,
   };
 };
