@@ -2,13 +2,13 @@ import React, { useEffect } from 'react'
 import { KeyboardDatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
 import {TextField, CircularProgress} from '@material-ui/core';
-import style from '../../Containers/Vacations/index.module.css';
+import '../../Containers/Vacations/index.scss';
 import { Button } from '@material-ui/core';
-import { requestVacation, setSuccess, setError } from '../../Redux/vacation/actions';
+import { addVacation, setSuccess, setError } from '../../Redux/vacation/actions';
 import { connect } from 'react-redux';
 import { useSnackbar } from "notistack";
 
-const VacationForm = ({ form, setForm, vacations, requestVacation, loading, setCreateForm, setSuccess, success, setError, error }) => {
+const VacationForm = ({ user, userId, form, setForm, addVacation, loading, setCreateForm, setSuccess, success, setError, error }) => {
     const { enqueueSnackbar } = useSnackbar();
     const colculateDates = form.returnDate.getTime() - form.startDate.getTime()
     const daysCount = Math.round(colculateDates / (1000 * 3600 * 24))
@@ -23,7 +23,7 @@ const VacationForm = ({ form, setForm, vacations, requestVacation, loading, setC
             enqueueSnackbar(error, {variant: 'error'})
             setError(null)
         }
-    }, [success, error])
+    }, [success, error, enqueueSnackbar, form, setCreateForm, setError, setForm, setSuccess])
 
     const appendLeadingZeroes = (n) => {
         if(n <= 9){
@@ -35,31 +35,31 @@ const VacationForm = ({ form, setForm, vacations, requestVacation, loading, setC
     const handleSubmit = () => {
         const {startDate, returnDate, description} = form
         const payload = {
-            id: vacations.length + 1,
             startDate: `${alz(startDate.getDate())}.${alz(startDate.getMonth() + 1)}.${startDate.getFullYear()}`,
             returnDate: `${alz(returnDate.getDate())}.${alz(returnDate.getMonth() + 1)}.${returnDate.getFullYear()}`,
             description: description,
-            daysNumber: daysCount,
-            status: 'Pending'
+            daysNumber: daysCount.toString(),
+            userId,
+            firstName: user.firstName,
+            lastName: user.lastName
         }
         if(daysCount<='30'){
-            requestVacation(payload)
+            addVacation(payload)
         }else{
             setError("You don't have enough vacation days")
         }
     }
 
     return (
-        <div className={style.form}>
+        <div className='form'>
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                <div className={style.pickers}>
+                <div className='pickers'>
                     <KeyboardDatePicker
-                        className={style.picker}
+                        className='picker'
                         disableToolbar
                         variant="inline"
                         format="dd/MM/yyyy"
                         margin="normal"
-                        id="start-date-picker-inline"
                         label="Start Date"
                         value={form.startDate}
                         onChange={(date) => setForm({ ...form, startDate: date })}
@@ -68,7 +68,7 @@ const VacationForm = ({ form, setForm, vacations, requestVacation, loading, setC
                         }}
                     />
                     <KeyboardDatePicker
-                        className={style.picker}
+                        className='picker'
                         disableToolbar
                         variant="inline"
                         format="dd/MM/yyyy"
@@ -82,8 +82,7 @@ const VacationForm = ({ form, setForm, vacations, requestVacation, loading, setC
                         }}
                     />
                     <TextField
-                        className={style.days}
-                        id="outlined-basic"
+                        className='days'
                         disabled
                         value={daysCount > 0 ? daysCount : '0'}
                         label="Number of days"
@@ -92,8 +91,7 @@ const VacationForm = ({ form, setForm, vacations, requestVacation, loading, setC
                 </div>
             </MuiPickersUtilsProvider>
             <TextField
-                className={style.description}
-                id="outlined-multiline-static"
+                className='description'
                 label="Description"
                 multiline
                 rows={4}
@@ -108,7 +106,7 @@ const VacationForm = ({ form, setForm, vacations, requestVacation, loading, setC
                 variant="contained"
                 color="primary"
                 endIcon={loading && <CircularProgress size={20} style={{color: '#fff'}}/>}
-                disabled={daysCount < 1 || loading && true}
+                disabled={daysCount < 1 || loading}
             >
                 Send Request
             </Button>
@@ -116,13 +114,14 @@ const VacationForm = ({ form, setForm, vacations, requestVacation, loading, setC
     )
 }
 const mapStateToProps = (state) => ({
-    vacations: state.vacationData.vacations,
     loading: state.vacationData.loading,
     success: state.vacationData.success,
     error: state.vacationData.error,
+    userId: state.userData.user.id,
+    user: state.userData.profileData,
 })
 const mapDispatchToProps = (dispatch) => ({
-    requestVacation: (payload) => dispatch(requestVacation(payload)),
+    addVacation: (payload) => dispatch(addVacation(payload)),
     setSuccess: (payload) => dispatch(setSuccess(payload)),
     setError: (payload) => dispatch(setError(payload)),
 });

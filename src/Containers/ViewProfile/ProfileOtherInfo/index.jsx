@@ -25,6 +25,7 @@ const ProfileOtherInfo = ({ user, adminGetProfileData, profData }) => {
 
   useEffect(() => {
     adminGetProfileData({ id: user.id });
+    //eslint-disable-next-line
   }, []);
   
   return (

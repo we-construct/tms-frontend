@@ -1,23 +1,56 @@
 import { takeEvery, put, all, fork, call } from "redux-saga/effects";
-import { REQUEST_VACATION, loading, setVacationRequest, setSuccess, setError } from "./actions";
+import axiosInstance from "../../Config/axiosInstance";
+import { ADD_VACATION, loading, setSuccess, setError, GET_VACATIONS, setVacations, requestVacations, setTotalPagesCount, setPage } from "./actions";
 
-
-const delay = time => new Promise(resolve => setTimeout(resolve, time));
-
-// request vacation functional
-export function* workerRequestVacation( {payload} ) {
-    yield put(loading())
-    yield call(delay, 2000);
-    yield put(setSuccess('Vacation request was sent successfully'))
-    yield put(setVacationRequest(payload))
-    yield put(loading())
+// get vacations
+export function getVacations({userId, page}) {
+  return axiosInstance.post(`/vacations/${userId}`, {page})
 }
 
-export function* watchRequestVacation() {
-  yield takeEvery(REQUEST_VACATION, workerRequestVacation);
+// request vacation
+export function addVacation(vacationData) {
+  debugger
+  return axiosInstance.post(`/vacations`, {...vacationData});
+}
+
+// request vacation functional
+export function* workerGetVacations( {data} ) {
+    yield put(setPage(data.page))
+    const res = yield call(getVacations, data);
+    if(typeof res.data !== "string"){
+      yield put(setTotalPagesCount(res.data.pagesCount))
+      yield put(setVacations(res.data.data))
+    }
+    else{
+      yield put(setError(res.data))
+    }
+}
+
+export function* watchGetVacations() {
+  yield takeEvery(GET_VACATIONS, workerGetVacations);
+}
+// end of get vacations
+
+export function* workerAddVacation( {payload} ) {
+    yield put(loading())
+    const res = yield call(addVacation, payload);
+    if(res.data.success){
+      yield put(setSuccess(res.data.success))
+      yield put(requestVacations(payload.userId, 1))
+      yield put(loading())
+    }
+    else{
+      yield put(setError(res.data))
+      yield put(loading())
+    }
+}
+
+export function* watchAddVacation() {
+  yield takeEvery(ADD_VACATION, workerAddVacation);
 }
 // end of request vacation
 
 export function* vacationsSaga() {
-  yield all([fork(watchRequestVacation)]);
+  yield all([fork(watchAddVacation)]);
+  yield all([fork(watchGetVacations)]);
 }

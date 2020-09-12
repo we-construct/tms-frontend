@@ -5,6 +5,7 @@ import ErrorPage from '../Containers/404';
 import ViewProfile from '../Containers/ViewProfile';
 import Goals from '../Containers/Goals';
 import Vacations from '../Containers/Vacations';
+import VacationRequests from '../Containers/VacationRequests/Index';
 
 const privateRoutes = [
   {
@@ -36,6 +37,11 @@ const privateRoutes = [
     path: '/vacations',
     exact: true,
     component: Vacations,
+  },
+  {
+    path: '/vacation-requests',
+    exact: true,
+    component: VacationRequests
   },
   {
     path: '/404',

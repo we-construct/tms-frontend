@@ -19,6 +19,10 @@ export const GET_CURRENT_USER = "GET_CURRENT_USER";
 export const SET_CURRENT_USER = "SET_CURRENT_USER";
 export const ADMIN_GET_PROFILE_DATA = "ADMIN_GET_PROFILE_DATA";
 export const ADMIN_SET_PROFILE_DATA = "ADMIN_SET_PROFILE_DATA";
+export const GET_VACATION_REQUESTS = 'GET_VACATION_REQUESTS';
+export const SET_VACATION_REQUESTS = 'SET_VACATION_REQUESTS';
+export const APPROVE_VACATION = 'APPROVE_VACATION';
+export const REJECT_VACATION = 'REJECT_VACATION';
 
 // error handling action
 export const setError = (error) => {
@@ -146,3 +150,10 @@ export const adminSetProfileData = (payload) => {
     payload,
   };
 };
+// get vacation requests
+export const getVacationRequests = () => ({type: GET_VACATION_REQUESTS})
+export const setVacationRequests = (payload) => ({type: SET_VACATION_REQUESTS, payload})
+// approve vacation
+export const approveVacation = (id) => ({type: APPROVE_VACATION, id})
+// reject vacation
+export const rejectVacation = (id) => ({type: REJECT_VACATION, id})

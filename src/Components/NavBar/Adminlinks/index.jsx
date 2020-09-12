@@ -14,6 +14,7 @@ const AdminLinks = () => {
       icon: <PersonAddIcon />,
     },
     { title: "Employees", link: "/employees", icon: <PeopleIcon /> },
+    { title: "Vacation Requests", link: "/vacation-requests", icon: <div>VR</div> },
   ]);
 
   return (
