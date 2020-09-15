@@ -19,7 +19,7 @@ const EditUser = ({ user, editProfile }) => {
     firstName: user.firstName,
     lastName: user.lastName,
     phoneNumber: user.phoneNumber,
-    birthday: user.birthday.slice(0, 10),
+    birthday: user.birthday && user.birthday.slice(0, 10),
   });
   
   const handleChange = (e) => {

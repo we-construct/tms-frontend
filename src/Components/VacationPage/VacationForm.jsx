@@ -8,7 +8,7 @@ import { addVacation, setSuccess, setError } from '../../Redux/vacation/actions'
 import { connect } from 'react-redux';
 import { useSnackbar } from "notistack";
 
-const VacationForm = ({ user, userId, form, setForm, addVacation, loading, setCreateForm, setSuccess, success, setError, error }) => {
+const VacationForm = ({ availableDays, user, userId, form, setForm, addVacation, loading, setCreateForm, setSuccess, success, setError, error }) => {
     const { enqueueSnackbar } = useSnackbar();
     const colculateDates = form.returnDate.getTime() - form.startDate.getTime()
     const daysCount = Math.round(colculateDates / (1000 * 3600 * 24))
@@ -43,7 +43,7 @@ const VacationForm = ({ user, userId, form, setForm, addVacation, loading, setCr
             firstName: user.firstName,
             lastName: user.lastName
         }
-        if(daysCount<='30'){
+        if(daysCount <= availableDays){
             addVacation(payload)
         }else{
             setError("You don't have enough vacation days")
@@ -106,7 +106,7 @@ const VacationForm = ({ user, userId, form, setForm, addVacation, loading, setCr
                 variant="contained"
                 color="primary"
                 endIcon={loading && <CircularProgress size={20} style={{color: '#fff'}}/>}
-                disabled={daysCount < 1 || loading}
+                disabled={daysCount < 1 || loading || daysCount > availableDays}
             >
                 Send Request
             </Button>
@@ -119,6 +119,7 @@ const mapStateToProps = (state) => ({
     error: state.vacationData.error,
     userId: state.userData.user.id,
     user: state.userData.profileData,
+    availableDays: state.userData.profileData.vacationAvailableDays
 })
 const mapDispatchToProps = (dispatch) => ({
     addVacation: (payload) => dispatch(addVacation(payload)),

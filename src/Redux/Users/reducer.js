@@ -2,7 +2,7 @@ import {
   SET_LOGGED_USER,
   SET_ERROR,
   SET_SUCCESS,
-  SET_PROFILE_DATA,
+  SET_PROFILE_DATA, SET_AVAILABLE_DAYS
 } from "./actions";
 
 const initialState = {
@@ -27,6 +27,10 @@ const usersReducer = (state = initialState, action) => {
       return { ...state, error: action.error };
     case SET_SUCCESS:
       return { ...state, success: action.success };
+    case SET_AVAILABLE_DAYS:
+      return { ...state, 
+        profileData: {...state.profileData, vacationAvailableDays: action.days}
+      };
     default:
       return state;
   }

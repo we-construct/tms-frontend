@@ -1,5 +1,6 @@
 import { takeEvery, put, all, fork, call } from "redux-saga/effects";
 import axiosInstance from "../../Config/axiosInstance";
+import { setAvailableDays } from "../Users/actions";
 import { ADD_VACATION, loading, setSuccess, setError, GET_VACATIONS, setVacations, requestVacations, setTotalPagesCount, setPage } from "./actions";
 
 // get vacations
@@ -9,7 +10,6 @@ export function getVacations({userId, page}) {
 
 // request vacation
 export function addVacation(vacationData) {
-  debugger
   return axiosInstance.post(`/vacations`, {...vacationData});
 }
 
@@ -20,6 +20,7 @@ export function* workerGetVacations( {data} ) {
     if(typeof res.data !== "string"){
       yield put(setTotalPagesCount(res.data.pagesCount))
       yield put(setVacations(res.data.data))
+      yield put(setAvailableDays(res.data.availableDays))
     }
     else{
       yield put(setError(res.data))

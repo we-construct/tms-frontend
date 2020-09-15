@@ -14,7 +14,6 @@ const App = ({ isAuth, loginCookie }) => {
     }
     //eslint-disable-next-line
   }, []);
-
   return <SnackbarProvider maxSnack={3}>{routes}</SnackbarProvider>;
 };
 
