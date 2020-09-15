@@ -8,6 +8,7 @@ export const ACCEPT_INVITATION = "ACCEPT_INVITATION";
 export const EDIT_PROFILE = "EDIT_PROFILE";
 export const SET_PROFILE_DATA = "SET_PROFILE_DATA";
 export const GET_PROFILE_DATA = "GET_PROFILE_DATA";
+export const SET_AVAILABLE_DAYS = "SET_AVAILABLE_DAYS";
 
 // error handling action
 export const setError = (error) => {
@@ -76,3 +77,7 @@ export const getProfileData = (payload) => {
     payload,
   };
 };
+
+
+// set vacation available days to profiel
+export const setAvailableDays = (days) => ({type: SET_AVAILABLE_DAYS, days})
