@@ -1,21 +1,23 @@
 import { takeEvery, put, all, fork, call } from "redux-saga/effects";
 import axiosInstance from "../../Config/axiosInstance";
 import {
+  GET_LANGUAGES,
+  GET_EDUCATION,
+  GET_HARD_SKILLS,
+  GET_EXPERIENCE,
+  GET_SOFT_SKILLS,
+  ADD_EDUCATION,
+  ADD_EXPERIENCE,
+  ADD_HARD_SKILL,
+  ADD_SOFT_SKILL,
   setError,
   //   setSuccess,
   setLanguages,
-  GET_LANGUAGES,
-  setEducation,
-  GET_EDUCATION,
-  setExperience,
   setHardSkills,
-  GET_HARD_SKILLS,
-  GET_EXPERIENCE,
+  setExperience,
+  setEducation,
   setSoftSkills,
-  GET_SOFT_SKILLS,
-  ADD_EDUCATION,
   setSuccess,
-  ADD_EXPERIENCE,
 } from "./actions";
 
 export function getLanguages({ id }) {
@@ -50,6 +52,16 @@ export function addEducation(payload) {
 }
 export function addExperience(payload) {
   return axiosInstance.post(`/edit-profile/add-experience`, {
+    ...payload
+  });
+}
+export function addHardSkill(payload) {
+  return axiosInstance.post(`/edit-profile/add-hardskill`, {
+    ...payload
+  });
+}
+export function addSoftSkill(payload) {
+  return axiosInstance.post(`/edit-profile/add-softskill`, {
     ...payload
   });
 }
@@ -163,6 +175,40 @@ export function* watchAddExperience() {
 }
 // /////////////////////
 
+// /////////////////////
+export function* workerAddHardSkills({ payload }) {
+  const res = yield call(addHardSkill, payload);
+  const data = yield call(getHardSkills, {id: payload.id})
+  if (typeof res.data !== "string") {
+    yield put(setSuccess(res.data));
+    yield put(setHardSkills(data.data));
+  } else {
+    yield put(setError(res.data));
+  }
+}
+
+export function* watchAddHardSkills() {
+  yield takeEvery(ADD_HARD_SKILL, workerAddHardSkills);
+}
+// /////////////////////
+
+// /////////////////////
+export function* workerAddSoftSkills({ payload }) {
+  const res = yield call(addSoftSkill, payload);
+  const data = yield call(getSoftSkills, {id: payload.id})
+  if (typeof res.data !== "string") {
+    yield put(setSuccess(res.data));
+    yield put(setSoftSkills(data.data));
+  } else {
+    yield put(setError(res.data));
+  }
+}
+
+export function* watchAddSoftSkills() {
+  yield takeEvery(ADD_SOFT_SKILL, workerAddSoftSkills);
+}
+// /////////////////////
+
 export function* profileSaga() {
   yield all([fork(watchGetLanguages)]);
   yield all([fork(watchGetEducation)]);
@@ -171,4 +217,6 @@ export function* profileSaga() {
   yield all([fork(watchGetHardSkills)]);
   yield all([fork(watchAddEducation)]);
   yield all([fork(watchAddExperience)]);
+  yield all([fork(watchAddHardSkills)]);
+  yield all([fork(watchAddSoftSkills)]);
 }

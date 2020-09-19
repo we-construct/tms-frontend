@@ -12,6 +12,8 @@ export const GET_HARD_SKILLS = "GET_HARD_SKILLS";
 export const SET_HARD_SKILLS = "SET_HARD_SKILLS";
 export const ADD_EDUCATION = "ADD_EDUCATION";
 export const ADD_EXPERIENCE = "ADD_EXPERIENCE";
+export const ADD_HARD_SKILL = "ADD_HARD_SKILL";
+export const ADD_SOFT_SKILL = "ADD_SOFT_SKILL";
 
 // error handling action
 export const setError = (error) => {
@@ -109,6 +111,20 @@ export const addEducation = (payload) => {
 export const addExperience = (payload) => {
   return {
     type: ADD_EXPERIENCE,
+    payload,
+  };
+};
+
+export const addHardSkill = (payload) => {
+  return {
+    type: ADD_HARD_SKILL,
+    payload,
+  };
+};
+
+export const addSoftSkill = (payload) => {
+  return {
+    type: ADD_SOFT_SKILL,
     payload,
   };
 };
