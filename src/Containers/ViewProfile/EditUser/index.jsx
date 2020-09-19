@@ -128,11 +128,11 @@ const EditUser = ({ user, roles, positions, statuses, updateUser }) => {
               name="roleId"
               className={classes.selectEmpty}
             >
-              {roles.map((role) => (
+              {roles !== null ? roles.map((role) => (
                 <MenuItem key={role.id} value={role.id}>
                   {role.name}
                 </MenuItem>
-              ))}
+              )) : null}
             </Select>
             <FormHelperText>Required</FormHelperText>
           </FormControl>
@@ -148,11 +148,11 @@ const EditUser = ({ user, roles, positions, statuses, updateUser }) => {
               name="positionId"
               className={classes.selectEmpty}
             >
-              {positions.map((pos) => (
+              {positions !== null ? positions.map((pos) => (
                 <MenuItem key={pos.id} value={pos.id}>
                   {pos.name}
                 </MenuItem>
-              ))}
+              )) : null}
             </Select>
             <FormHelperText>Required</FormHelperText>
           </FormControl>
@@ -168,11 +168,11 @@ const EditUser = ({ user, roles, positions, statuses, updateUser }) => {
               name="statusId"
               className={classes.selectEmpty}
             >
-              {statuses.map((stat) => (
+              {statuses !== null ? statuses.map((stat) => (
                 <MenuItem key={stat.id} value={stat.id}>
                   {stat.name}
                 </MenuItem>
-              ))}
+              )) : null}
             </Select>
             <FormHelperText>Required</FormHelperText>
           </FormControl>

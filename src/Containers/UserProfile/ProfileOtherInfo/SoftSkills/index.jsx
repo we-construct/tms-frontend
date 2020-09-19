@@ -49,7 +49,7 @@ const SoftSkills = ({ skills, id }) => {
                   </Typography>
                 </CardContent>
               </Card>
-            );
+          );
           })
         )}
       </div>

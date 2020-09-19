@@ -19,9 +19,9 @@ const EditUser = ({ user, editProfile }) => {
     firstName: user.firstName,
     lastName: user.lastName,
     phoneNumber: user.phoneNumber,
-    birthday: user.birthday.slice(0, 10),
+    birthday: user.birthday,
   });
-  
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setData({ ...data, [name]: value });
@@ -35,7 +35,7 @@ const EditUser = ({ user, editProfile }) => {
       firstName: user.firstName,
       lastName: user.lastName,
       phoneNumber: user.phoneNumber,
-      birthday: user.birthday.slice(0, 10),
+      birthday: user.birthday,
     });
     setError(null);
     setOpen(false);
