@@ -3,15 +3,15 @@ import { Card, CardActions, CardContent, Button, Typography } from '@material-ui
 import { NavLink } from 'react-router-dom';
 import '../../Containers/VacationRequests/index.scss';
 import { connect } from 'react-redux';
-import { approveVacation, rejectVacation } from '../../Redux/APanel/actions';
+import {approveVacation, getCurrentUser, rejectVacation} from '../../Redux/APanel/actions';
 
-const VacationCard = ({request, approveVacation, rejectVacation}) => {
+const VacationCard = ({request, approveVacation, rejectVacation, getUser}) => {
     const {id, userId, firstName, lastName, startDate, returnDate, daysNumber, description} = request
     return (
         <Card className='card'>
             <CardContent>
                 <NavLink style={{color: 'black'}} to={'/edit/' + userId}>
-                    <Typography gutterBottom variant="h5" component="h2">
+                    <Typography gutterBottom variant="h5" component="h2" onClick={() => getUser({id: userId})}>
                         {firstName + ' ' + lastName}
                     </Typography>
                 </NavLink>
@@ -42,6 +42,7 @@ const VacationCard = ({request, approveVacation, rejectVacation}) => {
 const mapDispatchToProps = (dispatch) => ({
     approveVacation: (id) => dispatch(approveVacation(id)),
     rejectVacation: (id) => dispatch(rejectVacation(id)),
+    getUser: (data) => dispatch(getCurrentUser(data)),
   })
-  
+
 export default connect(null, mapDispatchToProps)(VacationCard)

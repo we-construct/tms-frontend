@@ -4,6 +4,7 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import LinearProgress from "@material-ui/core/LinearProgress";
+import AddSoftSkill from "./AddSoftSkills";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -14,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SoftSkills = ({ skills }) => {
+const SoftSkills = ({ skills, id }) => {
   const classes = useStyles();
 
   return (
@@ -26,6 +27,7 @@ const SoftSkills = ({ skills }) => {
         className="itemTitle"
       >
         Soft Skills
+        <AddSoftSkill id={id} />
       </Typography>
       <div className="cards">
         {skills === null ? (
@@ -47,7 +49,7 @@ const SoftSkills = ({ skills }) => {
                   </Typography>
                 </CardContent>
               </Card>
-            );
+          );
           })
         )}
       </div>

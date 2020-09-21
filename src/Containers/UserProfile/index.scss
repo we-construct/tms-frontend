@@ -59,16 +59,14 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: flex-start;
-
             .profileCard {
                 margin-right: 16px;
                 margin-top: 16px;
-
                 .skillItem {
                     padding: 8px;
                     background: #2096F3;
                     transition: .2s all ease-in-out;
-
+                    position: relative;
                     &:hover {
                         background-color: #d81d5b;
                     }
