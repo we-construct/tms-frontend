@@ -12,7 +12,7 @@ const initialState = {
     accessToken: null,
     tokenExpiry: null,
   },
-  profileData: null,
+  profileData: [],
   error: null,
   success: null,
 };

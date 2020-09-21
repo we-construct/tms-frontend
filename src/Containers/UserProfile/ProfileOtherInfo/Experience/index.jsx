@@ -30,7 +30,7 @@ const Experience = ({ id, experienceList }) => {
         <AddExperience id={id} />
       </Typography>
       <div className="cards">
-        {experienceList === null ? (
+        {experienceList.length === 0 ? (
           <div className={classes.root}>
             <LinearProgress color="secondary" />
           </div>

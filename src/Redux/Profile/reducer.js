@@ -9,11 +9,11 @@ import {
 } from "./actions";
 
 const initialState = {
-  languages: null,
-  experience: null,
-  education: null,
-  hardSkills: null,
-  softSkills: null,
+  languages: [],
+  experience: [],
+  education: [],
+  hardSkills: [],
+  softSkills: [],
   error: null,
   success: null,
 };

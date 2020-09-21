@@ -9,7 +9,7 @@ import {
   getEducation,
   getExperience,
   getSoftSkills,
-  getHardSkills,
+  getHardSkills, getLanguages,
 } from "../../../Redux/Profile/actions";
 import Experience from "./Experience";
 import SoftSkills from "./SoftSkills";
@@ -18,7 +18,7 @@ import HardSkills from "./HardSkills";
 const ProfileOtherInfo = ({
   user,
   success,
-  /* error, */ 
+  /* error, */
   education,
   experience,
   hardSkills,
@@ -27,6 +27,7 @@ const ProfileOtherInfo = ({
   getExperience,
   getHardSkills,
   getSoftSkills,
+  getLanguages,
 }) => {
   const { enqueueSnackbar } = useSnackbar();
 
@@ -35,6 +36,7 @@ const ProfileOtherInfo = ({
     getExperience({ id: user.id });
     getSoftSkills({ id: user.id });
     getHardSkills({ id: user.id });
+    getLanguages({ id: user.id })
     //eslint-disable-next-line
   }, []);
 
@@ -76,6 +78,7 @@ function mapDispatchToProps(dispatch) {
     getExperience: (data) => dispatch(getExperience(data)),
     getHardSkills: (data) => dispatch(getHardSkills(data)),
     getSoftSkills: (data) => dispatch(getSoftSkills(data)),
+    getLanguages: (data) => dispatch(getLanguages(data)),
   };
 }
 
