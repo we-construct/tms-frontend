@@ -5,6 +5,7 @@ import CardContent from "@material-ui/core/CardContent";
 import AddEducation from "./AddEducation";
 import LinearProgress from '@material-ui/core/LinearProgress';
 import { makeStyles } from '@material-ui/core/styles';
+import EditEducation from "./EditEducation";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -44,8 +45,9 @@ const Education = ({ id, educationList }) => {
                 elevation={0}
               >
                 <CardContent>
-                  <Typography gutterBottom variant="h6" component="h2">
+                  <Typography gutterBottom variant="h6" className='educationCardTitle' component="h2">
                     {e.name}
+                    <EditEducation educationItem={e} userId={id}/>
                   </Typography>
                   <Typography
                     variant="body2"

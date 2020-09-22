@@ -5,6 +5,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import AddHardSkill from "./AddHardSkill";
+import EditHardSkill from "./EditHardSkill";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,7 +28,8 @@ const HardSkills = ({ skills, id }) => {
         className="itemTitle"
       >
         Hard Skills
-        <AddHardSkill id={id}/>
+        <AddHardSkill id={id} />
+        <EditHardSkill skills={skills} id={id} />
       </Typography>
       <div className="cards">
         {skills.length === 0 ? (

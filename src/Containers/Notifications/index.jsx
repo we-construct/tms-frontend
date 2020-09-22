@@ -13,6 +13,7 @@ const Notifications = ({ notification }) => {
         }
       })
     }
+    // eslint-disable-next-line
   }, [notification]);
   return (
     <>

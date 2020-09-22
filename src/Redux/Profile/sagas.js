@@ -18,6 +18,12 @@ import {
   setEducation,
   setSoftSkills,
   setSuccess,
+  DELETE_SOFT_SKILL,
+  EDIT_SOFT_SKILL,
+  DELETE_HARD_SKILL,
+  EDIT_HARD_SKILL,
+  DELETE_EDUCATION,
+  DELETE_EXPERIENCE, EDIT_EDUCATION, EDIT_EXPERIENCE,
 } from "./actions";
 
 export function getLanguages({ id }) {
@@ -62,6 +68,46 @@ export function addHardSkill(payload) {
 }
 export function addSoftSkill(payload) {
   return axiosInstance.post(`/edit-profile/add-softskill`, {
+    ...payload
+  });
+}
+export function deleteSoftSkill(payload) {
+  return axiosInstance.post(`/edit-profile/delete-softskill`, {
+    ...payload
+  });
+}
+export function deleteHardSkill(payload) {
+  return axiosInstance.post(`/edit-profile/delete-hardskill`, {
+    ...payload
+  });
+}
+export function editSoftSkill(payload) {
+  return axiosInstance.post(`/edit-profile/edit-softskill`, {
+    ...payload
+  });
+}
+export function editHardSkill(payload) {
+  return axiosInstance.post(`/edit-profile/edit-hardskill`, {
+    ...payload
+  });
+}
+export function deleteEducation(payload) {
+  return axiosInstance.post(`/edit-profile/delete-education`, {
+    ...payload
+  });
+}
+export function deleteExperience(payload) {
+  return axiosInstance.post(`/edit-profile/delete-experience`, {
+    ...payload
+  });
+}
+export function editEducation(payload) {
+  return axiosInstance.post(`/edit-profile/edit-education`, {
+    ...payload
+  });
+}
+export function editExperience(payload) {
+  return axiosInstance.post(`/edit-profile/edit-experience`, {
     ...payload
   });
 }
@@ -209,6 +255,142 @@ export function* watchAddSoftSkills() {
 }
 // /////////////////////
 
+// /////////////////////
+export function* workerDeleteSoftSkill({ payload }) {
+  const res = yield call(deleteSoftSkill, payload);
+  const data = yield call(getSoftSkills, {id: payload.userId})
+  if (typeof res.data !== "string") {
+    yield put(setSuccess(res.data));
+    yield put(setSoftSkills(data.data));
+  } else {
+    yield put(setError(res.data));
+  }
+}
+
+export function* watchDeleteSoftSkills() {
+  yield takeEvery(DELETE_SOFT_SKILL, workerDeleteSoftSkill);
+}
+// /////////////////////
+
+// /////////////////////
+export function* workerDeleteHardSkill({ payload }) {
+  const res = yield call(deleteHardSkill, payload);
+  const data = yield call(getHardSkills, {id: payload.userId})
+  if (typeof res.data !== "string") {
+    yield put(setSuccess(res.data));
+    yield put(setHardSkills(data.data));
+  } else {
+    yield put(setError(res.data));
+  }
+}
+
+export function* watchDeleteHardSkills() {
+  yield takeEvery(DELETE_HARD_SKILL, workerDeleteHardSkill);
+}
+// /////////////////////
+
+// /////////////////////
+export function* workerEditSoftSkill({ payload }) {
+  const res = yield call(editSoftSkill, payload);
+  const data = yield call(getSoftSkills, {id: payload.userId})
+  if (typeof res.data !== "string") {
+    yield put(setSuccess(res.data));
+    yield put(setSoftSkills(data.data));
+  } else {
+    yield put(setError(res.data));
+  }
+}
+
+export function* watchEditSoftSkill() {
+  yield takeEvery(EDIT_SOFT_SKILL, workerEditSoftSkill);
+}
+// /////////////////////
+
+// /////////////////////
+export function* workerEditHardSkill({ payload }) {
+  const res = yield call(editHardSkill, payload);
+  const data = yield call(getHardSkills, {id: payload.userId})
+  if (typeof res.data !== "string") {
+    yield put(setSuccess(res.data));
+    yield put(setHardSkills(data.data));
+  } else {
+    yield put(setError(res.data));
+  }
+}
+
+export function* watchEditHardSkill() {
+  yield takeEvery(EDIT_HARD_SKILL, workerEditHardSkill);
+}
+// /////////////////////
+
+// /////////////////////
+export function* workerDeleteEducation({ payload }) {
+  const res = yield call(deleteEducation, payload);
+  const data = yield call(getEducation, {id: payload.userId})
+  if (typeof res.data !== "string") {
+    yield put(setSuccess(res.data));
+    yield put(setEducation(data.data));
+  } else {
+    yield put(setError(res.data));
+  }
+}
+
+export function* watchDeleteEducation() {
+  yield takeEvery(DELETE_EDUCATION, workerDeleteEducation);
+}
+// /////////////////////
+
+// /////////////////////
+export function* workerDeleteExperience({ payload }) {
+  const res = yield call(deleteExperience, payload);
+  const data = yield call(getExperience, {id: payload.userId})
+  if (typeof res.data !== "string") {
+    yield put(setSuccess(res.data));
+    yield put(setExperience(data.data));
+  } else {
+    yield put(setError(res.data));
+  }
+}
+
+export function* watchDeleteExperience() {
+  yield takeEvery(DELETE_EXPERIENCE, workerDeleteExperience);
+}
+// /////////////////////
+
+// /////////////////////
+export function* workerEditEducation({ payload }) {
+  const res = yield call(editEducation, payload);
+  const data = yield call(getEducation, {id: payload.userId})
+  if (typeof res.data !== "string") {
+    yield put(setSuccess(res.data));
+    yield put(setEducation(data.data));
+  } else {
+    yield put(setError(res.data));
+  }
+}
+
+export function* watchEditEducation() {
+  yield takeEvery(EDIT_EDUCATION, workerEditEducation);
+}
+// /////////////////////
+
+// /////////////////////
+export function* workerEditExperience({ payload }) {
+  const res = yield call(editExperience, payload);
+  const data = yield call(getExperience, {id: payload.userId})
+  if (typeof res.data !== "string") {
+    yield put(setSuccess(res.data));
+    yield put(setExperience(data.data));
+  } else {
+    yield put(setError(res.data));
+  }
+}
+
+export function* watchEditExperience() {
+  yield takeEvery(EDIT_EXPERIENCE, workerEditExperience);
+}
+// /////////////////////
+
 export function* profileSaga() {
   yield all([fork(watchGetLanguages)]);
   yield all([fork(watchGetEducation)]);
@@ -219,4 +401,12 @@ export function* profileSaga() {
   yield all([fork(watchAddExperience)]);
   yield all([fork(watchAddHardSkills)]);
   yield all([fork(watchAddSoftSkills)]);
+  yield all([fork(watchDeleteSoftSkills)]);
+  yield all([fork(watchDeleteHardSkills)]);
+  yield all([fork(watchEditSoftSkill)]);
+  yield all([fork(watchEditHardSkill)]);
+  yield all([fork(watchDeleteEducation)]);
+  yield all([fork(watchDeleteExperience)]);
+  yield all([fork(watchEditEducation)]);
+  yield all([fork(watchEditExperience)]);
 }

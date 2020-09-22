@@ -9,7 +9,6 @@ export function getVacations({userId, page}) {
 
 // request vacation
 export function addVacation(vacationData) {
-  debugger
   return axiosInstance.post(`/vacations`, {...vacationData});
 }
 
