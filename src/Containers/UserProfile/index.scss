@@ -7,7 +7,7 @@
     .editBtn {
         align-self: flex-start;
         border-radius: 50%;
-        color: #2096F3;
+        color: #2196f3;
         transition: .2s all ease-in-out;
         border: 1px solid #e9e9e9;
         width: 42px;
@@ -55,6 +55,12 @@
                 color: #fff;
             }
         }
+        .editIcon{
+            color: #2096F3;
+            &:hover{
+                background-color: #2096F3;
+            }
+        }
         .cards {
             display: flex;
             flex-wrap: wrap;
@@ -62,6 +68,32 @@
             .profileCard {
                 margin-right: 16px;
                 margin-top: 16px;
+                &:hover{
+                    .educationCardTitle {
+                        .editEducationIcon {
+                            visibility: visible;
+                        }
+                    }
+                }
+                .educationCardTitle{
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    .editEducationIcon{
+                        visibility: hidden;
+                        color: #2096F3;
+                        width: 28px;
+                        height: 28px;
+                        border-radius: 50%;
+                        border: 1px solid #e9e9e9;
+                        &:hover{
+                            color: #fff;
+                            background-color: #2096F3;
+                            cursor: pointer;
+                            border: none;
+                        }
+                    }
+                }
                 .skillItem {
                     padding: 8px;
                     background: #2096F3;
@@ -69,6 +101,7 @@
                     position: relative;
                     &:hover {
                         background-color: #d81d5b;
+                        cursor: default;
                     }
                 }
             }
@@ -79,6 +112,5 @@
         padding-top: 16px;
         display: flex;
         align-items: center;
-
     }
 }

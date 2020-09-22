@@ -26,7 +26,7 @@ const App = ({ isAuth, loginCookie, user }) => {
   }, [])
 
   useEffect(() => {
-    if (isAuth && user){
+    if (isAuth){
       socket.emit("join", { name: `${user.firstName} ${user.lastName}`, role: user.role }, (error) => {
           if (error) {
             alert(error);
@@ -34,6 +34,7 @@ const App = ({ isAuth, loginCookie, user }) => {
         }
       );
     }
+    // eslint-disable-next-line
   }, [user])
 
 useEffect(() => {

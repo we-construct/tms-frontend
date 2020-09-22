@@ -5,6 +5,7 @@ import CardContent from "@material-ui/core/CardContent";
 import AddExperience from "./AddExperience";
 import { makeStyles } from "@material-ui/core/styles";
 import LinearProgress from "@material-ui/core/LinearProgress";
+import EditExperience from "./EditExperience";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -44,8 +45,9 @@ const Experience = ({ id, experienceList }) => {
                 elevation={0}
               >
                 <CardContent>
-                  <Typography gutterBottom variant="h6" component="h2">
+                  <Typography gutterBottom variant="h6" className='educationCardTitle' component="h2">
                     {job.company}
+                    <EditExperience experienceItem={job} userId={id}/>
                   </Typography>
                   <Typography
                     variant="body2"
@@ -66,7 +68,7 @@ const Experience = ({ id, experienceList }) => {
                     color="textSecondary"
                     component="p"
                   >
-                    Job Type: {job.jobTime}
+                    Job Type: {job.jobtime}
                   </Typography>
                   <Typography
                     variant="body2"

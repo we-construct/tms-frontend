@@ -14,6 +14,14 @@ export const ADD_EDUCATION = "ADD_EDUCATION";
 export const ADD_EXPERIENCE = "ADD_EXPERIENCE";
 export const ADD_HARD_SKILL = "ADD_HARD_SKILL";
 export const ADD_SOFT_SKILL = "ADD_SOFT_SKILL";
+export const DELETE_SOFT_SKILL = "DELETE_SOFT_SKILL";
+export const DELETE_HARD_SKILL = "DELETE_HARD_SKILL";
+export const EDIT_SOFT_SKILL = "EDIT_SOFT_SKILL";
+export const EDIT_HARD_SKILL = "EDIT_HARD_SKILL";
+export const DELETE_EDUCATION = "DELETE_EDUCATION";
+export const DELETE_EXPERIENCE = "DELETE_EXPERIENCE";
+export const EDIT_EDUCATION = "EDIT_EDUCATION";
+export const EDIT_EXPERIENCE = "EDIT_EXPERIENCE";
 
 // error handling action
 export const setError = (error) => {
@@ -125,6 +133,62 @@ export const addHardSkill = (payload) => {
 export const addSoftSkill = (payload) => {
   return {
     type: ADD_SOFT_SKILL,
+    payload,
+  };
+};
+
+export const deleteSoftSkill = (payload) => {
+  return {
+    type: DELETE_SOFT_SKILL,
+    payload,
+  };
+};
+
+export const editSoftSkill = (payload) => {
+  return {
+    type: EDIT_SOFT_SKILL,
+    payload,
+  };
+};
+
+export const deleteHardSkill = (payload) => {
+  return {
+    type: DELETE_HARD_SKILL,
+    payload,
+  };
+};
+
+export const editHardSkill = (payload) => {
+  return {
+    type: EDIT_HARD_SKILL,
+    payload,
+  };
+};
+
+export const deleteEducation = (payload) => {
+  return {
+    type: DELETE_EDUCATION,
+    payload,
+  };
+};
+
+export const deleteExperience = (payload) => {
+  return {
+    type: DELETE_EXPERIENCE,
+    payload,
+  };
+};
+
+export const editEducation = (payload) => {
+  return {
+    type: EDIT_EDUCATION,
+    payload,
+  };
+};
+
+export const editExperience = (payload) => {
+  return {
+    type: EDIT_EXPERIENCE,
     payload,
   };
 };
