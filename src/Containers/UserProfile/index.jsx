@@ -17,7 +17,7 @@ const UserProfile = ({ getProfileData, profileData, id }) => {
 
   return (
     <PageWrapper>
-      {profileData === null ? null : (
+      {profileData.length === 0 ? null : (
         <Grid container spacing={2}>
           <ProfileInfo user={profileData} />
           <ProfileOtherInfo user={profileData} />

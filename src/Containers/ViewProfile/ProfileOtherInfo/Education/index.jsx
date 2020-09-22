@@ -15,7 +15,7 @@ const Education = ({ educationList }) => {
         Education
       </Typography>
       <div className="cards">
-        {educationList === null || educationList.length === 0 ? (
+        {educationList.length === 0 ? (
           <Typography
             gutterBottom
             variant="body2"

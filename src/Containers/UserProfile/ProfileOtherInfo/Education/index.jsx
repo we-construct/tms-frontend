@@ -30,7 +30,7 @@ const Education = ({ id, educationList }) => {
         <AddEducation id={id} />
       </Typography>
       <div className="cards">
-        {educationList === null ? (
+        {educationList.length === 0 ? (
               <div className={classes.root}>
                 <LinearProgress color="secondary" />
                 </div>

@@ -1,15 +1,16 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
+import {connect} from "react-redux";
 import ListItemText from "@material-ui/core/ListItemText";
 import ProgressBar from "./ProgressBar";
 import Languages from "./Languages";
 import EditUser from "../EditUser";
 
-const ProfileInfo = ({ user }) => {
+const ProfileInfo = ({ user, languages }) => {
   const today = new Date();
   const regDate = new Date(user.createdAt);
   const oneDay = 1000 * 60 * 60 * 24;
@@ -27,7 +28,7 @@ const ProfileInfo = ({ user }) => {
             <ListItem>
               {/* //todo take profile full status data from db */}
               <div style={{ width: "100%", paddingBottom: "16px" }}>
-                <ListItemText secondary="Profile is 100% full!" />
+                <ListItemText secondary={`Profile is ${100}% full!`} />
                 <ProgressBar value={100} />
               </div>
             </ListItem>
@@ -106,7 +107,7 @@ const ProfileInfo = ({ user }) => {
               />
             </ListItem>
             {/* languages (will be taken from db) */}
-            <Languages languages={user.languages} />
+            <Languages languages={languages} />
           </List>
         </Paper>
       </Grid>
@@ -114,4 +115,8 @@ const ProfileInfo = ({ user }) => {
   );
 };
 
-export default ProfileInfo;
+const mapStateToProps = (state) => ({
+  languages: state.profileData.languages,
+})
+
+export default connect(mapStateToProps, null)(ProfileInfo);
